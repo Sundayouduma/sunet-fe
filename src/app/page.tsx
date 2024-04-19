@@ -62,7 +62,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-start w-4/5 mx-auto py-10 my-28">
+      <div className="flex flex-col items-start max-w-7xl mx-auto py-10 my-28">
         <div className="mb-8 text-start">
           <h2 className="text-3xl font-bold mb-4">
             Why choose Juwshewaj Hotels
@@ -127,7 +127,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-start w-4/5 mx-auto py-10">
+      <div className="flex flex-col items-start max-w-7xl mx-auto py-10">
         <div className="mb-8 text-start">
           <h2 className="text-3xl font-bold mb-4">Facility Juwshewaj Hotels</h2>
           <p className="text-gray-600">
