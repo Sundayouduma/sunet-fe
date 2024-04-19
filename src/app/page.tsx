@@ -1,7 +1,34 @@
 "use client";
 import Layout from "./components/layout/UserLayout";
 import { TypeAnimation } from "react-type-animation";
+import RoomCard from "./components/shared/roomCard/RoomCard";
 export default function Home() {
+  const data = [
+    {
+      image:
+        "https://a0.muscache.com/im/pictures/miso/Hosting-53627561/original/cc19cf5f-d04f-4b61-99b0-53b77aca7ba6.jpeg?im_w=720",
+      name: "The Throne Room",
+      price: "82000",
+    },
+    {
+      image:
+        "https://a0.muscache.com/im/pictures/miso/Hosting-53627561/original/cc19cf5f-d04f-4b61-99b0-53b77aca7ba6.jpeg?im_w=720",
+      name: "Halls of the Greats",
+      price: "84000",
+    },
+    {
+      image:
+        "https://a0.muscache.com/im/pictures/miso/Hosting-53627561/original/cc19cf5f-d04f-4b61-99b0-53b77aca7ba6.jpeg?im_w=720",
+      name: "Altars and Temples",
+      price: "86000",
+    },
+    {
+      image:
+        "https://a0.muscache.com/im/pictures/miso/Hosting-53627561/original/cc19cf5f-d04f-4b61-99b0-53b77aca7ba6.jpeg?im_w=720",
+      name: "Elysian Fields",
+      price: "88000",
+    },
+  ];
   return (
     <Layout>
       <div
@@ -35,7 +62,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-start w-4/5 mx-auto py-10">
+      <div className="flex flex-col items-start w-4/5 mx-auto py-10 my-28">
         <div className="mb-8 text-start">
           <h2 className="text-3xl font-bold mb-4">
             Why choose Juwshewaj Hotels
@@ -102,61 +129,19 @@ export default function Home() {
       </div>
       <div className="flex flex-col items-start w-4/5 mx-auto py-10">
         <div className="mb-8 text-start">
-          <h2 className="text-3xl font-bold mb-4">
-            Facility Juwshewaj Hotels
-          </h2>
+          <h2 className="text-3xl font-bold mb-4">Facility Juwshewaj Hotels</h2>
           <p className="text-gray-600">
             Here are some reasons why you should choose Tourz for your next
             adventure:
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20 pt-4">
-          <div className="flex flex-col items-start">
-            <div className="">
-              {/* Icon */}
-              <img src="https://a0.muscache.com/im/pictures/miso/Hosting-53627561/original/cc19cf5f-d04f-4b61-99b0-53b77aca7ba6.jpeg?im_w=720" />
-           
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pt-4">
+          {data.map((item, index) => (
+            <div key={index}>
+              <RoomCard data={item} />
             </div>
-            <h3 className="text-lg font-semibold mb-2 pt-4">
-              Luxurious Accommodations
-            </h3>
-            
-            <p className="text-gray-600 text-sm text-start">
-              Experience the epitome of comfort and luxury with our elegantly
-              designed rooms and suites.
-            </p>
-          </div>
-
-          <div className="flex flex-col items-start">
-            <div className="">
-              {/* Icon */}
-              <img src="https://a0.muscache.com/im/pictures/miso/Hosting-53627561/original/cc19cf5f-d04f-4b61-99b0-53b77aca7ba6.jpeg?im_w=720" />
-           
-            </div>
-            <h3 className="text-lg font-semibold mb-2 pt-4">
-              Luxurious Accommodations
-            </h3>
-            <p className="text-gray-600 text-sm text-start">
-              Experience the epitome of comfort and luxury with our elegantly
-              designed rooms and suites.
-            </p>
-          </div>
-
-          <div className="flex flex-col items-start">
-            <div className="">
-              {/* Icon */}
-              <img src="https://a0.muscache.com/im/pictures/miso/Hosting-53627561/original/cc19cf5f-d04f-4b61-99b0-53b77aca7ba6.jpeg?im_w=720" />
-           
-            </div>
-            <h3 className="text-lg font-semibold mb-2 pt-4">
-              Luxurious Accommodations
-            </h3>
-            <p className="text-gray-600 text-sm text-start">
-              Experience the epitome of comfort and luxury with our elegantly
-              designed rooms and suites.
-            </p>
-          </div>
+          ))}
         </div>
       </div>
     </Layout>
