@@ -21,13 +21,14 @@
   color: #5a5a5a !important;
 }
 
-fieldset.MuiOutlinedInput-notchedOutline {
+/* fieldset.MuiOutlinedInput-notchedOutline {
   border-color: transparent;
 }
 
 .Mui-focused fieldset.MuiOutlinedInput-notchedOutline {
   border-color: transparent;
-}
+} */
 .rooms > * .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
-  color: transparent !important;
+  /* color: transparent !important; */
+  font-weight: 600;
 }

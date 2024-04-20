@@ -22,9 +22,9 @@ const RoomPage = () => {
   const [visible, setVisible] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const images = [
-    "https://a0.muscache.com/im/pictures/miso/Hosting-53627561/original/cc19cf5f-d04f-4b61-99b0-53b77aca7ba6.jpeg?im_w=720",
-    "https://a0.muscache.com/im/pictures/miso/Hosting-53627561/original/cc19cf5f-d04f-4b61-99b0-53b77aca7ba6.jpeg?im_w=720",
-    "https://a0.muscache.com/im/pictures/miso/Hosting-53627561/original/cc19cf5f-d04f-4b61-99b0-53b77aca7ba6.jpeg?im_w=720",
+    "https://assets-global.website-files.com/5c6d6c45eaa55f57c6367749/65045f093c166fdddb4a94a5_x-65045f0266217.webp",
+    "https://assets-global.website-files.com/5c6d6c45eaa55f57c6367749/65d7d7080ab85f33665b94d6_RoomView022224.webp",
+    "https://static01.nyt.com/images/2019/03/24/travel/24trending-shophotels1/24trending-shophotels1-jumbo.jpg?quality=75&auto=webp",
     "https://a0.muscache.com/im/pictures/miso/Hosting-53627561/original/cc19cf5f-d04f-4b61-99b0-53b77aca7ba6.jpeg?im_w=720",
   ];
 
@@ -131,29 +131,29 @@ const RoomPage = () => {
                   <div className="rooms flex flex-col gap-2 w-full">
                     <p>Check-in Date</p>
                     <div className="flex relative w-full">
-                      <p className="absolute top-1/2 -translate-y-1/2 ml-4">
+                      {/* <p className="absolute top-1/2 -translate-y-1/2 ml-4">
                         {checkInDate.format("DD-MM-YY")}
-                      </p>
+                      </p> */}
                       <DatePicker
                         // label="Departure Date"
                         // defaultValue={dayjs()}
                         value={checkInDate}
                         // onClose={() => setDateOpen(null)}
-                        onChange={(value) => setcheckInDate(value)}
+                        onChange={(value: any) => setcheckInDate(value)}
                         // renderInput={(params) => <TextField {...params} />}
                         className="w-full"
                       />
                     </div>
                     <p>Check-out Date</p>
                     <div className="flex relative w-full">
-                      <p className="absolute top-1/2 -translate-y-1/2 ml-4">
+                      {/* <p className="absolute top-1/2 -translate-y-1/2 ml-4">
                         {checkOutDate.format("DD-MM-YY")}
-                      </p>
+                      </p> */}
                       <DatePicker
                         // label="Arrival Date"
                         // defaultValue={dayjs()}
                         value={checkOutDate}
-                        onChange={(value) => setcheckOutDate(value)}
+                        onChange={(value: any) => setcheckOutDate(value)}
                         // onClose={() => setDateOpen(null)}
                         // renderInput={(params) => <TextField {...params} />}
                         className="w-full"
