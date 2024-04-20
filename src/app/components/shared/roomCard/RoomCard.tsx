@@ -14,7 +14,7 @@ interface RoomCardProps {
   data: RoomData;
 }
 
-const RoomCard: React.FC<RoomCardProps> = ({ data }) => {
+const RoomCard: React.FC<RoomCardProps> = ({data}) => {
   return (
     <div className="p-3 rounded-xl max-w-sm w-full border">
       <Link href={"/"}>

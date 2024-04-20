@@ -3,7 +3,7 @@ import Layout from "./components/layout/UserLayout";
 import { TypeAnimation } from "react-type-animation";
 import RoomCard from "./components/shared/roomCard/RoomCard";
 export default function Home() {
-  const data = [
+  const data: any = [
     {
       image:
         "https://a0.muscache.com/im/pictures/miso/Hosting-53627561/original/cc19cf5f-d04f-4b61-99b0-53b77aca7ba6.jpeg?im_w=720",
@@ -137,11 +137,14 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pt-4">
-          {data.map((item, index) => (
-            <div key={index}>
-              <RoomCard data={item} />
-            </div>
-          ))}
+          {data.map((item : any, index : any) => {
+           // const item: any = item
+            return (
+              <div key={index}>
+                <RoomCard data={item} />
+              </div>
+            );
+          })}
         </div>
       </div>
     </Layout>
