@@ -4,6 +4,7 @@ import { FaStar } from "react-icons/fa";
 import Link from "next/link";
 
 interface RoomData {
+  id: number;
   image: string;
   name: string;
   price: number;
@@ -14,10 +15,10 @@ interface RoomCardProps {
   data: RoomData;
 }
 
-const RoomCard: React.FC<RoomCardProps> = ({data}) => {
+const RoomCard: React.FC<RoomCardProps> = ({ data }) => {
   return (
     <div className="p-3 rounded-xl max-w-sm w-full border">
-      <Link href={"/"}>
+      <Link href={`/rooms/${data?.id}`}>
         <div className=" relative">
           <div className="w-full h-56 rounded-xl overflow-hidden">
             <img className="h-full w-full" src={data?.image} />

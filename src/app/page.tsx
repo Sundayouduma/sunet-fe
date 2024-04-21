@@ -5,24 +5,28 @@ import RoomCard from "./components/shared/roomCard/RoomCard";
 export default function Home() {
   const data: any = [
     {
+      id: 1,
       image:
         "https://a0.muscache.com/im/pictures/miso/Hosting-53627561/original/cc19cf5f-d04f-4b61-99b0-53b77aca7ba6.jpeg?im_w=720",
       name: "The Throne Room",
       price: "82000",
     },
     {
+      id: 2,
       image:
         "https://a0.muscache.com/im/pictures/miso/Hosting-53627561/original/cc19cf5f-d04f-4b61-99b0-53b77aca7ba6.jpeg?im_w=720",
       name: "Halls of the Greats",
       price: "84000",
     },
     {
+      id: 3,
       image:
         "https://a0.muscache.com/im/pictures/miso/Hosting-53627561/original/cc19cf5f-d04f-4b61-99b0-53b77aca7ba6.jpeg?im_w=720",
       name: "Altars and Temples",
       price: "86000",
     },
     {
+      id: 4,
       image:
         "https://a0.muscache.com/im/pictures/miso/Hosting-53627561/original/cc19cf5f-d04f-4b61-99b0-53b77aca7ba6.jpeg?im_w=720",
       name: "Elysian Fields",
@@ -137,8 +141,8 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pt-4">
-          {data.map((item : any, index : any) => {
-           // const item: any = item
+          {data.map((item: any, index: any) => {
+            // const item: any = item
             return (
               <div key={index}>
                 <RoomCard data={item} />
