@@ -9,11 +9,13 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
+      colors:{
+        jsPrimary100: "#ffdc73",
+        jsPrimary200: "#ffcf40",
+        jsPrimary300: "#ffbf00",
+        jsPrimary400: "#bf9b30",
+        jsPrimary500: "#a67c00",
+      }
     },
   },
   plugins: [],

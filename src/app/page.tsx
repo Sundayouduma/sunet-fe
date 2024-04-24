@@ -33,14 +33,13 @@ export default function Home() {
       price: "88000",
     },
   ];
+
   return (
     <Layout>
       <div
-        className="bg-cover bg-center bg-no-repeat relative"
+        className="bg-cover bg-center bg-no-repeat relative w-full md:h-[450px] lg:h-[700px]"
         style={{
           backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://res.cloudinary.com/dzv98o7ds/image/upload/v1713353419/juwsheyaj-bg-img_ayl8kn.jpg')`,
-          height: "700px",
-          width: "100%",
         }}
       >
         <div className="absolute inset-0 flex justify-center items-center">
@@ -66,7 +65,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-start max-w-7xl mx-auto py-10 my-28">
+      <div className="flex flex-col items-start max-w-7xl mx-auto py-10 px-5 my-10 lg:my-28">
         <div className="mb-8 text-start">
           <h2 className="text-3xl font-bold mb-4">
             Why choose Juwshewaj Hotels
@@ -131,7 +130,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-start max-w-7xl mx-auto py-10">
+      <div className="flex flex-col items-start max-w-7xl mx-auto py-10 p-5">
         <div className="mb-8 text-start">
           <h2 className="text-3xl font-bold mb-4">Facility Juwshewaj Hotels</h2>
           <p className="text-gray-600">
@@ -140,7 +139,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pt-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pt-4 mx-auto">
           {data.map((item: any, index: any) => {
             // const item: any = item
             return (
