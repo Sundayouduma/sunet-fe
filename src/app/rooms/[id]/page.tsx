@@ -127,7 +127,7 @@ const RoomPage = () => {
               </div>
             </div>
           </div>
-          <div className="border rounded-xl p-3 w-[18rem] md:w-[45rem] h-fit">
+          <div className="border rounded-xl w-full p-3 w-[18rem] md:w-[45rem] h-fit">
             <p className="whitespace-nowrap text-lg font-semibold">
               &#8358;82,000
             </p>

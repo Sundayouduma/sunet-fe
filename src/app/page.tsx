@@ -37,7 +37,7 @@ export default function Home() {
   return (
     <Layout>
       <div
-        className="bg-cover bg-center bg-no-repeat relative w-full md:h-[450px] lg:h-[700px]"
+        className="bg-cover bg-center bg-no-repeat h-[650px]  w-full md:h-[450px] lg:h-[700px] "
         style={{
           backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://res.cloudinary.com/dzv98o7ds/image/upload/v1713353419/juwsheyaj-bg-img_ayl8kn.jpg')`,
         }}
@@ -64,6 +64,41 @@ export default function Home() {
             </p>
           </div>
         </div>
+      </div>
+      <div className="flex flex-col items-start max-w-7xl mx-auto py-5 px-5 my-5 lg:my-12">
+        <div className="mb-8 text-center mx-auto">
+          <h2 className="text-4xl font-bold mb-4 text-[#c19d08]">
+            Welcome to Juwshewaj Hotels
+          </h2>
+        </div>
+
+
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 pt-4">
+  <div className="flex flex-col items-start animate-fade-in">
+    <h3 className="text-2xl font-semibold mb-2">Our vision</h3>
+    <p className="text-gray-600 text-md text-start mt-4 leading-loose">
+      At Juwshewaj Hotels, we believe in creating unforgettable experiences for our guests. Nestled [location details], our hotel offers a blend of luxury, comfort, and personalized service, making it the perfect choice for both leisure and business travelers. Our Story has been a landmark in location , enchanting guests with its timeless charm and hospitality.<br /><br /> From its humble beginnings to becoming a beacon of excellence in the hospitality industry, our journey is woven with stories of warmth and dedication.<br /><br /> Our Vision is simple - to redefine hospitality by providing unparalleled service and creating lasting memories for every guest who walks through our doors. We strive to exceed expectations at every turn, ensuring that each stay is a memorable one.
+    </p>
+  </div>
+  <div className="flex flex-col items-start animate-fade-in">
+    <h3 className="text-2xl font-semibold mb-2">Our Values</h3>
+    <ol className="text-gray-600 text-md text-start leading-loose">
+      <li className="mt-4">
+        <strong>Excellence:</strong> We are committed to excellence in everything we do, from the service we provide to the experiences we curate.
+      </li>
+      <li className="mt-4">
+        <strong>Hospitality:</strong> Hospitality is at the heart of our ethos. We welcome guests with open arms and genuine warmth, ensuring they feel at home from the moment they arrive.
+      </li>
+      <li className="mt-4">
+        <strong>Innovation:</strong> We continuously innovate to enhance the guest experience, embracing new technologies and trends while staying true to our heritage.
+      </li>
+      <li className="mt-4">
+        <strong>Sustainability:</strong> We are dedicated to minimizing our environmental footprint and contributing to the well-being of the communities we serve.
+      </li>
+    </ol>
+  </div>
+</div>
+
       </div>
       <div className="flex flex-col items-start max-w-7xl mx-auto py-10 px-5 my-10 lg:my-28">
         <div className="mb-8 text-start">
