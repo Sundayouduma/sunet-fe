@@ -3,7 +3,7 @@ import { FaCheck, FaStar } from "react-icons/fa";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import { LiaBookReaderSolid } from "react-icons/lia";
 import Layout from "../../components/layout/UserLayout";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Viewer from "react-viewer";
 import {
   DatePicker,
@@ -20,6 +20,7 @@ const RoomPage = () => {
   const [checkOutDate, setcheckOutDate] = useState(dayjs());
   const [visible, setVisible] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [dateDifference, setDateDifference] = useState(1);
   const images = [
     "https://assets-global.website-files.com/5c6d6c45eaa55f57c6367749/65045f093c166fdddb4a94a5_x-65045f0266217.webp",
     "https://assets-global.website-files.com/5c6d6c45eaa55f57c6367749/65d7d7080ab85f33665b94d6_RoomView022224.webp",
@@ -35,7 +36,33 @@ const RoomPage = () => {
     },
   });
 
+  const handleDateUpdate = (value: any, type: string) => {
+    if (type === "checkIn") {
+      if (
+        Math.ceil(dayjs(value).diff(dayjs(), "day", true)) >= 0 &&
+        Math.ceil(checkOutDate.diff(dayjs(value), "day", true)) >= 0
+      ) {
+        setcheckInDate(dayjs(value));
+      } else {
+        setcheckInDate(dayjs());
+      }
+    } else {
+      if (Math.ceil(dayjs(value).diff(dayjs(), "day", true)) >= 0) {
+        setcheckOutDate(dayjs(value));
+      } else {
+        setcheckOutDate(dayjs());
+      }
+    }
+  };
+
+  useEffect(() => {
+    const difference = Math.ceil(checkOutDate.diff(checkInDate, "day", true));
+    setDateDifference(difference + 1);
+  }, [checkInDate, checkOutDate]);
+
   console.log({ checkInDate });
+  console.log({ checkOutDate });
+  console.log({ dateDifference });
   return (
     <Layout>
       <div className="max-w-7xl w-full mx-auto p-5">
@@ -127,7 +154,8 @@ const RoomPage = () => {
               </div>
             </div>
           </div>
-          <div className="border rounded-xl w-full p-3 w-[18rem] md:w-[45rem] h-fit">
+
+          <div className="border rounded-xl p-3 w-[18rem] md:w-[45rem] h-fit">
             <p className="whitespace-nowrap text-lg font-semibold">
               &#8358;82,000
             </p>
@@ -139,38 +167,28 @@ const RoomPage = () => {
                     <div className="rooms flex flex-col gap-2 w-full">
                       <p>Check-in Date</p>
                       <div className="flex relative w-full">
-                        {/* <p className="absolute top-1/2 -translate-y-1/2 ml-4">
-                        {checkInDate.format("DD-MM-YY")}
-                      </p> */}
                         <DatePicker
-                          // label="Departure Date"
-                          // defaultValue={dayjs()}
                           value={checkInDate}
-                          // onClose={() => setDateOpen(null)}
-                          onChange={(value: any) => setcheckInDate(value)}
-                          // renderInput={(params) => <TextField {...params} />}
-                          className="w-full"
+                          onChange={(value: any) =>
+                            handleDateUpdate(value, "checkIn")
+                          }
+                          className="w-full font-semibold"
                         />
                       </div>
                       <p>Check-out Date</p>
                       <div className="flex relative w-full">
-                        {/* <p className="absolute top-1/2 -translate-y-1/2 ml-4">
-                        {checkOutDate.format("DD-MM-YY")}
-                      </p> */}
                         <DatePicker
-                          // label="Arrival Date"
-                          // defaultValue={dayjs()}
                           value={checkOutDate}
-                          onChange={(value: any) => setcheckOutDate(value)}
-                          // onClose={() => setDateOpen(null)}
-                          // renderInput={(params) => <TextField {...params} />}
-                          className="w-full"
+                          onChange={(value: any) =>
+                            handleDateUpdate(value, "checkOut")
+                          }
+                          className="w-full font-semibold"
                         />
                       </div>
                     </div>
                   </LocalizationProvider>
                 </ThemeProvider>
-                <div className="flex justify-between items-center">
+                {/* <div className="flex justify-between items-center">
                   <p className="">Occupants</p>
                   <div className="rounded-md overflow-hidden flex">
                     <p
@@ -191,14 +209,16 @@ const RoomPage = () => {
                       <FiPlus size={20} />
                     </p>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
 
             <div className="mt-10 pt-5 border-t">
               <div className="flex justify-between items-center text-lg font-medium">
                 <p>Total:</p>
-                <p className="whitespace-nowrap">&#8358;82,000</p>
+                <p className="whitespace-nowrap">
+                  &#8358;{Number(82000 * dateDifference).toLocaleString()}
+                </p>
               </div>
 
               <div className="hover:bg-[#B89010] bg-[#C8A008] cursor-pointer mt-2 font-medium p-5 rounded-md text-center text-white">
