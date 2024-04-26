@@ -86,7 +86,7 @@ const SignUpScreen = () => {
   return (
     <Layout>
         <ToastContainer />
-      <div className="flex justify-center h-screen">
+      <div className="flex items-center justify-center h-screen -mt-20">
         <div className="w-full sm:w-1/3 justify-center">
           <div className="">
             <div className="pt-2 text-2xl text-nrvLightGrey text-md">
@@ -139,7 +139,7 @@ const SignUpScreen = () => {
               </div>
             </div>
 
-            <div className="mt-20 pt-10">
+            <div className="mt-16">
               <Button
                 size="large"
                 className="block w-full"
