@@ -10,6 +10,7 @@ interface InputFieldProps {
   value?: string | number;
   name?: string;
   disabled?: boolean;
+  error?: string; // Add error prop
 }
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -21,6 +22,7 @@ const InputField: React.FC<InputFieldProps> = ({
   value,
   name,
   disabled,
+  error, // Destructure error prop
 }) => {
   return (
     <div className="">
@@ -30,20 +32,24 @@ const InputField: React.FC<InputFieldProps> = ({
         </label>
       )}
       <div
-        className={`${css} border border-nrvLightGrey  mt-2 relative flex items-center cursor-pointer rounded-lg overflow-hidden  focus:outline-none cursor-pointer `}
+        className={`${css} border ${
+          error ? "border-red-500" : "border-nrvLightGrey"
+        } mt-2 relative flex items-center cursor-pointer rounded-lg overflow-hidden  focus:outline-none cursor-pointer `}
       >
-
         <input
           type={inputType ? inputType : "text"}
           id={name}
           name={name}
           placeholder={placeholder}
-          className={`font-light w-full h-11 px-3 py-2 cursor-pointer focus:outline-none text-sm`}
+          className={`font-light w-full h-11 px-3 py-2 cursor-pointer focus:outline-none text-sm ${
+            error ? "text-red-500" : ""
+          }`} // Conditionally apply error color
           onChange={onChange}
           value={value}
           disabled={disabled}
         />
       </div>
+      {error && <div className="text-red-500 text-sm mt-1">{error}</div>} {/* Render error message */}
     </div>
   );
 };
