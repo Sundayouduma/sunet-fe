@@ -13,7 +13,7 @@ const config: Config = {
         jsPrimary100: "#B89010",
         jsPrimary200: "#C8A008",
         jsBlue: "#082838",
-
+        jsBlack: "#646c70",
       }
     },
   },

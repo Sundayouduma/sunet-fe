@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  color: #646c70;
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -27,7 +31,6 @@
 .animate-fade-in {
   animation: fade-in 4s ease-out;
 }
-
 
 .animate-fadeIn {
   animation: fadeIn 0.5s ease-in-out forwards;
