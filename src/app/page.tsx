@@ -70,11 +70,6 @@ export default function Home() {
       </div>
 
       <div className="flex flex-col items-start max-w-7xl mx-auto py-5 px-5 my-5 lg:my-12">
-        <div className="mb-8 text-center mx-auto">
-          <h2 className="uppercase text-4xl font-black mb-4 text-jsBlue">
-            Welcome to Juwshewaj Hotels
-          </h2>
-        </div>
 
         <div className="grid md:grid-cols-2 items-center">
           <div className="max-w-1/2 w-full h-auto py-5 hidden md:block">
@@ -93,10 +88,10 @@ export default function Home() {
             <p className="uppercase text-jsPrimary100 font-medium ">
               a b o u t &nbsp;&nbsp;u s
             </p>
-            <h3 className="text-2xl font-bold my-3 text-jsBlue">
+            <h3 className="text-[2rem] my-3 text-[#222222]">
               The Most Preferred Hotel in Nigeria
             </h3>
-            <p className="font-medium text-gray-700">
+            <p className="text-gray-600">
               Juwshewaj hotels is the most preferred hotel in Nigeria, it is all
               about the right blend, Located in Federal capital territory of
               Nigeria, Abuja. We offer our clients a perfect combination of
@@ -120,9 +115,9 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex flex-col items-start max-w-7xl mx-auto py-10 px-5 my-10 lg:my-28">
+      <div className="flex flex-col items-start max-w-7xl mx-auto py-10 px-5 my-10 lg:my-16">
         <div className="mb-8 text-center w-full">
-          <h2 className="uppercase text-3xl font-black mb-4 cap text-jsBlue">
+          <h2 className="text-[2rem] mb-4 text-[#222222]">
             Why choose Juwshewaj Hotels
           </h2>
           <p className="text-gray-600">
@@ -189,13 +184,10 @@ export default function Home() {
       </div>
       <div className="flex flex-col items-start max-w-7xl mx-auto py-10 p-5">
         <div className="mb-8 text-center w-full">
-          <h2 className="uppercase text-3xl font-black mb-4 text-jsBlue">
+          <h2 className="text-[2rem] mb-4 text-[#222222]">
             Our Exclusive Rooms
           </h2>
-          {/* <   p className="text-gray-600">
-            Here are some reasons why you should choose Tourz for your next
-            adventure:
-          </p> */}
+
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pt-4 mx-auto">
@@ -211,7 +203,7 @@ export default function Home() {
       </div>
 
       <div className="flex flex-col max-w-7xl mx-auto py-10 p-5">
-        <h2 className="uppercase text-3xl w-full text-center font-black text-jsBlue mb-4">
+        <h2 className="text-[2rem] w-full text-center text-[#222222] mb-4">
           Recreational services
         </h2>
         <div className="flex gap-10 mt-10 items-center justify-center flex-wrap">
@@ -249,18 +241,12 @@ export default function Home() {
       </div>
 
       <div className="flex flex-col items-start max-w-7xl mx-auto py-5 px-5 my-5 lg:my-12">
-        <div className="mb-8 text-center mx-auto">
-          <h2 className="uppercase text-4xl font-black mb-4 text-jsBlue">
-            Welcome to Juwshewaj Hotels
-          </h2>
-        </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 pt-4">
           <div className="flex flex-col items-start animate-fade-in">
             <h3 className="text-2xl font-semibold mb-2 w-full text-center">
               Our vision
             </h3>
-            <p className="text-gray-600 text-md text-start mt-4 leading-loose">
+            <p className="text-gray-600 text-sm text-start mt-4 leading-loose">
               At Juwshewaj Hotels, we believe in creating unforgettable
               experiences for our guests. Nestled [location details], our hotel
               offers a blend of luxury, comfort, and personalized service,

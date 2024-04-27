@@ -4,7 +4,11 @@ import NavLink from "./NavLink";
 import Logo from "../../../../../public/images/logo.jpg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
+import {
+  MdOutlineKeyboardDoubleArrowDown,
+  MdOutlineKeyboardDoubleArrowUp,
+} from "react-icons/md";
+import { useState } from "react";
 
 const navItems = [
   // { text: "Home", route: "/" },
@@ -28,9 +32,11 @@ const Navigation = () => (
 
 const NavBar = () => {
   const router = useRouter();
+  const [navOpen, setNavOpen] = useState(false);
+
   return (
-    <div className="w-full gap-2 flex justify-between items-center py-4 px-5 md:px-12">
-      <NavLink className="pt-2" href="/">
+    <div className="w-full gap-2 fixed top-0 left-0 bg-white z-[100] flex justify-between items-center py-4 px-5 md:px-12 ">
+      <NavLink href="/">
         <Image src={Logo} alt="logo" className="h-14 w-auto" />
       </NavLink>
 
@@ -53,8 +59,27 @@ const NavBar = () => {
       </div>
 
       <div className="block min-[820px]:hidden text-jsPrimary100">
-        <MdOutlineKeyboardDoubleArrowDown size={35} />
+        {!navOpen ? (
+          <MdOutlineKeyboardDoubleArrowDown
+            onClick={() => setNavOpen(true)}
+            size={35}
+          />
+        ) : (
+          <MdOutlineKeyboardDoubleArrowUp
+            size={35}
+            onClick={() => setNavOpen(false)}
+          />
+        )}
       </div>
+      {navOpen && (
+        <div
+          className={`absolute left-0 w-full mt-40 bg-red-500 ${
+            navOpen ? "min-h-10 p-5" : "h-0"
+          }`}
+        >
+          juyfufuyfuyfufuyuyfuyfffufufuuyufuy
+        </div>
+      )}
     </div>
   );
 };

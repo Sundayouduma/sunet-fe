@@ -78,7 +78,7 @@ const LoginScreen = () => {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="w-full sm:w-1/3 p-16 justify-center">
+      <div className="w-full p-5 justify-center">
         <div className="">
           <div className="text-3xl text-nrvGreyBlack font-semibold">
             Welcome Back, 🤗,

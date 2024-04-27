@@ -87,7 +87,7 @@ const SignUpScreen = () => {
     <Layout>
         <ToastContainer />
       <div className="flex items-center justify-center h-screen -mt-20">
-        <div className="w-full sm:w-1/3 justify-center">
+        <div className="w-full p-5 justify-center">
           <div className="">
             <div className="pt-2 text-2xl text-nrvLightGrey text-md">
               Create an Account
