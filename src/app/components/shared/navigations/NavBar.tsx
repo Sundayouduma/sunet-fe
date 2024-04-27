@@ -10,7 +10,7 @@ const navItems = [
   // { text: "Home", route: "/" },
   { text: "Feature", route: "/about" },
   { text: "How it works", route: "/services" },
-  { text: "FAQs", route: "/contact" },
+  { text: "FAQs", route: "/faq" },
 ];
 
 // Create a component to render the navigation items
@@ -30,7 +30,9 @@ const NavBar = () => {
   const router = useRouter();
   return (
     <div className="w-full gap-2 flex justify-between items-center py-4 px-5 md:px-12">
-      <Image src={Logo} alt="logo" className="h-14 w-auto" />
+      <NavLink className="pt-2" href="/">
+        <Image src={Logo} alt="logo" className="h-14 w-auto" />
+      </NavLink>
 
       <div className="min-[820px]:flex hidden items-center">
         <Navigation />
