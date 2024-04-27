@@ -25,11 +25,9 @@ const Faq = () => {
             <summary className="cursor-pointer p-4">Do you have wifi?</summary>
             <div className="p-4 bg-gray-50">
               <p>
-                Stay connected during your stay with 40MB bandwidth internet
-                service provided throughout our guestrooms and public areas.
-                Please log-in with your username and password provided at
-                check-in. User name is your room no. Password is *followed by
-                room no. eg: USER NAME: 2803 PASSWORD: *2803.
+                High speed wireless internet is offered for free throughout the
+                hotel; whether it be rooms, poolside, terrace, communal areas or
+                breakfast area.
               </p>
             </div>
           </details>
@@ -52,6 +50,61 @@ const Faq = () => {
             </summary>
             <div className="p-4 bg-gray-50">
               <p>We accept cash and all major credit cards as payment.</p>
+            </div>
+          </details>
+          <details className="w-full">
+            <summary className="cursor-pointer p-4">
+              What is included in our rooms?
+            </summary>
+            <div className="p-4 bg-gray-50">
+              <p>
+                Our rooms include a vast array of utilities to make your stay
+                enjoyable.
+              </p>
+            </div>
+          </details>
+          <details className="w-full">
+            <summary className="cursor-pointer p-4">
+              Do you charge any fees for your services?
+            </summary>
+            <div className="p-4 bg-gray-50">
+              <p>
+                No, A-HOTEL.com doesn&apos;t charge any fees for its services.
+                Our service is completely free of charge and we will not add to
+                your accommodation any additional fee for our service.
+              </p>
+            </div>
+          </details>
+          <details className="w-full">
+            <summary className="cursor-pointer p-4">
+              Are the rates on your web site per person or per room?
+            </summary>
+            <div className="p-4 bg-gray-50">
+              <p>The price is always per room.</p>
+            </div>
+          </details>
+          <details className="w-full">
+            <summary className="cursor-pointer p-4">
+              How many rooms can I book at once?
+            </summary>
+            <div className="p-4 bg-gray-50">
+              <p>
+                You can book as many rooms as are available for selected period.
+              </p>
+            </div>
+          </details>
+          <details className="w-full">
+            <summary className="cursor-pointer p-4">
+              Is it secure to send my credit card details?
+            </summary>
+            <div className="p-4 bg-gray-50">
+              <p>
+                Yes, it is absolutely secure as we are using encrypted SSL
+                protocol in all our order forms. This is the latest, most secure
+                technology that encrypts all the details provided in the order
+                form including your credit card details. All our servers are
+                also protected by firewall against any unauthorized access.{" "}
+              </p>
             </div>
           </details>
         </div>
