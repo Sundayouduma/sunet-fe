@@ -26,7 +26,6 @@ export default function Home() {
     getRooms();
   }, []);
 
-
   return (
     <Layout>
       <div
@@ -63,7 +62,7 @@ export default function Home() {
         <div className="grid md:grid-cols-2 items-center">
           <div className="max-w-1/2 w-full h-auto py-5 hidden md:block">
             <img
-              src="https://res.cloudinary.com/dzv98o7ds/image/upload/v1713353419/juwsheyaj-bg-img_ayl8kn.jpg"
+              src="https://res.cloudinary.com/dzv98o7ds/image/upload/v1714338856/ewipbpjleqegnaaegtba.jpg"
               alt="hotel"
 
               // // height={100}
@@ -197,16 +196,24 @@ export default function Home() {
         <div className="flex gap-10 mt-10 items-center justify-center flex-wrap">
           <div className="grid sm:flex sm:items-center gap-5 p-5 border max-w-lg w-full shadow">
             <div className="-mt-10 sm:-mt-0 sm:-ml-10 mx-auto h-40 min-w-40 max-w-40 border border-black w-full">
-              <Image src={gymImg} alt="gym" className="h-full w-full" />
+              <img
+                src={
+                  "https://res.cloudinary.com/dzv98o7ds/image/upload/v1714339322/IMG20240406122247_ritv84.jpg"
+                }
+                alt="gym"
+                className="h-full w-full"
+              />
             </div>
             <div className="col-span-full">
               <p className="text-2xl font-bold text-jsPrimary200 mb-3">
-                Gymnasium
+                Exclusive Bar
               </p>
               <p className="text-gray-700">
-                Our well-equipped guy with best and latest gym equipments are
-                accessible to out in-house fit fam junkies, and comes with an
-                available instructor
+                Our state-of-the-art facilities provide an unparalleled
+                ambiance, ensuring that every visit is an unforgettable
+                experience. Come and immerse yourself in a world of unparalleled
+                refinement, where the finest drinks and impeccable service await
+                you. Your journey to an extraordinary evening begins here.
               </p>
             </div>
           </div>
