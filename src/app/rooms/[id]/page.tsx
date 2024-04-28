@@ -129,6 +129,8 @@ const RoomPage = () => {
           booking,
           { headers: { Authorization: `Bearer ${user?.token}` } }
         );
+        alert("Your booking was successful");
+        toast.success("Your booking was successful");
       } catch (error: any) {
         toast.error(error?.message);
       }
@@ -141,8 +143,6 @@ const RoomPage = () => {
     setTotalAmount(roomData?.price * (difference + 1));
   }, [checkInDate, checkOutDate]);
 
-  // console.log({ checkOutDate });
-  console.log({ dateDifference });
   useEffect(() => {
     const roomBookingDetails = localStorage.getItem("roomBookingDetails");
     const savedData = roomBookingDetails
@@ -162,8 +162,6 @@ const RoomPage = () => {
       setOccupants(savedData?.roomDetails?.occupancy);
     }
   }, []);
-  // console.log({ roomData });
-  console.log({ totalAmount });
   return (
     <Layout>
       <ToastContainer />
@@ -259,7 +257,7 @@ const RoomPage = () => {
             </div>
           </div>
 
-          <div className="border rounded-xl p-3 w-[18rem] md:w-[45rem] h-fit">
+          <div className="border rounded-xl p-3 w-full md:w-[45rem] h-fit">
             <p className="whitespace-nowrap text-lg font-semibold">
               &#8358;{Number(roomData?.price).toLocaleString()}
             </p>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { MdClose } from "react-icons/md";
 import InputField from "../input-fields/InputFields";
 import Button from "../buttons/Button";
@@ -7,12 +7,13 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-interface props {
-open: any
-onClose: any
-bookingDetails: any
+interface Props {
+  open: any;
+  onClose: any;
+  bookingDetails: any;
 }
-const NotLoggedInModal = ({ open, onClose, bookingDetails }: props) => {
+
+const NotLoggedInModal: FC<Props> = ({ open, onClose, bookingDetails }: Props) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -20,13 +21,11 @@ const NotLoggedInModal = ({ open, onClose, bookingDetails }: props) => {
     phone: "",
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-  const [isLoading, setIsLoading] = useState(false); // New loading state
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-
-    // Clear the corresponding error when typing
     setErrors((prevErrors) => ({
       ...prevErrors,
       [name]: "",
@@ -52,11 +51,10 @@ const NotLoggedInModal = ({ open, onClose, bookingDetails }: props) => {
     }
 
     setErrors(errors);
-
     return Object.keys(errors).length === 0;
   };
 
-  const resetformData = () => {
+  const resetFormData = () => {
     setFormData({
       firstName: "",
       lastName: "",
@@ -65,9 +63,9 @@ const NotLoggedInModal = ({ open, onClose, bookingDetails }: props) => {
     });
   };
 
-  const handleCloseModal = () => {
+  const handleCloseModal = (): void => {
     setErrors({});
-    resetformData();
+    resetFormData();
     onClose(false);
   };
 
@@ -85,10 +83,9 @@ const NotLoggedInModal = ({ open, onClose, bookingDetails }: props) => {
       await axios.post(
         `https://sunet-be.onrender.com/api/rooms/create-booking`,
         booking
-        // { headers: { Authorization: `Bearer ${user?.token}` } }
       );
       setIsLoading(false);
-      resetformData();
+      resetFormData();
       onClose();
     } catch (error: any) {
       setIsLoading(false);
@@ -96,11 +93,12 @@ const NotLoggedInModal = ({ open, onClose, bookingDetails }: props) => {
     }
   };
 
-  if (!open) return;
+  if (!open) return null;
+
   return (
     <main className="fixed flex justify-center items-center h-[100vh] w-full top-0 left-0 bg-black bg-opacity-25 z-[200]">
       <ToastContainer />
-      <div className="max-w-xl w-full p-5 bg-white rounded-3xl">
+      <div className="max-w-xl w-full w-4/5 p-5 bg-white rounded-3xl">
         <div
           className="text-jsPrimary100 cursor-pointer p-2 rounded-full border-2 border-jsPrimary100 w-fit ml-auto hover:bg-yellow-50"
           onClick={handleCloseModal}
@@ -108,7 +106,7 @@ const NotLoggedInModal = ({ open, onClose, bookingDetails }: props) => {
           <MdClose size={20} />
         </div>
 
-        <div className="w-full p-5">
+        <div className="w-full p-5 m-2">
           <h3 className="text-xl font-medium text-center">
             You&apos;re not logged in
           </h3>
@@ -166,16 +164,12 @@ const NotLoggedInModal = ({ open, onClose, bookingDetails }: props) => {
               variant="bluebg"
               showIcon={false}
               onClick={handleBooking}
-              disabled={isLoading} // Disable the button while loading
+              disabled={isLoading}
             >
               {isLoading ? "Loading..." : "Continue"}
-              {/* Change button text based on loading state */}
             </Button>
           </div>
         </div>
-        <Link href="/sign-in" className="mt-10 hover:underline">
-          Sign in
-        </Link>
       </div>
     </main>
   );
