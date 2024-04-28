@@ -25,7 +25,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ data }) => {
     localStorage.setItem("roomData", JSON.stringify(data));
   };
   return (
-    <div className="p-3 rounded-xl max-w-sm w-full">
+    <div className="p-3 rounded-xl max-w-md w-full">
       <Link href={`/rooms/${data?.roomId}`} onClick={saveRoomData}>
         <div className=" relative">
           <div className="w-full h-56 rounded-xl overflow-hidden">

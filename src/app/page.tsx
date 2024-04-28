@@ -26,7 +26,6 @@ export default function Home() {
     getRooms();
   }, []);
 
-  console.log(rooms);
 
   return (
     <Layout>
@@ -179,7 +178,7 @@ export default function Home() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pt-4 mx-auto">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pt-4 mx-auto">
           {rooms.map((item: any) => {
             // const item: any = item
             return (
