@@ -13,6 +13,8 @@ import {
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import { ThemeProvider, createTheme } from "@mui/material";
+import { toast, ToastContainer } from "react-toastify"; // Import toast
+import "react-toastify/dist/ReactToastify.css";
 
 const RoomPage = () => {
   const [occupants, setOccupants] = useState(1);
@@ -39,8 +41,9 @@ const RoomPage = () => {
   const handleDateUpdate = (value: any, type: string) => {
     if (type === "checkIn") {
       if (
-        Math.ceil(dayjs(value).diff(dayjs(), "day", true)) >= 0 &&
-        Math.ceil(checkOutDate.diff(dayjs(value), "day", true)) >= 0
+        Math.ceil(dayjs(value).diff(dayjs(), "day", true)) >= 0
+        // &&
+        //
       ) {
         setcheckInDate(dayjs(value));
       } else {
@@ -55,6 +58,16 @@ const RoomPage = () => {
     }
   };
 
+  const handleBookRoom = () => {
+    if (Math.ceil(checkOutDate.diff(checkInDate, "day", true)) <= 0) {
+      toast.error(
+        "You can't pick a check-in date thats later than check-out date"
+      );
+    } else {
+      console.log("Error dey his");
+    }
+  };
+
   useEffect(() => {
     const difference = Math.ceil(checkOutDate.diff(checkInDate, "day", true));
     setDateDifference(difference + 1);
@@ -65,6 +78,7 @@ const RoomPage = () => {
   console.log({ dateDifference });
   return (
     <Layout>
+      <ToastContainer />
       <div className="max-w-7xl w-full mx-auto p-5">
         <h1 className="font-semibold text-4xl">The Throne Room</h1>
 
@@ -221,7 +235,10 @@ const RoomPage = () => {
                 </p>
               </div>
 
-              <div className="hover:bg-[#B89010] bg-[#C8A008] cursor-pointer mt-2 font-medium p-5 rounded-md text-center text-white">
+              <div
+                className="hover:bg-[#B89010] bg-[#C8A008] cursor-pointer mt-2 font-medium p-5 rounded-md text-center text-white"
+                onClick={handleBookRoom}
+              >
                 Book Now
               </div>
             </div>

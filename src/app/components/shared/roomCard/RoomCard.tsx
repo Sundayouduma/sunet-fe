@@ -4,10 +4,13 @@ import { FaStar } from "react-icons/fa";
 import Link from "next/link";
 
 interface RoomData {
-  id: number;
-  image: string;
-  name: string;
+  _id: string;
+  roomId: number;
+  roomName: string;
+  roomType: string;
   price: number;
+  amenities: string[];
+  images: string[];
   // Add other properties as needed
 }
 
@@ -18,10 +21,10 @@ interface RoomCardProps {
 const RoomCard: React.FC<RoomCardProps> = ({ data }) => {
   return (
     <div className="p-3 rounded-xl max-w-sm w-full">
-      <Link href={`/rooms/${data?.id}`}>
+      <Link href={`/rooms/${data?.roomId}`}>
         <div className=" relative">
           <div className="w-full h-56 rounded-xl overflow-hidden">
-            <img className="h-full w-full" src={data?.image} />
+            <img className="h-full w-full" src={data?.images[0]} />
           </div>
           <div className="p-2 rounded-full bg-white absolute bottom-0 right-3 translate-y-1/2">
             <IoMdHeartEmpty size={20} className="-mb-1" />
@@ -29,7 +32,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ data }) => {
         </div>
 
         <div className="mt-2">
-          <p className="text-md font-medium text-[#222222]">{data?.name}</p>
+          <p className="text-md font-medium text-[#222222]">{data?.roomName}</p>
           <div className="flex gap-3 items-center mt-2 justify-between">
             <div className="flex items-center gap-1">
               {Array.from({ length: 5 }).map((_, index) => (

@@ -5,7 +5,11 @@ import RoomCard from "./components/shared/roomCard/RoomCard";
 import Image from "next/image";
 import gymImg from "../../public/images/gym.jpg";
 import poolImg from "../../public/images/pool.jpg";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 export default function Home() {
+  const [rooms, setRooms] = useState([]);
   const data: any = [
     {
       id: 1,
@@ -36,6 +40,23 @@ export default function Home() {
       price: "88000",
     },
   ];
+
+  useEffect(() => {
+    const getRooms = async () => {
+      try {
+        const response = await axios.get(
+          `https://sunet-be.onrender.com/api/rooms/all`
+        );
+        setRooms(response?.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getRooms();
+  }, []);
+
+  console.log(rooms);
 
   return (
     <Layout>
@@ -70,7 +91,6 @@ export default function Home() {
       </div>
 
       <div className="flex flex-col items-start max-w-7xl mx-auto py-5 px-5 my-5 lg:my-12">
-
         <div className="grid md:grid-cols-2 items-center">
           <div className="max-w-1/2 w-full h-auto py-5 hidden md:block">
             <img
@@ -187,14 +207,13 @@ export default function Home() {
           <h2 className="text-[2rem] mb-4 text-[#222222]">
             Our Exclusive Rooms
           </h2>
-
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pt-4 mx-auto">
-          {data.map((item: any, index: any) => {
+          {rooms.map((item: any) => {
             // const item: any = item
             return (
-              <div key={index}>
+              <div key={item?.roomId}>
                 <RoomCard data={item} />
               </div>
             );
