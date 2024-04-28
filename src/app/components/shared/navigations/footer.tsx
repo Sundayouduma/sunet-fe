@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import Logo from "../../../../../public/images/logo.jpg";
+import Logo from "../../../../../public/images/Logo.png";
 import Link from "next/link";
 import React, { useState } from "react";
 import {
@@ -29,7 +29,7 @@ const Footer = () => {
   };
   return (
     <footer className="bg-gray-50">
-      <div className="max-w-7xl mx-auto py-10 px-5 gap-5 grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
+      <div className="max-w-7xl mx-auto py-10 px-5 gap-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
         <Link className="mb-10" href="/">
           <Image src={Logo} alt="logo" className="h-auto w-full" />
         </Link>

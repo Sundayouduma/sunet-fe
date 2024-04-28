@@ -1,7 +1,7 @@
 "use client";
 import Button from "../buttons/Button";
 import NavLink from "./NavLink";
-import Logo from "../../../../../public/images/logo.jpg";
+import Logo from "../../../../../public/images/Logo.png";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import {
