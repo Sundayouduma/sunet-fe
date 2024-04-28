@@ -129,7 +129,7 @@ const RoomPage = () => {
           booking,
           { headers: { Authorization: `Bearer ${user?.token}` } }
         );
-      } catch (error) {
+      } catch (error: any) {
         toast.error(error?.message);
       }
     }

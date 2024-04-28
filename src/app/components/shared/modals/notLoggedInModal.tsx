@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { MdClose } from "react-icons/md";
 import InputField from "../input-fields/InputFields";
-import { Button } from "@mui/material";
+import Button from "../buttons/Button";
 import Link from "next/link";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const NotLoggedInModal = ({ open, onClose, bookingDetails }) => {
+interface props {
+open: any
+onClose: any
+bookingDetails: any
+}
+const NotLoggedInModal = ({ open, onClose, bookingDetails }: props) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -85,7 +90,7 @@ const NotLoggedInModal = ({ open, onClose, bookingDetails }) => {
       setIsLoading(false);
       resetformData();
       onClose();
-    } catch (error) {
+    } catch (error: any) {
       setIsLoading(false);
       toast.error(error?.message);
     }

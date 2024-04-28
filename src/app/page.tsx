@@ -18,7 +18,7 @@ export default function Home() {
           `https://sunet-be.onrender.com/api/rooms/all`
         );
         setRooms(response?.data);
-      } catch (error) {
+      } catch (error: any) {
         console.log(error);
       }
     };
