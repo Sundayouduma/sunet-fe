@@ -61,7 +61,17 @@ const LoginScreen = () => {
         // Login successful
         const userData = response.data; // Assuming response.data contains user data
         localStorage.setItem("userData", JSON.stringify(userData));
-        router.push("/dashboard"); // Redirect to dashboard or home page after login
+
+        const roomBooingDetails = localStorage.getItem("roomBookingDetails");
+        const savedData = roomBooingDetails
+          ? JSON.parse(roomBooingDetails)
+          : null;
+
+        if (!savedData) {
+          router.push("/dashboard"); // Redirect to dashboard or home page after login
+        } else {
+          router.push(`/rooms/${savedData?.roomDetails?.roomType?.roomId}`); // Redirect to dashboard or home page after login
+        }
       } else {
         console.error("Login failed:", response.statusText);
         // Handle login failure
@@ -109,7 +119,6 @@ const LoginScreen = () => {
                 error={errors.password}
               />
             </div>
-
           </div>
           <div className="w-full mt-16">
             <Button

@@ -15,14 +15,46 @@ import dayjs from "dayjs";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { toast, ToastContainer } from "react-toastify"; // Import toast
 import "react-toastify/dist/ReactToastify.css";
+import NotLoggedInModal from "@/app/components/shared/modals/notLoggedInModal";
+import axios from "axios";
 
+interface RoomData {
+  _id: string;
+  roomId: number;
+  roomName: string;
+  roomType: string;
+  price: number;
+  amenities: string[];
+  images: string[];
+  availability: boolean;
+
+  // Add other properties as needed
+}
 const RoomPage = () => {
+  const [roomData, setRoomData] = useState<RoomData>({
+    _id: "",
+    roomId: 0,
+    roomName: "",
+    roomType: "",
+    price: 0,
+    amenities: [],
+    images: [],
+    availability: false,
+  });
   const [occupants, setOccupants] = useState(1);
   const [checkInDate, setcheckInDate] = useState(dayjs());
   const [checkOutDate, setcheckOutDate] = useState(dayjs());
-  const [visible, setVisible] = useState(false);
+  const [totalAmount, setTotalAmount] = useState(roomData?.price);
+  const [visibleImg, setVisibleImg] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [dateDifference, setDateDifference] = useState(1);
+  const [notLoggedInModal, setNotLoggedInModal] = useState(false);
+  const [bookingDetails, setBookingDetails] = useState({});
+  // const [formData, setFormData] = useState({
+  //   checkInDate: dayjs(),
+  //   checkOutDate: dayjs(),
+
+  // });
   const images = [
     "https://assets-global.website-files.com/5c6d6c45eaa55f57c6367749/65045f093c166fdddb4a94a5_x-65045f0266217.webp",
     "https://assets-global.website-files.com/5c6d6c45eaa55f57c6367749/65d7d7080ab85f33665b94d6_RoomView022224.webp",
@@ -40,11 +72,7 @@ const RoomPage = () => {
 
   const handleDateUpdate = (value: any, type: string) => {
     if (type === "checkIn") {
-      if (
-        Math.ceil(dayjs(value).diff(dayjs(), "day", true)) >= 0
-        // &&
-        //
-      ) {
+      if (Math.ceil(dayjs(value).diff(dayjs(), "day", true)) >= 0) {
         setcheckInDate(dayjs(value));
       } else {
         setcheckInDate(dayjs());
@@ -58,29 +86,91 @@ const RoomPage = () => {
     }
   };
 
-  const handleBookRoom = () => {
-    if (Math.ceil(checkOutDate.diff(checkInDate, "day", true)) <= 0) {
+  const handleBookRoom = async () => {
+    if (dateDifference < 1) {
       toast.error(
         "You can't pick a check-in date thats later than check-out date"
       );
+      return;
+    }
+
+    const userData = localStorage.getItem("userData");
+    const user = userData ? JSON.parse(userData) : null;
+    console.log({ user });
+    if (!user) {
+      const booking = {
+        roomDetails: {
+          roomType: roomData,
+          checkinDate: checkInDate.format("DD-MM-YY"),
+          checkOutDate: checkOutDate.format("DD-MM-YY"),
+          occupancy: occupants,
+        },
+        total_price: totalAmount,
+      };
+      setBookingDetails(booking);
+      localStorage.setItem("roomBookingDetails", JSON.stringify(booking));
+      setNotLoggedInModal(true);
     } else {
-      console.log("Error dey his");
+      delete user?.token;
+      const booking = {
+        userDetails: user?.user,
+        roomDetails: {
+          roomType: roomData,
+          checkinDate: checkInDate.format("DD-MM-YY"),
+          checkOutDate: checkOutDate.format("DD-MM-YY"),
+          occupancy: occupants,
+        },
+        total_price: totalAmount,
+        email: user?.user?.email,
+      };
+      try {
+        await axios.post(
+          `https://sunet-be.onrender.com/api/rooms/create-booking`,
+          booking,
+          { headers: { Authorization: `Bearer ${user?.token}` } }
+        );
+      } catch (error) {
+        toast.error(error?.message);
+      }
     }
   };
 
   useEffect(() => {
     const difference = Math.ceil(checkOutDate.diff(checkInDate, "day", true));
     setDateDifference(difference + 1);
+    setTotalAmount(roomData?.price * (difference + 1));
   }, [checkInDate, checkOutDate]);
 
-  console.log({ checkInDate });
-  console.log({ checkOutDate });
+  // console.log({ checkOutDate });
   console.log({ dateDifference });
+  useEffect(() => {
+    const roomBookingDetails = localStorage.getItem("roomBookingDetails");
+    const savedData = roomBookingDetails
+      ? JSON.parse(roomBookingDetails)
+      : null;
+
+    if (!savedData) {
+      const data = localStorage.getItem("roomData");
+      const savedData = data ? JSON.parse(data) : null;
+      setRoomData(savedData);
+      setTotalAmount(savedData?.price);
+    } else {
+      setRoomData(savedData?.roomDetails?.roomType);
+      setTotalAmount(savedData?.roomDetails?.roomType?.price);
+      setcheckInDate(dayjs(savedData?.roomDetails?.checkInDate));
+      setcheckOutDate(dayjs(savedData?.roomDetails?.checkOutDate));
+      setOccupants(savedData?.roomDetails?.occupancy);
+    }
+  }, []);
+  // console.log({ roomData });
+  console.log({ totalAmount });
   return (
     <Layout>
       <ToastContainer />
       <div className="max-w-7xl w-full mx-auto p-5">
-        <h1 className="font-semibold text-4xl">The Throne Room</h1>
+        <h1 className="font-semibold text-4xl">
+          {roomData?.roomName} <small>({roomData?.roomType})</small>
+        </h1>
 
         <div className="flex gap-3 items-center mt-2">
           <div className="flex items-center gap-1">
@@ -113,7 +203,7 @@ const RoomPage = () => {
                     : "absolute h-1/2 w-2/5 bottom-0 right-0 border-l-4 border-t-4 border-white"
                 } `}
                 onClick={() => {
-                  setVisible(true);
+                  setVisibleImg(true);
                   setActiveIndex(index);
                 }}
               />
@@ -171,7 +261,7 @@ const RoomPage = () => {
 
           <div className="border rounded-xl p-3 w-[18rem] md:w-[45rem] h-fit">
             <p className="whitespace-nowrap text-lg font-semibold">
-              &#8358;82,000
+              &#8358;{Number(roomData?.price).toLocaleString()}
             </p>
 
             <div className="text-swGray900 top-24 bg-white w-full rounded-md z-20 mt-5">
@@ -225,13 +315,15 @@ const RoomPage = () => {
                   </div>
                 </div> */}
               </div>
+              <p className="mt-2 font-medium">No of nights: {dateDifference}</p>
             </div>
 
-            <div className="mt-10 pt-5 border-t">
+            <div className="mt-5 pt-5 border-t">
               <div className="flex justify-between items-center text-lg font-medium">
                 <p>Total:</p>
                 <p className="whitespace-nowrap">
-                  &#8358;{Number(82000 * dateDifference).toLocaleString()}
+                  &#8358;
+                  {Number(totalAmount).toLocaleString()}
                 </p>
               </div>
 
@@ -246,10 +338,15 @@ const RoomPage = () => {
         </div>
       </div>
       <Viewer
-        visible={visible}
-        onClose={() => setVisible(false)}
+        visible={visibleImg}
+        onClose={() => setVisibleImg(false)}
         images={images.map((image) => ({ src: image }))}
         activeIndex={activeIndex}
+      />
+      <NotLoggedInModal
+        open={notLoggedInModal}
+        onClose={setNotLoggedInModal}
+        bookingDetails={bookingDetails}
       />
     </Layout>
   );

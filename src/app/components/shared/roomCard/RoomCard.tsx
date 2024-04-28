@@ -11,6 +11,8 @@ interface RoomData {
   price: number;
   amenities: string[];
   images: string[];
+  availability: boolean;
+
   // Add other properties as needed
 }
 
@@ -19,9 +21,12 @@ interface RoomCardProps {
 }
 
 const RoomCard: React.FC<RoomCardProps> = ({ data }) => {
+  const saveRoomData = () => {
+    localStorage.setItem("roomData", JSON.stringify(data));
+  };
   return (
     <div className="p-3 rounded-xl max-w-sm w-full">
-      <Link href={`/rooms/${data?.roomId}`}>
+      <Link href={`/rooms/${data?.roomId}`} onClick={saveRoomData}>
         <div className=" relative">
           <div className="w-full h-56 rounded-xl overflow-hidden">
             <img className="h-full w-full" src={data?.images[0]} />
@@ -45,7 +50,9 @@ const RoomCard: React.FC<RoomCardProps> = ({ data }) => {
           </div>
 
           <div className="mt-2 pt-3 flex items-center justify-between">
-            <p className="text-sm text-green">Available</p>
+            <p className="text-sm text-green">
+              {data?.availability ? "Available" : "Not Available"}
+            </p>
             <p className="font-medium text-black">
               &#8358; {Number(data?.price).toLocaleString()}
             </p>

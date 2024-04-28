@@ -10,36 +10,6 @@ import axios from "axios";
 
 export default function Home() {
   const [rooms, setRooms] = useState([]);
-  const data: any = [
-    {
-      id: 1,
-      image:
-        "https://a0.muscache.com/im/pictures/miso/Hosting-53627561/original/cc19cf5f-d04f-4b61-99b0-53b77aca7ba6.jpeg?im_w=720",
-      name: "The Throne Room",
-      price: "82000",
-    },
-    {
-      id: 2,
-      image:
-        "https://a0.muscache.com/im/pictures/miso/Hosting-53627561/original/cc19cf5f-d04f-4b61-99b0-53b77aca7ba6.jpeg?im_w=720",
-      name: "Halls of the Greats",
-      price: "84000",
-    },
-    {
-      id: 3,
-      image:
-        "https://a0.muscache.com/im/pictures/miso/Hosting-53627561/original/cc19cf5f-d04f-4b61-99b0-53b77aca7ba6.jpeg?im_w=720",
-      name: "Altars and Temples",
-      price: "86000",
-    },
-    {
-      id: 4,
-      image:
-        "https://a0.muscache.com/im/pictures/miso/Hosting-53627561/original/cc19cf5f-d04f-4b61-99b0-53b77aca7ba6.jpeg?im_w=720",
-      name: "Elysian Fields",
-      price: "88000",
-    },
-  ];
 
   useEffect(() => {
     const getRooms = async () => {
