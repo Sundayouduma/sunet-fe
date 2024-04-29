@@ -88,10 +88,10 @@ const LoginScreen = () => {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="w-full p-5 justify-center">
+      <div className="w-full max-w-md p-5 justify-center">
         <div className="">
           <div className="text-3xl text-nrvGreyBlack font-semibold">
-            Welcome Back, 🤗,
+            Welcome Back 🤗
           </div>
           <div className="pt-2 text-nrvLightGrey text-md">
             Please enter your login to access your account.

@@ -79,7 +79,7 @@ export default function Home() {
             <h3 className="text-[2rem] my-3 text-[#222222]">
               The Most Preferred Hotel in Nigeria
             </h3>
-            <p className="text-gray-600">
+            <p className="text-[#b1a36c]">
               Juwshewaj hotels is the most preferred hotel in Nigeria, it is all
               about the right blend, Located in Federal capital territory of
               Nigeria, Abuja. We offer our clients a perfect combination of
@@ -96,9 +96,7 @@ export default function Home() {
               security is our primary concern and you will find our customer
               care is second to none.
             </p>
-            <button className="py-2 px-4 font-semibold uppercase text-white bg-jsPrimary100 hover:bg-jsPrimary200 mt-5 w-fit">
-              learn more
-            </button>
+
           </div>
         </div>
       </div>
@@ -241,9 +239,9 @@ export default function Home() {
             <h3 className="text-2xl font-semibold mb-2 w-full text-center">
               Our vision
             </h3>
-            <p className="text-gray-600 text-sm text-start mt-4 leading-loose">
-              At Juwshewaj Hotels, we believe in creating unforgettable
-              experiences for our guests. Nestled [location details], our hotel
+            <p className="text-gray-600 text-md text-start mt-4 leading-loose">
+              At Juwshewaj, we believe in creating unforgettable
+              experiences for our guests. Nestled at No 1, lukulu Street wuse zone 3, Abuja, our hotel
               offers a blend of luxury, comfort, and personalized service,
               making it the perfect choice for both leisure and business
               travelers. Our Story has been a landmark in location , enchanting

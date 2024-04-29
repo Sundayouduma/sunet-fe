@@ -12,8 +12,7 @@ import { useState } from "react";
 
 const navItems = [
   // { text: "Home", route: "/" },
-  { text: "Feature", route: "/about" },
-  { text: "How it works", route: "/services" },
+  { text: " Home", route: "/" },
   { text: "FAQs", route: "/faq" },
 ];
 
@@ -73,11 +72,29 @@ const NavBar = () => {
       </div>
       {navOpen && (
         <div
-          className={`absolute left-0 w-full mt-40 bg-red-500 ${
-            navOpen ? "min-h-10 p-5" : "h-0"
+          className={`absolute left-0 w-full mt-40 ${
+            navOpen ? "min-h-10" : "h-0"
           }`}
         >
-          juyfufuyfuyfufuyuyfuyfffufufuuyufuy
+          <div className="bg-white pt-8">
+            <div className="min-[820px] items-center">
+              <Navigation />
+            </div>
+
+            <div className="pt-8 min-[820px] justify-center flex gap-8 items-center">
+              <NavLink className="pt-2" href="/sign-in">
+                Sign In
+              </NavLink>
+              <Button
+                size="large"
+                variant="primary"
+                showIcon={false}
+                onClick={() => router.push("/sign-up")}
+              >
+                Get Started
+              </Button>
+            </div>
+          </div>
         </div>
       )}
     </div>

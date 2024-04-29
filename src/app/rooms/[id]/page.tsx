@@ -17,6 +17,7 @@ import { toast, ToastContainer } from "react-toastify"; // Import toast
 import "react-toastify/dist/ReactToastify.css";
 import NotLoggedInModal from "@/app/components/shared/modals/notLoggedInModal";
 import axios from "axios";
+import LoadingPage from "@/app/components/loaders/Loader";
 
 interface RoomData {
   _id: string;
@@ -61,6 +62,17 @@ const RoomPage = () => {
     "https://static01.nyt.com/images/2019/03/24/travel/24trending-shophotels1/24trending-shophotels1-jumbo.jpg?quality=75&auto=webp",
     "https://a0.muscache.com/im/pictures/miso/Hosting-53627561/original/cc19cf5f-d04f-4b61-99b0-53b77aca7ba6.jpeg?im_w=720",
   ];
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000); 
+
+    return () => clearTimeout(timer); 
+  }, []);
+
 
   const customTheme = createTheme({
     palette: {
@@ -163,7 +175,9 @@ const RoomPage = () => {
     }
   }, []);
   return (
-    <Layout>
+    <div>
+    {isLoading ? <LoadingPage /> :
+      <Layout>
       <ToastContainer />
       <div className="max-w-7xl w-full mx-auto p-5">
         <h1 className="font-semibold text-4xl">
@@ -346,7 +360,9 @@ const RoomPage = () => {
         onClose={setNotLoggedInModal}
         bookingDetails={bookingDetails}
       />
-    </Layout>
+    </Layout>} 
+  </div>
+  
   );
 };
 

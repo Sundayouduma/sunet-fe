@@ -36,8 +36,6 @@ const Footer = () => {
         <div className="p-5 pt-0 flex flex-col gap-5 mb-10">
           <p className="text-jsPrimary100 text-xl">Site Navigation</p>
           <Link href="/">Home</Link>
-          <Link href="#">About</Link>
-          <Link href="#">Rooms & Suits</Link>
           <Link href="/faq">FAQ</Link>
         </div>
         <div className="p-5 pt-0 flex flex-col gap-3 mb-10">
@@ -77,11 +75,11 @@ const Footer = () => {
         <div className="p-5 pt-0 flex flex-col gap-5 mb-10">
           <p className="text-jsPrimary100 text-xl">Get in Touch</p>
           <p className="flex gap-2 items-center">
-            <FaMapMarkerAlt size={20} /> Abuja
+            <FaMapMarkerAlt size={20} /> No 1, lukulu Street wuse zone 3, Abuja
           </p>
           <p className="flex gap-2 items-center">
             <FaPhoneAlt size={20} />
-            <Link href="tel:+2340000000000">+2340000000000</Link>
+            <Link href="tel:+2340000000000">07032735889</Link>
           </p>
           <p className="flex gap-2 items-center">
             <MdEmail size={20} />{" "}
