@@ -68,7 +68,7 @@ const LoginScreen = () => {
           : null;
 
         if (!savedData) {
-          router.push("/dashboard"); // Redirect to dashboard or home page after login
+          router.push("/"); // Redirect to dashboard or home page after login
         } else {
           router.push(`/rooms/${savedData?.roomDetails?.roomType?.roomId}`); // Redirect to dashboard or home page after login
         }
