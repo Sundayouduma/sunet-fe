@@ -3,8 +3,7 @@ import Layout from "./components/layout/UserLayout";
 import { TypeAnimation } from "react-type-animation";
 import RoomCard from "./components/shared/roomCard/RoomCard";
 import Image from "next/image";
-import gymImg from "../../public/images/gym.jpg";
-import poolImg from "../../public/images/pool.jpg";
+import resturantImg from "../../public/images/resturant.jpg";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -96,7 +95,6 @@ export default function Home() {
               security is our primary concern and you will find our customer
               care is second to none.
             </p>
-
           </div>
         </div>
       </div>
@@ -189,9 +187,9 @@ export default function Home() {
 
       <div className="flex flex-col max-w-7xl mx-auto py-10 p-5">
         <h2 className="text-[2rem] w-full text-center text-[#222222] mb-4">
-          Recreational services
+          Exceptional services
         </h2>
-        <div className="flex gap-10 mt-10 items-center justify-center flex-wrap">
+        <div className="flex gap-10 mt-10  justify-center flex-wrap">
           <div className="grid sm:flex sm:items-center gap-5 p-5 border max-w-lg w-full shadow">
             <div className="-mt-10 sm:-mt-0 sm:-ml-10 mx-auto h-40 min-w-40 max-w-40 border border-black w-full">
               <img
@@ -215,18 +213,20 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="grid sm:flex sm:items-center gap-5 p-5 border max-w-lg w-full shadow">
+          <div className="grid sm:flex sm:items-center gap-5 p-5 border max-w-lg w-full shadow ">
             <div className="-mt-10 sm:-mt-0 sm:-ml-10 mx-auto h-40 min-w-40 max-w-40 border border-black w-full">
-              <Image src={poolImg} alt="pool" className="h-full w-full" />
+              <Image src={resturantImg} alt="pool" className="h-full w-full" />
             </div>
             <div className="col-span-full">
               <p className="text-2xl font-bold text-jsPrimary200 mb-3">
-                Swimming Pool
+                Exclusive Resturant
               </p>
               <p className="text-gray-700">
-                Additional perks of being an in-house guest is to enjoy a or
-                night time swim. Access to pool for outside guests are at an
-                additional cost.
+                Savor the flavors of our locally sourced ingredients expertly
+                crafted into delectable dishes at our restaurant. Whether you're
+                craving a hearty breakfast, a leisurely lunch, or a sumptuous
+                dinner, our culinary team ensures an unforgettable dining
+                experience awaits you.
               </p>
             </div>
           </div>
@@ -240,9 +240,9 @@ export default function Home() {
               Our vision
             </h3>
             <p className="text-gray-600 text-md text-start mt-4 leading-loose">
-              At Juwshewaj, we believe in creating unforgettable
-              experiences for our guests. Nestled at No 1, lukulu Street wuse zone 3, Abuja, our hotel
-              offers a blend of luxury, comfort, and personalized service,
+              At Juwshewaj, we believe in creating unforgettable experiences for
+              our guests. Nestled at No 1, lukulu Street wuse zone 3, Abuja, our
+              hotel offers a blend of luxury, comfort, and personalized service,
               making it the perfect choice for both leisure and business
               travelers. Our Story has been a landmark in location , enchanting
               guests with its timeless charm and hospitality.
