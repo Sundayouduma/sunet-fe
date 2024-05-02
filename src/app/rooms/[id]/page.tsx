@@ -5,14 +5,6 @@ import { LiaBookReaderSolid } from "react-icons/lia";
 import Layout from "../../components/layout/UserLayout";
 import { useEffect, useState } from "react";
 import Viewer from "react-viewer";
-// import {
-//   DatePicker,
-//   DateTimePicker,
-//   LocalizationProvider,
-// } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import dayjs from "dayjs";
-import { ThemeProvider, createTheme } from "@mui/material";
 import { toast, ToastContainer } from "react-toastify"; // Import toast
 import "react-toastify/dist/ReactToastify.css";
 import NotLoggedInModal from "@/app/components/shared/modals/notLoggedInModal";
@@ -73,13 +65,6 @@ const RoomPage = () => {
 
     return () => clearTimeout(timer);
   }, []);
-
-  const checkInModifiers = {
-    selected: checkInDate,
-  };
-  const checkOutModifiers = {
-    selected: checkOutDate,
-  };
 
   const handleDateUpdate = (value: any, type: string) => {
     if (type === "checkIn") {
@@ -299,7 +284,7 @@ const RoomPage = () => {
                       <p className="text-lg font-medium">Check-in date</p>
                       <div className="flex items-center justify-between border p-2 rounded-md hover:border-jsPrimary100">
                         <p className="text-lg font-medium">
-                          {format(checkInDate, "PP")}
+                          {format(checkInDate, "PPP")}
                         </p>
                         <div
                           className="w-fit p-2 rounded-full border border-jsPrimary100 text-jsPrimary100 cursor-pointer"
@@ -338,7 +323,7 @@ const RoomPage = () => {
                       <p className="text-lg font-medium">Check-out date</p>
                       <div className="flex items-center justify-between border p-2 rounded-md hover:border-jsPrimary100">
                         <p className="text-lg font-medium">
-                          {format(checkOutDate, "PP")}
+                          {format(checkOutDate, "PPP")}
                         </p>
                         <div
                           className="w-fit p-2 rounded-full border border-jsPrimary100 text-jsPrimary100 cursor-pointer"
