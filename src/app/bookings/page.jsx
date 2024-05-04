@@ -20,7 +20,6 @@ const Bookings = () => {
         const response = await axios(
           `https://sunet-be.onrender.com/api/rooms/user-bookings?email=${userData?.user?.email}`
         );
-        console.log("response", response?.data);
         setData(response?.data);
       } catch (error) {
         toast.error(error?.message);
