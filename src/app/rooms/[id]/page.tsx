@@ -14,6 +14,9 @@ import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import formatDateDifference from "../../../app/helpers/dateDifference";
 import { format } from "date-fns";
+import React from "react";
+import { PaystackButton as ReactPaystackButton } from "react-paystack";
+import { useRouter } from "next/navigation";
 
 interface RoomData {
   _id: string;
@@ -27,7 +30,21 @@ interface RoomData {
 
   // Add other properties as needed
 }
+
+
 const RoomPage = () => {
+  const publicKey = "pk_test_a14111be56de0380c681d515b897810f4fa22f69";
+
+  const onSuccess = (reference: string) => {
+    console.log("Payment successful", reference);
+     handleBookRoom();
+  };
+
+  const onClose = () => {
+    console.log("Payment closed");
+    // Handle payment close
+  };
+
   const [roomData, setRoomData] = useState<RoomData>({
     _id: "",
     roomId: 0,
@@ -49,6 +66,8 @@ const RoomPage = () => {
   const [dateDifference, setDateDifference] = useState(1);
   const [notLoggedInModal, setNotLoggedInModal] = useState(false);
   const [bookingDetails, setBookingDetails] = useState({});
+  const [user, setUser] = useState<any>({});
+  const router = useRouter();
   const images = [
     "https://assets-global.website-files.com/5c6d6c45eaa55f57c6367749/65045f093c166fdddb4a94a5_x-65045f0266217.webp",
     "https://assets-global.website-files.com/5c6d6c45eaa55f57c6367749/65d7d7080ab85f33665b94d6_RoomView022224.webp",
@@ -125,6 +144,9 @@ const RoomPage = () => {
         total_price: totalAmount,
         email: user?.user?.email,
       };
+      console.log({ user });
+
+      setUser(user?.user?.email);
       try {
         await axios.post(
           `https://sunet-be.onrender.com/api/rooms/create-booking`,
@@ -147,6 +169,10 @@ const RoomPage = () => {
 
   useEffect(() => {
     const roomBookingDetails = localStorage.getItem("roomBookingDetails");
+    const userData = localStorage.getItem("userData");
+    const user = userData ? JSON.parse(userData) : null;
+    console.log({ user });
+    setUser(user);
     const savedData = roomBookingDetails
       ? JSON.parse(roomBookingDetails)
       : null;
@@ -164,6 +190,7 @@ const RoomPage = () => {
       setOccupants(savedData?.roomDetails?.occupancy);
     }
   }, []);
+
   return (
     <div>
       {isLoading ? (
@@ -374,12 +401,28 @@ const RoomPage = () => {
                     </p>
                   </div>
 
-                  <div
-                    className="hover:bg-[#B89010] bg-[#C8A008] cursor-pointer mt-2 font-medium p-5 rounded-md text-center text-white"
-                    onClick={handleBookRoom}
-                  >
-                    Book Now
-                  </div>
+                  {user ? (
+                    <div className="w-full ">
+                      <ReactPaystackButton
+                        text="Pay Now"
+                        className="payButton hover:bg-[#B89010] bg-[#C8A008] cursor-pointer mt-2 font-medium p-3 rounded-md text-center text-white block w-full"
+                        onSuccess={onSuccess} // Use onSuccess instead of callback
+                        onClose={onClose}
+                        email={user?.user?.email}
+                        amount={totalAmount * 100}
+                        publicKey={publicKey}
+                      />
+                    </div>
+                  ) : (
+                    <div
+                      className="hover:bg-[#B89010] bg-[#C8A008] cursor-pointer mt-2 font-medium p-3 rounded-md text-center text-white"
+                      onClick={() => {
+                        router.push("/sign-in");
+                      }}
+                    >
+                      Please login to complete your order
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
