@@ -219,7 +219,7 @@ const RoomPage = () => {
             </div>
 
             <div className="w-full rounded-3xl overflow-hidden h-[15rem] sm:h-[20rem] md:h-[30rem] relative cursor-pointer mt-10">
-              {images
+              {roomData?.images
                 .filter((_, index) => index <= 2)
                 .map((image, index) => (
                   <img
@@ -256,12 +256,13 @@ const RoomPage = () => {
                     What&apos;s included
                   </p>
                   <div className="flex flex-col gap-3">
+                    
                     <div className="flex items-center gap-2">
                       <div className="rounded-full p-1 bg-green-100 text-green-500 h-fit">
                         <FaCheck size={12} />
                       </div>
                       <p>
-                        Beverages, drinking water, morning tea and buffet lunch
+                        Air Conditioner
                       </p>
                     </div>
                     <div className="flex items-center gap-2">
@@ -269,7 +270,7 @@ const RoomPage = () => {
                         <FaCheck size={12} />
                       </div>
                       <p>
-                        Beverages, drinking water, morning tea and buffet lunch
+                        Microwave
                       </p>
                     </div>
                     <div className="flex items-center gap-2">
@@ -277,7 +278,7 @@ const RoomPage = () => {
                         <FaCheck size={12} />
                       </div>
                       <p>
-                        Beverages, drinking water, morning tea and buffet lunch
+                        Chiller
                       </p>
                     </div>
                     <div className="flex items-center gap-2">
@@ -285,17 +286,10 @@ const RoomPage = () => {
                         <FaCheck size={12} />
                       </div>
                       <p>
-                        Beverages, drinking water, morning tea and buffet lunch
+                        Wifi
                       </p>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <div className="rounded-full p-1 bg-green-100 text-green-500 h-fit">
-                        <FaCheck size={12} />
-                      </div>
-                      <p>
-                        Beverages, drinking water, morning tea and buffet lunch
-                      </p>
-                    </div>
+              
                   </div>
                 </div>
               </div>
@@ -430,7 +424,7 @@ const RoomPage = () => {
           <Viewer
             visible={visibleImg}
             onClose={() => setVisibleImg(false)}
-            images={images.map((image) => ({ src: image }))}
+            images={roomData?.images.map((image) => ({ src: image }))}
             activeIndex={activeIndex}
           />
           <NotLoggedInModal
