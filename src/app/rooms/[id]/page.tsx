@@ -33,7 +33,7 @@ interface RoomData {
 
 
 const RoomPage = () => {
-  const publicKey = "pk_test_a14111be56de0380c681d515b897810f4fa22f69";
+  const publicKey = "pk_test_2c1e582d761c7350f80ab5c922419a5fd1a06773";
 
   const onSuccess = (reference: string) => {
     console.log("Payment successful", reference);
