@@ -31,13 +31,12 @@ interface RoomData {
   // Add other properties as needed
 }
 
-
 const RoomPage = () => {
   const publicKey = "pk_test_2c1e582d761c7350f80ab5c922419a5fd1a06773";
 
   const onSuccess = (reference: string) => {
     console.log("Payment successful", reference);
-     handleBookRoom();
+    handleBookRoom();
   };
 
   const onClose = () => {
@@ -107,6 +106,21 @@ const RoomPage = () => {
     }
   };
 
+  const handleNotLoggedIn = () => {
+    const booking = {
+      roomDetails: {
+        roomType: roomData,
+        checkinDate: format(checkInDate, "yyyy-MM-dd"),
+        checkOutDate: format(checkOutDate, "yyyy-MM-dd"),
+        occupancy: occupants,
+      },
+      total_price: totalAmount,
+    };
+    setBookingDetails(booking);
+    localStorage.setItem("roomBookingDetails", JSON.stringify(booking));
+    // setNotLoggedInModal(true);
+  };
+
   const handleBookRoom = async () => {
     if (dateDifference < 1) {
       toast.error(
@@ -117,34 +131,23 @@ const RoomPage = () => {
 
     const userData = localStorage.getItem("userData");
     const user = userData ? JSON.parse(userData) : null;
-    console.log({ user });
+    // console.log({ user });
     if (!user) {
-      const booking = {
-        roomDetails: {
-          roomType: roomData,
-          checkinDate: format(checkInDate, "dd-MM-yy"),
-          checkOutDate: format(checkOutDate, "dd-MM-yy"),
-          occupancy: occupants,
-        },
-        total_price: totalAmount,
-      };
-      setBookingDetails(booking);
-      localStorage.setItem("roomBookingDetails", JSON.stringify(booking));
-      setNotLoggedInModal(true);
+      handleNotLoggedIn();
     } else {
       delete user?.token;
       const booking = {
         userDetails: user?.user,
         roomDetails: {
           roomType: roomData,
-          checkinDate: format(checkInDate, "dd-MM-yy"),
-          checkOutDate: format(checkOutDate, "dd-MM-yy"),
+          checkinDate: format(checkInDate, "yyyy-MM-dd"),
+          checkOutDate: format(checkOutDate, "yyyy-MM-dd"),
           occupancy: occupants,
         },
         total_price: totalAmount,
         email: user?.user?.email,
       };
-      console.log({ user });
+      // console.log({ user });
 
       setUser(user?.user?.email);
       try {
@@ -154,6 +157,10 @@ const RoomPage = () => {
           { headers: { Authorization: `Bearer ${user?.token}` } }
         );
         toast.success("Your booking was successful");
+        localStorage.removeItem("bookingDetails");
+        localStorage.removeItem("roomData");
+        localStorage.removeItem("roomBookingDetails");
+        router.push("/");
       } catch (error: any) {
         toast.error(error?.message);
       }
@@ -161,17 +168,20 @@ const RoomPage = () => {
   };
 
   useEffect(() => {
-    const difference = formatDateDifference(checkInDate, checkOutDate);
-    const newDifference = difference + 1;
-    setDateDifference(newDifference);
-    setTotalAmount(roomData?.price * newDifference);
+    const difference =
+      formatDateDifference(checkInDate, checkOutDate) === 0
+        ? 1
+        : formatDateDifference(checkInDate, checkOutDate);
+
+    setDateDifference(difference);
+    setTotalAmount(roomData?.price * difference);
   }, [checkInDate, checkOutDate]);
 
   useEffect(() => {
     const roomBookingDetails = localStorage.getItem("roomBookingDetails");
     const userData = localStorage.getItem("userData");
     const user = userData ? JSON.parse(userData) : null;
-    console.log({ user });
+    // console.log({ user });
     setUser(user);
     const savedData = roomBookingDetails
       ? JSON.parse(roomBookingDetails)
@@ -183,6 +193,7 @@ const RoomPage = () => {
       setRoomData(savedData);
       setTotalAmount(savedData?.price);
     } else {
+      // console.log("savedDate", savedData?.roomDetails?.checkinDate);
       setRoomData(savedData?.roomDetails?.roomType);
       setTotalAmount(savedData?.roomDetails?.roomType?.price);
       setcheckInDate(new Date(savedData?.roomDetails?.checkinDate));
@@ -256,40 +267,30 @@ const RoomPage = () => {
                     What&apos;s included
                   </p>
                   <div className="flex flex-col gap-3">
-                    
                     <div className="flex items-center gap-2">
                       <div className="rounded-full p-1 bg-green-100 text-green-500 h-fit">
                         <FaCheck size={12} />
                       </div>
-                      <p>
-                        Air Conditioner
-                      </p>
+                      <p>Air Conditioner</p>
                     </div>
                     <div className="flex items-center gap-2">
                       <div className="rounded-full p-1 bg-green-100 text-green-500 h-fit">
                         <FaCheck size={12} />
                       </div>
-                      <p>
-                        Microwave
-                      </p>
+                      <p>Microwave</p>
                     </div>
                     <div className="flex items-center gap-2">
                       <div className="rounded-full p-1 bg-green-100 text-green-500 h-fit">
                         <FaCheck size={12} />
                       </div>
-                      <p>
-                        Chiller
-                      </p>
+                      <p>Chiller</p>
                     </div>
                     <div className="flex items-center gap-2">
                       <div className="rounded-full p-1 bg-green-100 text-green-500 h-fit">
                         <FaCheck size={12} />
                       </div>
-                      <p>
-                        Wifi
-                      </p>
+                      <p>Wifi</p>
                     </div>
-              
                   </div>
                 </div>
               </div>
@@ -305,7 +306,9 @@ const RoomPage = () => {
                       <p className="text-lg font-medium">Check-in date</p>
                       <div className="flex items-center justify-between border p-2 rounded-md hover:border-jsPrimary100">
                         <p className="text-lg font-medium">
-                          {format(checkInDate, "PPP")}
+                          {checkInDate instanceof Date
+                            ? format(checkInDate, "PPP")
+                            : format(new Date(checkInDate), "PPP")}
                         </p>
                         <div
                           className="w-fit p-2 rounded-full border border-jsPrimary100 text-jsPrimary100 cursor-pointer"
@@ -344,7 +347,9 @@ const RoomPage = () => {
                       <p className="text-lg font-medium">Check-out date</p>
                       <div className="flex items-center justify-between border p-2 rounded-md hover:border-jsPrimary100">
                         <p className="text-lg font-medium">
-                          {format(checkOutDate, "PPP")}
+                          {checkInDate instanceof Date
+                            ? format(checkOutDate, "PPP")
+                            : format(new Date(checkOutDate), "PPP")}
                         </p>
                         <div
                           className="w-fit p-2 rounded-full border border-jsPrimary100 text-jsPrimary100 cursor-pointer"
@@ -411,6 +416,7 @@ const RoomPage = () => {
                     <div
                       className="hover:bg-[#B89010] bg-[#C8A008] cursor-pointer mt-2 font-medium p-3 rounded-md text-center text-white"
                       onClick={() => {
+                        handleNotLoggedIn();
                         router.push("/sign-in");
                       }}
                     >
