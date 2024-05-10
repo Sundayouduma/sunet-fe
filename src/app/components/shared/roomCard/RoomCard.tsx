@@ -30,8 +30,8 @@ const RoomCard: React.FC<RoomCardProps> = ({ data }) => {
         <div className=" relative">
           <div className="w-full h-56 rounded-xl overflow-hidden">
           
-            {/* <img className="h-full w-full" src={data?.images[0]} /> */}
-            <img className="h-full w-full" src={"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/f9/34/83/guest-room.jpg?w=1200&h=-1&s=1"} />
+            <img className="h-full w-full" src={data?.images[2]} />
+            {/* <img className="h-full w-full" src={"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/f9/34/83/guest-room.jpg?w=1200&h=-1&s=1"} /> */}
           </div>
           <div className="p-2 rounded-full bg-white absolute bottom-0 right-3 translate-y-1/2">
             <IoMdHeartEmpty size={20} className="-mb-1" />
