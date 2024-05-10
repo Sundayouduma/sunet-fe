@@ -127,7 +127,7 @@ const NavBar = () => {
 
             {openUserDropDown && (
               <div
-                className={`absolute w-[12rem] -right-5 top-full mt-7 p-3 bg-white rounded-md ${
+                className={`absolute w-[12rem] -right-5 top-full mt-7 p-3 bg-white rounded-md border ${
                   openUserDropDown ? "min-h-10" : "h-0"
                 }`}
               >

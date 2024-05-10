@@ -6,6 +6,8 @@ import InputField from "../components/shared/input-fields/InputFields";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios"; // Import Axios
+import { toast, ToastContainer } from "react-toastify"; // Import toast
+import "react-toastify/dist/ReactToastify.css";
 
 const LoginScreen = () => {
   const router = useRouter();
@@ -59,26 +61,31 @@ const LoginScreen = () => {
 
       if (response.status === 200) {
         // Login successful
+        toast.success("Login successful");
         const userData = response.data; // Assuming response.data contains user data
         localStorage.setItem("userData", JSON.stringify(userData));
 
-        const roomBooingDetails = localStorage.getItem("roomBookingDetails");
-        const savedData = roomBooingDetails
-          ? JSON.parse(roomBooingDetails)
+        const roomBookingDetails = localStorage.getItem("roomBookingDetails");
+        const savedData = roomBookingDetails
+          ? JSON.parse(roomBookingDetails)
           : null;
 
         if (!savedData) {
           router.push("/"); // Redirect to dashboard or home page after login
         } else {
+          // console.log(`/rooms/${savedData?.roomDetails?.roomType?.roomId}`);
           router.push(`/rooms/${savedData?.roomDetails?.roomType?.roomId}`); // Redirect to dashboard or home page after login
         }
       } else {
         console.error("Login failed:", response.statusText);
+        console.log("hello", response);
         // Handle login failure
         // Show error message, enable the button again, etc.
       }
     } catch (error: any) {
-      console.error("Login failed:", error.message);
+      toast.error(
+        `Login failed: ${error?.message || error?.response?.data?.message}`
+      );
       // Handle login failure
       // Show error message, enable the button again, etc.
     } finally {
@@ -88,6 +95,7 @@ const LoginScreen = () => {
 
   return (
     <div className="flex justify-center items-center h-screen">
+      <ToastContainer />
       <div className="w-full max-w-md p-5 justify-center">
         <div className="">
           <div className="text-3xl text-nrvGreyBlack font-semibold">
