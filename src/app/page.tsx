@@ -173,7 +173,7 @@ export default function Home() {
           </h2>
         </div>
 
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-4 mx-auto">
+        <div className="w-full flex justify-evenly items-center flex-wrap gap-10 pt-4 mx-auto">
           {rooms.map((item: any) => {
             // const item: any = item
             return (
@@ -261,7 +261,7 @@ export default function Home() {
             <h3 className="text-2xl font-semibold mb-2 w-full text-center">
               Our Values
             </h3>
-            <ol className="text-gray-600 text-md text-start leading-loose">
+            <ol className="text-gray-600 text-md text-start leading-10">
               <li className="mt-4">
                 <strong>Excellence:</strong> We are committed to excellence in
                 everything we do, from the service we provide to the experiences
