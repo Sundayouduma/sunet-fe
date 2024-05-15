@@ -173,7 +173,7 @@ export default function Home() {
           </h2>
         </div>
 
-        <div className="w-full flex justify-evenly items-center flex-wrap gap-10 pt-4 mx-auto">
+        <div className="w-full flex justify-center items-center flex-wrap gap-10 pt-4 mx-auto">
           {rooms.map((item: any) => {
             // const item: any = item
             return (
@@ -190,8 +190,8 @@ export default function Home() {
           Exceptional services
         </h2>
         <div className="flex gap-10 mt-10  justify-center flex-wrap">
-          <div className="grid sm:flex sm:items-center gap-5 p-5 border max-w-lg w-full shadow">
-            <div className="-mt-10 sm:-mt-0 sm:-ml-10 mx-auto h-40 min-w-40 max-w-40 border border-black w-full">
+          <div className="grid gap-5 p-5 border max-w-sm w-full shadow text-center">
+            <div className="mx-auto h-60 w-60 sm:h-72 sm:w-72">
               <img
                 src={
                   "https://res.cloudinary.com/dzv98o7ds/image/upload/v1714339322/IMG20240406122247_ritv84.jpg"
@@ -213,8 +213,8 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="grid sm:flex sm:items-center gap-5 p-5 border max-w-lg w-full shadow ">
-            <div className="-mt-10 sm:-mt-0 sm:-ml-10 mx-auto h-40 min-w-40 max-w-40 border border-black w-full">
+          <div className="grid gap-5 p-5 border max-w-sm w-full shadow text-center">
+            <div className="mx-auto h-60 w-60 sm:h-72 sm:w-72">
               <Image src={resturantImg} alt="pool" className="h-full w-full" />
             </div>
             <div className="col-span-full">

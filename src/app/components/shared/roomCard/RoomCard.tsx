@@ -25,10 +25,10 @@ const RoomCard: React.FC<RoomCardProps> = ({ data }) => {
     localStorage.setItem("roomData", JSON.stringify(data));
   };
   return (
-    <div className="p-3 rounded-xl max-w-[16rem] w-full">
+    <div className="p-3 rounded-xl max-w-sm sm:max-w-[16rem] w-full">
       <Link href={`/rooms/${data?.roomId}`} onClick={saveRoomData}>
         <div className=" relative">
-          <div className="w-full h-56 rounded-xl overflow-hidden">
+          <div className="auto h-56 rounded-xl overflow-hidden">
             <img className="h-full w-full" src={data?.images[2]} />
             {/* <img className="h-full w-full" src={"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/f9/34/83/guest-room.jpg?w=1200&h=-1&s=1"} /> */}
           </div>
