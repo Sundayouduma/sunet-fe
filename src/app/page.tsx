@@ -49,22 +49,16 @@ export default function Home() {
       url: "https://res.cloudinary.com/dzv98o7ds/image/upload/v1714338856/ewipbpjleqegnaaegtba.jpg",
     },
     {
-      url: "https://res.cloudinary.com/dzv98o7ds/image/upload/v1713353419/juwsheyaj-bg-img_ayl8kn.jpg",
+      url: "https://res.cloudinary.com/dzv98o7ds/image/upload/v1715895933/WhatsApp_Image_2024-05-03_at_22.50.50_10_ng12hu.jpg",
     },
     {
-      url: "https://res.cloudinary.com/dzv98o7ds/image/upload/v1714338856/ewipbpjleqegnaaegtba.jpg",
-    },
-    {
-      url: "https://res.cloudinary.com/dzv98o7ds/image/upload/v1713353419/juwsheyaj-bg-img_ayl8kn.jpg",
-    },
-    {
-      url: "https://res.cloudinary.com/dzv98o7ds/image/upload/v1714338856/ewipbpjleqegnaaegtba.jpg",
+      url: "https://res.cloudinary.com/dzv98o7ds/image/upload/v1715895932/WhatsApp_Image_2024-05-03_at_22.50.50_7_e8bw7f.jpg",
     },
   ];
 
   return (
     <Layout>
-      <div className="w-full h-[600px] md:h-[780px] relative p-3 group">
+      <div className="w-full h-[600px] md:h-[720px] relative p-3 group">
         <div
           style={{
             backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${slides[slide].url})`,
