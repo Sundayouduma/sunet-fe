@@ -56,3 +56,7 @@ body {
   background-color: #c8a008;
   color: white;
 }
+
+.slide-transition {
+  transition: background-image 1s ease-in-out;
+}

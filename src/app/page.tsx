@@ -6,9 +6,11 @@ import Image from "next/image";
 import resturantImg from "../../public/images/resturant.jpg";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 
 export default function Home() {
   const [rooms, setRooms] = useState([]);
+  const [slide, setSlide] = useState(0);
 
   useEffect(() => {
     const getRooms = async () => {
@@ -25,15 +27,51 @@ export default function Home() {
     getRooms();
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (slide < slides.length - 1) {
+        setSlide(slide + 1);
+      } else {
+        setSlide(0);
+      }
+    }, 5000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [slide]);
+
+  const slides = [
+    {
+      url: "https://res.cloudinary.com/dzv98o7ds/image/upload/v1713353419/juwsheyaj-bg-img_ayl8kn.jpg",
+    },
+    {
+      url: "https://res.cloudinary.com/dzv98o7ds/image/upload/v1714338856/ewipbpjleqegnaaegtba.jpg",
+    },
+    {
+      url: "https://res.cloudinary.com/dzv98o7ds/image/upload/v1713353419/juwsheyaj-bg-img_ayl8kn.jpg",
+    },
+    {
+      url: "https://res.cloudinary.com/dzv98o7ds/image/upload/v1714338856/ewipbpjleqegnaaegtba.jpg",
+    },
+    {
+      url: "https://res.cloudinary.com/dzv98o7ds/image/upload/v1713353419/juwsheyaj-bg-img_ayl8kn.jpg",
+    },
+    {
+      url: "https://res.cloudinary.com/dzv98o7ds/image/upload/v1714338856/ewipbpjleqegnaaegtba.jpg",
+    },
+  ];
+
   return (
     <Layout>
-      <div
-        className="bg-cover bg-center bg-no-repeat relative w-full h-[300px] md:h-[450px] lg:h-[700px]"
-        style={{
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://res.cloudinary.com/dzv98o7ds/image/upload/v1713353419/juwsheyaj-bg-img_ayl8kn.jpg')`,
-        }}
-      >
-        <div className="absolute inset-0 flex justify-center items-center">
+      <div className="w-full h-[600px] md:h-[780px] relative p-3 group">
+        <div
+          style={{
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${slides[slide].url})`,
+          }}
+          className="h-full w-full rounded-xl bg-cover bg-center bg-no-repeat transition-all duration-500 ease-in-out"
+        ></div>
+        <div className="absolute inset-0 flex justify-center items-center p-10">
           <div className="text-white text-center">
             <h1 className="text-2xl font-bold">
               <TypeAnimation
@@ -54,6 +92,22 @@ export default function Home() {
               Indulge in the epitome of luxury at our hotel.
             </p>
           </div>
+        </div>
+        <div
+          className="md:hidden md:group-hover:block absolute top-1/2 z-20 bg-black bg-opacity-50 text-white cursor-pointer rounded-full p-2 -translate-y-1/2 left-5"
+          onClick={() =>
+            slide === 0 ? setSlide(slides.length - 1) : setSlide(slide - 1)
+          }
+        >
+          <BsChevronCompactLeft size={30} />
+        </div>
+        <div
+          className="md:hidden md:group-hover:block absolute top-1/2 z-20 bg-black bg-opacity-50 text-white cursor-pointer rounded-full p-2 -translate-y-1/2 right-5"
+          onClick={() =>
+            slide === slides.length - 1 ? setSlide(0) : setSlide(slide + 1)
+          }
+        >
+          <BsChevronCompactRight size={30} />
         </div>
       </div>
 
@@ -173,7 +227,7 @@ export default function Home() {
           </h2>
         </div>
 
-        <div className="w-full flex justify-evenly items-center flex-wrap gap-10 pt-4 mx-auto">
+        <div className="w-full flex justify-center items-center flex-wrap gap-10 pt-4 mx-auto">
           {rooms.map((item: any) => {
             // const item: any = item
             return (
@@ -190,8 +244,8 @@ export default function Home() {
           Exceptional services
         </h2>
         <div className="flex gap-10 mt-10  justify-center flex-wrap">
-          <div className="grid sm:flex sm:items-center gap-5 p-5 border max-w-lg w-full shadow">
-            <div className="-mt-10 sm:-mt-0 sm:-ml-10 mx-auto h-40 min-w-40 max-w-40 border border-black w-full">
+          <div className="grid gap-5 p-5 border max-w-sm w-full shadow text-center">
+            <div className="mx-auto h-60 w-60 sm:h-72 sm:w-72">
               <img
                 src={
                   "https://res.cloudinary.com/dzv98o7ds/image/upload/v1714339322/IMG20240406122247_ritv84.jpg"
@@ -213,8 +267,8 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="grid sm:flex sm:items-center gap-5 p-5 border max-w-lg w-full shadow ">
-            <div className="-mt-10 sm:-mt-0 sm:-ml-10 mx-auto h-40 min-w-40 max-w-40 border border-black w-full">
+          <div className="grid gap-5 p-5 border max-w-sm w-full shadow text-center">
+            <div className="mx-auto h-60 w-60 sm:h-72 sm:w-72">
               <Image src={resturantImg} alt="pool" className="h-full w-full" />
             </div>
             <div className="col-span-full">
