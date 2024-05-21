@@ -1,7 +1,8 @@
-import React, { ChangeEvent, ReactNode } from "react";
+import React, { ChangeEvent, ReactNode, useState } from "react";
 
 interface InputFieldProps {
   css?: string;
+  mainCss?: string;
   label?: string;
   placeholder?: string;
   inputType?: string;
@@ -10,11 +11,13 @@ interface InputFieldProps {
   value?: string | number;
   name?: string;
   disabled?: boolean;
-  error?: string; // Add error prop
+  endIcon?: React.ReactNode;
+  error?: string;
 }
 
 const InputField: React.FC<InputFieldProps> = ({
   css,
+  mainCss,
   label,
   placeholder,
   inputType,
@@ -22,35 +25,32 @@ const InputField: React.FC<InputFieldProps> = ({
   value,
   name,
   disabled,
-  error, // Destructure error prop
+  endIcon,
+  error,
 }) => {
   return (
-    <div className="">
+    <div className="w-full">
       {label && (
-        <label htmlFor={name} className="text-nrvGreyBlack mb-2 text-sm font-medium">
+        <label htmlFor={name} className="text-nafcGreyBlack mb-2 text-sm">
           {label}
         </label>
       )}
       <div
-        className={`${css} border ${
-          error ? "border-red-500" : "border-nrvLightGrey"
-        } mt-2 relative flex items-center rounded-lg  focus:outline-none cursor-pointer `}
+        className={`${mainCss} h-full relative border flex items-center rounded-lg overflow-hidden  focus:outline-none `}
       >
         <input
           type={inputType ? inputType : "text"}
           id={name}
           name={name}
           placeholder={placeholder}
-          className={`font-light w-full h-11 px-3 py-2 cursor-pointer rounded-lg focus:outline-jsPrimary100 overflow-hidden text-sm ${
-            error ? "text-red-500" : ""
-          }`} // Conditionally apply error color
+          className={`${css} font-light w-full h-10 px-3 py-2 focus:outline-none`}
           onChange={onChange}
           value={value}
           disabled={disabled}
         />
+        {endIcon && endIcon}
       </div>
-      {error && <div className="text-red-500 text-sm mt-1">{error}</div>}{" "}
-      {/* Render error message */}
+      {error && <div className="text-red-500 text-sm mt-1">{error}</div>}
     </div>
   );
 };
