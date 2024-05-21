@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Button from "../components/shared/buttons/Button";
-import InputField from "../components/shared/input-fields/InputFields";
+import Button from "../../components/shared/buttons/Button";
+import InputField from "../../components/shared/input-fields/InputFields";
 import { useRouter } from "next/navigation";
 import axios from "axios"; // Import Axios
 import { toast, ToastContainer } from "react-toastify"; // Import toast
