@@ -25,9 +25,9 @@ const AdminSideBar = () => {
       <div className="flex flex-col gap-20 my-5 items-center text-nafcGrayText h-full">
         <nav className="flex flex-col gap-6 text-lg w-full h-full">
           <Link
-            href="/admin/dashboard"
+            href="/admin/rooms"
             className={`flex items-center text-sm gap-4 p-2 rounded-md transition-colors duration-200 ${
-              pathname === "/admin/dashboard"
+              pathname === "/admin/rooms"
                 ? "bg-yellow-50 text-jsPrimary100 font-semibold"
                 : "hover:bg-yellow-50"
             }`}

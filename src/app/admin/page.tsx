@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Button from "../../components/shared/buttons/Button";
-import InputField from "../../components/shared/input-fields/InputFields";
+import Button from "../components/shared/buttons/Button";
+import InputField from "../components/shared/input-fields/InputFields";
 import { useRouter } from "next/navigation";
 import axios from "axios"; // Import Axios
 import { toast, ToastContainer } from "react-toastify"; // Import toast
@@ -66,17 +66,7 @@ const AdminLoginScreen = () => {
         const userData = response.data; // Assuming response.data contains user data
         localStorage.setItem("userData", JSON.stringify(userData));
 
-        const roomBookingDetails = localStorage.getItem("roomBookingDetails");
-        const savedData = roomBookingDetails
-          ? JSON.parse(roomBookingDetails)
-          : null;
-
-        if (!savedData) {
-          router.push("/"); // Redirect to dashboard or home page after login
-        } else {
-          // console.log(`/rooms/${savedData?.roomDetails?.roomType?.roomId}`);
-          router.push(`/rooms/${savedData?.roomDetails?.roomType?.roomId}`); // Redirect to dashboard or home page after login
-        }
+        router.push("/admin/rooms"); // Redirect to dashboard or home page after login
       } else {
         console.error("Login failed:", response.statusText);
         console.log("hello", response);
