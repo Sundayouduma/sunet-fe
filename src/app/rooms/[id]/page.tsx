@@ -27,7 +27,6 @@ interface RoomData {
   amenities: string[];
   images: string[];
   availability: boolean;
-
   // Add other properties as needed
 }
 
