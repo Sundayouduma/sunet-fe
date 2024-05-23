@@ -317,7 +317,7 @@ const RoomPage = () => {
                         </div>
                       </div>
                       {openCheckIn && (
-                        <div className="absolute w-full top-full mt-1 bg-white border rounded-md z-10">
+                        <div className="absolute top-full mt-1 right-0 bg-white border rounded-md z-10">
                           <DayPicker
                             styles={{
                               caption: { color: "#C8A008" },
@@ -358,7 +358,7 @@ const RoomPage = () => {
                         </div>
                       </div>
                       {openCheckOut && (
-                        <div className="absolute w-full top-full mt-1 bg-white border rounded-md z-10">
+                        <div className="absolute top-full mt-1 right-0 bg-white border rounded-md z-10">
                           <DayPicker
                             styles={{
                               caption: { color: "#C8A008" },

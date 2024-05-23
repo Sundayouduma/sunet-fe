@@ -13,10 +13,10 @@ const AdminLayout: FC<Props> = ({ children }: Props) => {
       <div className="fixed h-[11vh] w-full top-0 left-0 z-50">
         <AdminNavBar />
       </div>
-      <div className="fixed h-[89vh] bg-nafcLightGreyBg  w-1/5 left-0 bottom-0 ">
+      <div className="fixed h-[89vh] bg-nafcLightGreyBg  w-1/6 left-0 bottom-0 ">
         <AdminSideBar />
       </div>
-      <div className="fixed h-[89vh] w-4/5 bottom-0 right-0 overflow-auto border-t-2 border-jsPrimary100">
+      <div className="fixed h-[89vh] w-5/6 bottom-0 right-0 overflow-auto border-t-2 border-jsPrimary100">
         {children}
       </div>
     </main>

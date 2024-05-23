@@ -49,7 +49,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="w-full gap-2 fixed top-0 left-0 bg-white z-[100] flex justify-between items-center py-4 px-5 md:px-12 ">
+    <div className="w-full gap-2 fixed top-0 left-0 bg-white z-[100] flex justify-between items-center py-4 px-5 md:px-12 border-b-2 border-jsPrimary100">
       <NavLink href="/">
         <Image src={Logo} alt="logo" className="h-14 w-auto" />
       </NavLink>
