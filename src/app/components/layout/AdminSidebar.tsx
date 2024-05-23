@@ -22,13 +22,13 @@ const AdminSideBar = () => {
   }, []);
   return (
     <aside className="h-full w-full border-r-2 border-t-2 border-jsPrimary100 p-5">
-      <div className="flex flex-col gap-20 my-5 items-center text-nafcGrayText h-full">
+      <div className="flex flex-col gap-20 my-5 items-center text-nafcGrayText h-full ">
         <nav className="flex flex-col gap-6 text-lg w-full h-full">
           <Link
             href="/admin/rooms"
             className={`flex items-center text-sm gap-4 p-2 rounded-md transition-colors duration-200 ${
-              pathname === "/admin/rooms"
-                ? "bg-yellow-50 text-jsPrimary100 font-semibold"
+              pathname.includes("/admin/rooms")
+                ? "bg-yellow-50 text-jsPrimary100 font-semibold border border-yellow-500"
                 : "hover:bg-yellow-50"
             }`}
           >
@@ -38,8 +38,8 @@ const AdminSideBar = () => {
           <Link
             href="/admin/users"
             className={`flex items-center text-sm gap-4 p-2 rounded-md transition-colors duration-200 ${
-              pathname === "/admin/users"
-                ? "bg-yellow-50 text-jsPrimary100 font-semibold"
+              pathname.includes("/admin/users")
+                ? "bg-yellow-50 text-jsPrimary100 font-semibold border border-yellow-500"
                 : "hover:bg-yellow-50"
             }`}
           >
@@ -49,8 +49,8 @@ const AdminSideBar = () => {
           <Link
             href="/admin/bookings"
             className={`flex items-center text-sm gap-4 p-2 rounded-md transition-colors duration-200 ${
-              pathname === "/admin/bookings"
-                ? "bg-yellow-50 text-jsPrimary100 font-semibold"
+              pathname.includes("/admin/bookings")
+                ? "bg-yellow-50 text-jsPrimary100 font-semibold border border-yellow-500"
                 : "hover:bg-yellow-50"
             }`}
           >

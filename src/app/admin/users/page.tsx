@@ -1,5 +1,6 @@
 "use client";
 import AdminLayout from "@/app/components/layout/AdminLayout";
+import SearchBar from "@/app/components/shared/input-fields/SearchBar";
 import axios from "axios";
 import { format } from "date-fns";
 import { useRouter } from "next/navigation";
@@ -8,6 +9,8 @@ import { useEffect, useState } from "react";
 const AdminRooms = () => {
   const router = useRouter();
   const [users, setUsers] = useState<any>([]);
+  const [filter, setFilter] = useState("all");
+  const [search, setSearch] = useState("");
 
   const getAllUsers = async () => {
     try {
@@ -27,6 +30,17 @@ const AdminRooms = () => {
 
   console.log(users);
 
+  const renderFilterButton = (text: string) => (
+    <button
+      className={`p-2 px-5 rounded-full text-md font-bold border border-yellow-500 capitalize ${
+        filter === text && "bg-yellow-50"
+      }`}
+      onClick={() => setFilter(text)}
+    >
+      {text}
+    </button>
+  );
+
   return (
     <AdminLayout>
       <div className="p-5">
@@ -37,7 +51,23 @@ const AdminRooms = () => {
           </button> */}
         </div>
 
-        <div></div>
+        <div className="mt-3">
+          <p className="text-lg font-semibold">Total Rooms: {users.length}</p>
+        </div>
+        <div className="flex justify-between items-center mt-10">
+          <div className="flex gap-5 items-center">
+            {renderFilterButton("all")}
+            {renderFilterButton("Active")}
+            {renderFilterButton("Not Active")}
+          </div>
+          <div className="max-w-md w-full">
+            <SearchBar
+              name="search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
+        </div>
         <table className="mt-10 w-full">
           <thead className="bg-jsPrimary100 text-white font-medium">
             <tr>
@@ -50,20 +80,31 @@ const AdminRooms = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((item: any, index: number) => (
-              <tr
-                key={item?._id}
-                className={`border-t ${index % 2 === 1 && "bg-yellow-50"}`}
-                onClick={() => router.push(`/admin/users/${item?.email}`)}
-              >
-                <td className="p-5">{index + 1}</td>
-                <td className="p-5 capitalize">{item?.firstName}</td>
-                <td className="p-5 capitalize">{item?.lastName}</td>
-                <td className="p-5">{item?.email}</td>
-                <td className="p-5">{format(item?.createdAt, "PPP")}</td>
-                <td className="p-5">{item?.status}</td>
-              </tr>
-            ))}
+            {users
+              .filter(
+                (item: any) => item?.status === filter || filter === "all"
+              )
+              .filter((item: any) =>
+                ["firstName", "lastName", "email"].some((prop) =>
+                  item?.[prop]
+                    ?.toLowerCase()
+                    .includes(search.toLocaleLowerCase())
+                )
+              )
+              .map((item: any, index: number) => (
+                <tr
+                  key={item?._id}
+                  className={`border-t border-t-yellow-500 hover:bg-yellow-50 cursor-pointer`}
+                  onClick={() => router.push(`/admin/users/${item?.email}`)}
+                >
+                  <td className="p-5">{index + 1}</td>
+                  <td className="p-5 capitalize">{item?.firstName}</td>
+                  <td className="p-5 capitalize">{item?.lastName}</td>
+                  <td className="p-5">{item?.email}</td>
+                  <td className="p-5">{format(item?.createdAt, "PPP")}</td>
+                  <td className="p-5">{item?.status}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
