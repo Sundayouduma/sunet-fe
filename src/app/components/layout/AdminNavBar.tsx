@@ -51,12 +51,12 @@ const AdminNavBar = () => {
   };
 
   return (
-    <div className="w-full gap-2 fixed top-0 left-0 bg-white z-[100] flex justify-between items-center py-4 px-5 md:px-12 ">
-      <NavLink href="/">
+    <div className="gap-2 w-full bg-white flex justify-between items-center py-4 px-5 md:px-12 ">
+      <NavLink href="/admin/rooms">
         <Image src={Logo} alt="logo" className="h-14 w-auto" />
       </NavLink>
 
-      <div className="min-[820px]:flex hidden items-center">
+      {/* <div className="min-[820px]:flex hidden items-center">
         <Navigation />
       </div>
 
@@ -157,7 +157,7 @@ const AdminNavBar = () => {
             )}
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };
