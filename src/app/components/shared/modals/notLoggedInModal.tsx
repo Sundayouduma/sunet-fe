@@ -13,7 +13,11 @@ interface Props {
   bookingDetails: any;
 }
 
-const NotLoggedInModal: FC<Props> = ({ open, onClose, bookingDetails }: Props) => {
+const NotLoggedInModal: FC<Props> = ({
+  open,
+  onClose,
+  bookingDetails,
+}: Props) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -98,7 +102,7 @@ const NotLoggedInModal: FC<Props> = ({ open, onClose, bookingDetails }: Props) =
   return (
     <main className="fixed flex justify-center items-center h-[100vh] w-full top-0 left-0 bg-black bg-opacity-25 z-[200]">
       <ToastContainer />
-      <div className="max-w-xl w-full w-4/5 p-5 bg-white rounded-3xl">
+      <div className="max-w-xl w-full p-5 bg-white rounded-3xl">
         <div
           className="text-jsPrimary100 cursor-pointer p-2 rounded-full border-2 border-jsPrimary100 w-fit ml-auto hover:bg-yellow-50"
           onClick={handleCloseModal}

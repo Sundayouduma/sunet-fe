@@ -74,7 +74,7 @@ const AdminLoginScreen = () => {
         `Login failed: ${error?.message || error?.response?.data?.message}`
       );
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
@@ -87,10 +87,10 @@ const AdminLoginScreen = () => {
       <ToastContainer />
       <div className="w-full max-w-md p-5 justify-center">
         <div className="">
-          <div className="text-3xl text-nrvGreyBlack font-semibold">
+          <div className="text-3xl text-nrvGreyBlack font-semibold text-center">
             ADMIN DASHBOARD
           </div>
-          <div className="pt-2 text-nrvLightGrey text-md">
+          <div className="pt-2 text-nrvLightGrey text-md text-center">
             Please enter your login to access your account.
           </div>
 
