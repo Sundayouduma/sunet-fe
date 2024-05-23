@@ -8,6 +8,7 @@ import axios from "axios"; // Import Axios
 import { toast, ToastContainer } from "react-toastify"; // Import toast
 import "react-toastify/dist/ReactToastify.css";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; // Import icons for show/hide password
+import Link from "next/link";
 
 const AdminLoginScreen = () => {
   const router = useRouter();
@@ -146,6 +147,9 @@ const AdminLoginScreen = () => {
               />
             </div>
           </div>
+          <p className="text-sm mt-2 pt-2 hover:underline w-fit">
+            <Link href="/forgot-password">Forgot Password? </Link>
+          </p>
           <div className="w-full mt-16">
             <Button
               size="large"
