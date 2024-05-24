@@ -5,8 +5,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import InputField from "../components/shared/input-fields/InputFields";
 import Button from "../components/shared/buttons/Button";
+import axios from "axios";
+import VerifyPage from "../components/screens/forgot-password/PasswordVerify";
+import { format } from "path";
 
 const ForgotPassword = () => {
+  const [pageState, setPageState] = useState(0);
   const [emailError, setEmailError] = useState("");
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -25,33 +29,34 @@ const ForgotPassword = () => {
     return emailRegex.test(email);
   };
 
-  // const sendVerificationCode = async (email: string) => {
-  //   try {
-  //     const response = await fetch("/api/sendVerificationCode", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ email }),
-  //     });
+  const sendVerificationCode = async (email: string) => {
+    try {
+      const response = await axios.post(
+        "https://sunet-be.onrender.com/api/users/reset",
+        { email }
+      );
 
-  //     if (!response.ok) {
-  //       throw new Error("Network response was not ok");
-  //     }
-
-  //     const data = await response.json();
-  //     return data;
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //   }
-  // };
+      if (response.status === 200) {
+        toast.success("Email sent successfully");
+        console.log("Email sent successfully");
+      } else {
+        console.error("Failed:", response.statusText);
+        toast.error("Failed!. Please try again later.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setLoading(false);
+    }
+  };
 
   const handleForgotPassword = async () => {
-    setLoading(true);
     if (isValidEmail(formData.email)) {
+      setLoading(true);
       try {
-        // await sendVerificationCode(formData.email);
-        router.push("/forgot-password-verify");
+        await sendVerificationCode(formData.email);
+        // router.push("/forgot-password-verify");
+        setPageState(1);
+        setLoading(false);
       } catch (error) {
         console.error("Error:", error);
       }
@@ -62,46 +67,49 @@ const ForgotPassword = () => {
 
   return (
     <>
+      <ToastContainer />
       <main className="flex justify-center min-h-screen pt-20">
-        <ToastContainer />
-        <div className="max-w-sm w-full p-2 mt-20">
-          <p className="text-center text-2xl font-medium text-jsPrimary100">
-            Forgot your password
-          </p>
-          <p className="text-center mt-2 mb-8 text-[0.95rem]">
-            Let’s help you reset your password. Provide your email address,
-            We’ll send a reset link.
-          </p>
+        {pageState === 0 && (
+          <div className="max-w-sm w-full p-2 mt-20">
+            <p className="text-center text-2xl font-medium text-jsPrimary100">
+              Forgot your password
+            </p>
+            <p className="text-center mt-2 mb-8 text-[0.95rem]">
+              Let’s help you reset your password. Provide your email address,
+              We’ll send a reset link.
+            </p>
 
-          <div className="w-full">
-            <InputField
-              label={"Email"}
-              name={"email"}
-              placeholder={"Enter email address"}
-              onChange={handleInputChange}
-            />
-            {emailError && <p className="text-red-500">{emailError}</p>}
-          </div>
-
-          <div className="my-7 flex justify-center">
-            <Button
-              size="large"
-              className="block w-full"
-              variant="bluebg"
-              showIcon={false}
-              onClick={handleForgotPassword}
-            >
-              {loading ? "Sending..." : "Send mail"}
-              <div
-                className={`${
-                  loading
-                    ? "bg-white bg-opacity-50 h-full w-full absolute top-0 left-0 cursor-not-allowed"
-                    : "hidden"
-                }`}
+            <div className="w-full">
+              <InputField
+                label={"Email"}
+                name={"email"}
+                placeholder={"Enter email address"}
+                onChange={handleInputChange}
               />
-            </Button>
+              {emailError && <p className="text-red-500">{emailError}</p>}
+            </div>
+
+            <div className="my-7 flex justify-center">
+              <Button
+                size="large"
+                className="block w-full"
+                variant="bluebg"
+                showIcon={false}
+                onClick={handleForgotPassword}
+              >
+                {loading ? "Sending..." : "Send mail"}
+                <div
+                  className={`${
+                    loading
+                      ? "bg-white bg-opacity-50 h-full w-full absolute top-0 left-0 cursor-not-allowed"
+                      : "hidden"
+                  }`}
+                />
+              </Button>
+            </div>
           </div>
-        </div>
+        )}
+        {pageState === 1 && <VerifyPage email={formData.email} />}
       </main>
     </>
   );
