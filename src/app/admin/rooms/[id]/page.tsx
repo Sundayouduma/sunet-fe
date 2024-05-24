@@ -18,9 +18,17 @@ const Room = () => {
   return (
     <AdminLayout>
       <div className="max-w-7xl w-full mx-auto p-5">
-        <h1 className="font-semibold text-4xl">
-          Room 203 <small>(standard)</small>
-        </h1>
+        <div className="flex justify-between items-center">
+          <h1 className="font-semibold text-4xl">
+            Room 203 <small>(standard)</small>
+          </h1>
+          <button
+            className="py-2 px-4 border border-jsPrimary100 text-jsPrimary100 hover:bg-jsPrimary100 hover:text-white"
+            // onClick={() => setOpenRoomModal(true)}
+          >
+            Update Room
+          </button>
+        </div>
 
         <div className="flex gap-3 items-center mt-2">
           <div className="flex items-center gap-1">
