@@ -2,10 +2,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import AdminLayout from "../../components/layout/AdminLayout";
-import { useRouter } from "next/navigation";
 import axios from "axios";
 import CreateRoomModal from "@/app/components/shared/modals/ceateRoomsModal";
 import SearchBar from "@/app/components/shared/input-fields/SearchBar";
+import { useRouter } from "next/navigation";
 
 const AdminDashboard = () => {
   const router = useRouter();
