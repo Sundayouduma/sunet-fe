@@ -146,7 +146,7 @@ const RoomPage = () => {
         total_price: totalAmount,
         email: user?.user?.email,
       };
-      // console.log({ user });
+      // console.log({ booking });
 
       setUser(user?.user?.email);
       try {

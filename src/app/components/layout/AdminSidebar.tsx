@@ -62,7 +62,7 @@ const AdminSideBar = () => {
             className=" flex items-center text-sm gap-4 cursor-pointer p-3 bg-blue rounded-lg mt-auto mb-5"
             onClick={() => {
               localStorage.removeItem("nafc-admin");
-              router.push("/sign-in");
+              router.push("/admin");
             }}
           >
             <PiSignOutBold size={25} />
