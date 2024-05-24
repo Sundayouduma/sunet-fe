@@ -62,17 +62,15 @@ const AdminLoginScreen = () => {
 
       if (response.status === 200) {
         toast.success("Login successful");
+        router.push("/admin/rooms"); // Redirect to dashboard or home page after login
         const userData = response.data; // Assuming response.data contains user data
         localStorage.setItem("userData", JSON.stringify(userData));
-
-        router.push("/admin/rooms"); // Redirect to dashboard or home page after login
       } else {
         console.error("Login failed:", response.statusText);
       }
     } catch (error: any) {
-      toast.error(
-        `Login failed: ${error?.message || error?.response?.data?.message}`
-      );
+      toast.error(error.response.data.message);
+      console.log("Login failed:", error.response.data.message);
     } finally {
       setLoading(false);
     }
