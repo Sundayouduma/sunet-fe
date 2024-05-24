@@ -38,13 +38,14 @@ const ForgotPassword = () => {
 
       if (response.status === 200) {
         toast.success("Email sent successfully");
-        console.log("Email sent successfully");
+        setPageState(1);
       } else {
         console.error("Failed:", response.statusText);
-        toast.error("Failed!. Please try again later.");
+     
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error:", error);
+      toast.error(error.response.data.message);
       setLoading(false);
     }
   };
@@ -54,8 +55,6 @@ const ForgotPassword = () => {
       setLoading(true);
       try {
         await sendVerificationCode(formData.email);
-        // router.push("/forgot-password-verify");
-        setPageState(1);
         setLoading(false);
       } catch (error) {
         console.error("Error:", error);
