@@ -108,7 +108,7 @@ const AdminDashboard = () => {
                   <tr
                     key={item?._id}
                     className={`border-t border-t-yellow-500 hover:bg-yellow-50 cursor-pointer `}
-                    onClick={() => router.push(`/admin/rooms/${item?.roomId}`)}
+                    onClick={() => router.push(`/admin/rooms/${item?._id}`)}
                   >
                     <td className="p-5">{index + 1}</td>
                     <td className="p-5">{item?.roomId}</td>
