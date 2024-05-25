@@ -391,7 +391,8 @@ const RoomPage = () => {
 
                   {user ? (
                     <div className="w-full ">
-                      <ReactPaystackButton
+                      {
+                        data?.availability === true ?    <ReactPaystackButton
                         text="Pay Now"
                         className="payButton hover:bg-[#B89010] bg-[#C8A008] cursor-pointer mt-2 font-medium p-3 rounded-md text-center text-white block w-full"
                         onSuccess={onSuccess} // Use onSuccess instead of callback
@@ -399,7 +400,10 @@ const RoomPage = () => {
                         email={user?.user?.email}
                         amount={totalAmount * 100}
                         publicKey={publicKey}
-                      />
+                        
+                      /> : null
+                      }
+                   
                     </div>
                   ) : (
                     <div
