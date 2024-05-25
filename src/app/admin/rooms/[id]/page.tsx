@@ -125,9 +125,9 @@ const Room = () => {
                 <p>
                   Step into comfort and elegance with our luxurious hotel rooms.
                   Designed for relaxation, each room features modern amenities,
-                  plush bedding, and Executive Luxury bathrooms. Whether traveling for
-                  business or leisure, our rooms provide the perfect retreat for
-                  a rejuvenating stay.
+                  plush bedding, and Executive Luxury bathrooms. Whether
+                  traveling for business or leisure, our rooms provide the
+                  perfect retreat for a rejuvenating stay.
                 </p>
               </div>
               <div className="mt-5 pt-5">
@@ -145,31 +145,6 @@ const Room = () => {
                       </div>
                     ))}
                 </div>
-                {/* <div className="flex items-center gap-2">
-                  <div className="rounded-full p-1 bg-green-100 text-green-500 h-fit">
-                    <FaCheck size={12} />
-                  </div>
-                  <p>Air Conditioner</p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="rounded-full p-1 bg-green-100 text-green-500 h-fit">
-                    <FaCheck size={12} />
-                  </div>
-                  <p>Microwave</p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="rounded-full p-1 bg-green-100 text-green-500 h-fit">
-                    <FaCheck size={12} />
-                  </div>
-                  <p>Chiller</p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="rounded-full p-1 bg-green-100 text-green-500 h-fit">
-                    <FaCheck size={12} />
-                  </div>
-                  <p>Wifi</p>
-                </div>
-              </div> */}
               </div>
             </div>
           </div>

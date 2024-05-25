@@ -16,7 +16,7 @@ import formatDateDifference from "../../../app/helpers/dateDifference";
 import { format } from "date-fns";
 import React from "react";
 import { PaystackButton as ReactPaystackButton } from "react-paystack";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 interface RoomData {
   _id: string;
@@ -31,8 +31,10 @@ interface RoomData {
 }
 
 const RoomPage = () => {
+  const param = useParams();
   const publicKey = "pk_test_2c1e582d761c7350f80ab5c922419a5fd1a06773";
 
+  const [data, setData] = useState<any>({});
   const onSuccess = (reference: string) => {
     console.log("Payment successful", reference);
     handleBookRoom();
@@ -58,7 +60,9 @@ const RoomPage = () => {
   const [checkOutDate, setcheckOutDate] = useState(new Date());
   const [openCheckIn, setOpenCheckIn] = useState(false);
   const [openCheckOut, setOpenCheckOut] = useState(false);
-  const [totalAmount, setTotalAmount] = useState(roomData?.price);
+  const [totalAmount, setTotalAmount] = useState(
+    Number(data?.price ? data?.price : 0)
+  );
   const [visibleImg, setVisibleImg] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [dateDifference, setDateDifference] = useState(1);
@@ -66,14 +70,9 @@ const RoomPage = () => {
   const [bookingDetails, setBookingDetails] = useState({});
   const [user, setUser] = useState<any>({});
   const router = useRouter();
-  const images = [
-    "https://assets-global.website-files.com/5c6d6c45eaa55f57c6367749/65045f093c166fdddb4a94a5_x-65045f0266217.webp",
-    "https://assets-global.website-files.com/5c6d6c45eaa55f57c6367749/65d7d7080ab85f33665b94d6_RoomView022224.webp",
-    "https://static01.nyt.com/images/2019/03/24/travel/24trending-shophotels1/24trending-shophotels1-jumbo.jpg?quality=75&auto=webp",
-    "https://a0.muscache.com/im/pictures/miso/Hosting-53627561/original/cc19cf5f-d04f-4b61-99b0-53b77aca7ba6.jpeg?im_w=720",
-  ];
 
   const [isLoading, setIsLoading] = useState(true);
+  console.log(data?.price);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -108,7 +107,7 @@ const RoomPage = () => {
   const handleNotLoggedIn = () => {
     const booking = {
       roomDetails: {
-        roomType: roomData,
+        id: data?._id,
         checkinDate: format(checkInDate, "yyyy-MM-dd"),
         checkOutDate: format(checkOutDate, "yyyy-MM-dd"),
         occupancy: occupants,
@@ -138,12 +137,12 @@ const RoomPage = () => {
       const booking = {
         userDetails: user?.user,
         roomDetails: {
-          roomType: roomData,
+          roomType: data,
           checkinDate: format(checkInDate, "yyyy-MM-dd"),
           checkOutDate: format(checkOutDate, "yyyy-MM-dd"),
           occupancy: occupants,
         },
-        total_price: totalAmount,
+        total_price: totalAmount.toString(),
         email: user?.user?.email,
       };
       // console.log({ booking });
@@ -156,8 +155,6 @@ const RoomPage = () => {
           { headers: { Authorization: `Bearer ${user?.token}` } }
         );
         toast.success("Your booking was successful");
-        localStorage.removeItem("bookingDetails");
-        localStorage.removeItem("roomData");
         localStorage.removeItem("roomBookingDetails");
         router.push("/");
       } catch (error: any) {
@@ -173,33 +170,42 @@ const RoomPage = () => {
         : formatDateDifference(checkInDate, checkOutDate);
 
     setDateDifference(difference);
-    setTotalAmount(roomData?.price * difference);
-  }, [checkInDate, checkOutDate]);
+    setTotalAmount(Number(data?.price ? data?.price : 0) * difference);
+  }, [checkInDate, checkOutDate, data?.price]);
 
   useEffect(() => {
     const roomBookingDetails = localStorage.getItem("roomBookingDetails");
     const userData = localStorage.getItem("userData");
     const user = userData ? JSON.parse(userData) : null;
-    // console.log({ user });
+
     setUser(user);
     const savedData = roomBookingDetails
       ? JSON.parse(roomBookingDetails)
       : null;
 
-    if (!savedData) {
-      const data = localStorage.getItem("roomData");
-      const savedData = data ? JSON.parse(data) : null;
-      setRoomData(savedData);
-      setTotalAmount(savedData?.price);
-    } else {
-      // console.log("savedDate", savedData?.roomDetails?.checkinDate);
-      setRoomData(savedData?.roomDetails?.roomType);
-      setTotalAmount(savedData?.roomDetails?.roomType?.price);
+    if (savedData) {
       setcheckInDate(new Date(savedData?.roomDetails?.checkinDate));
       setcheckOutDate(new Date(savedData?.roomDetails?.checkOutDate));
       setOccupants(savedData?.roomDetails?.occupancy);
     }
   }, []);
+
+  const getRoomData = async () => {
+    try {
+      const response = await axios.get(
+        `https://sunet-be.onrender.com/api/rooms/${param.id}`
+      );
+      setData(response.data);
+      // setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getRoomData();
+  }, []);
+  console.log({ data });
 
   return (
     <div>
@@ -210,7 +216,7 @@ const RoomPage = () => {
           <ToastContainer />
           <div className="max-w-7xl w-full mx-auto p-5">
             <h1 className="font-semibold text-4xl">
-              {roomData?.roomName} <small>({roomData?.roomType})</small>
+              {data?.roomName} <small>({data?.roomType})</small>
             </h1>
 
             <div className="flex gap-3 items-center mt-2">
@@ -229,26 +235,27 @@ const RoomPage = () => {
             </div>
 
             <div className="w-full rounded-3xl overflow-hidden h-[15rem] sm:h-[20rem] md:h-[30rem] relative cursor-pointer mt-10">
-              {roomData?.images
-                .filter((_, index) => index <= 2)
-                .map((image, index) => (
-                  <img
-                    key={index}
-                    src={image}
-                    alt={`Image ${index + 1}`}
-                    className={`${
-                      index === 0
-                        ? "absolute h-full w-3/5 top-0 left-0 border-r-4 border-white"
-                        : index === 1
-                        ? "absolute h-1/2 w-2/5 top-0 right-0 border-l-4 border-b-4 border-white"
-                        : "absolute h-1/2 w-2/5 bottom-0 right-0 border-l-4 border-t-4 border-white"
-                    } `}
-                    onClick={() => {
-                      setVisibleImg(true);
-                      setActiveIndex(index);
-                    }}
-                  />
-                ))}
+              {data?.images &&
+                data?.images
+                  .filter((_: any, index: number) => index <= 2)
+                  .map((image: string, index: number) => (
+                    <img
+                      key={index}
+                      src={image}
+                      alt={`Image ${index + 1}`}
+                      className={`${
+                        index === 0
+                          ? "absolute h-full w-3/5 top-0 left-0 border-r-4 border-white"
+                          : index === 1
+                          ? "absolute h-1/2 w-2/5 top-0 right-0 border-l-4 border-b-4 border-white"
+                          : "absolute h-1/2 w-2/5 bottom-0 right-0 border-l-4 border-t-4 border-white"
+                      } `}
+                      onClick={() => {
+                        setVisibleImg(true);
+                        setActiveIndex(index);
+                      }}
+                    />
+                  ))}
             </div>
 
             <div className="mt-10 grid grid-cols-1 md:flex gap-10">
@@ -257,46 +264,29 @@ const RoomPage = () => {
                 <p>
                   Step into comfort and elegance with our luxurious hotel rooms.
                   Designed for relaxation, each room features modern amenities,
-                  plush bedding, and Executive Luxury bathrooms. Whether traveling for
-                  business or leisure, our rooms provide the perfect retreat for
-                  a rejuvenating stay.
+                  plush bedding, and Executive Luxury bathrooms. Whether
+                  traveling for business or leisure, our rooms provide the
+                  perfect retreat for a rejuvenating stay.
                 </p>
                 <div className="mt-5 pt-5">
                   <p className="text-3xl font-semibold mb-5">
                     What&apos;s included
                   </p>
-                  <div className="flex flex-col gap-3">
-                    <div className="flex items-center gap-2">
-                      <div className="rounded-full p-1 bg-green-100 text-green-500 h-fit">
-                        <FaCheck size={12} />
+                  {data?.amenities &&
+                    JSON.parse(data?.amenities)?.map((amenity: any) => (
+                      <div key={amenity} className="flex items-center gap-2">
+                        <div className="rounded-full p-1 bg-green-100 text-green-500 h-fit">
+                          <FaCheck size={12} />
+                        </div>
+                        <p>{amenity}</p>
                       </div>
-                      <p>Air Conditioner</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="rounded-full p-1 bg-green-100 text-green-500 h-fit">
-                        <FaCheck size={12} />
-                      </div>
-                      <p>Microwave</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="rounded-full p-1 bg-green-100 text-green-500 h-fit">
-                        <FaCheck size={12} />
-                      </div>
-                      <p>Chiller</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="rounded-full p-1 bg-green-100 text-green-500 h-fit">
-                        <FaCheck size={12} />
-                      </div>
-                      <p>Wifi</p>
-                    </div>
-                  </div>
+                    ))}
                 </div>
               </div>
 
               <div className="border rounded-xl p-3 w-full md:w-[45rem] h-fit">
                 <p className="whitespace-nowrap text-lg font-semibold">
-                  &#8358;{Number(roomData?.price).toLocaleString()}
+                  &#8358;{Number(data?.price).toLocaleString()}
                 </p>
 
                 <div className="text-swGray900 top-24 bg-white w-full rounded-md z-20 mt-5">
@@ -395,7 +385,7 @@ const RoomPage = () => {
                     <p>Total:</p>
                     <p className="whitespace-nowrap">
                       &#8358;
-                      {Number(totalAmount).toLocaleString()}
+                      {totalAmount}
                     </p>
                   </div>
 
@@ -419,7 +409,7 @@ const RoomPage = () => {
                         router.push("/sign-in");
                       }}
                     >
-                      Please login to complete your order
+                      Sign-in to continue
                     </div>
                   )}
                 </div>
@@ -429,7 +419,7 @@ const RoomPage = () => {
           <Viewer
             visible={visibleImg}
             onClose={() => setVisibleImg(false)}
-            images={roomData?.images.map((image) => ({ src: image }))}
+            images={data?.images.map((image: string) => ({ src: image }))}
             activeIndex={activeIndex}
           />
           <NotLoggedInModal

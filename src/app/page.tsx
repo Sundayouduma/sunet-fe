@@ -27,6 +27,8 @@ export default function Home() {
     getRooms();
   }, []);
 
+  // console.log(rooms);
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (slide < slides.length - 1) {
@@ -132,7 +134,8 @@ export default function Home() {
               Nigeria, Abuja. We offer our clients a perfect combination of
               business and leisure amenities with dining and recreational
               options delicately infused in one amazing space. We crown all
-              these with services that meet the highest Executive Business Suites.
+              these with services that meet the highest Executive Business
+              Suites.
               <br />
               <br />
               Overlooking Juwsheyaj hotel is Asorock and its only a 10 minute
@@ -225,7 +228,7 @@ export default function Home() {
           {rooms.map((item: any) => {
             // const item: any = item
             return (
-              <div key={item?.roomId}>
+              <div key={item?._id}>
                 <RoomCard data={item} />
               </div>
             );
