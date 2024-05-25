@@ -28,8 +28,8 @@ const RoomCard: React.FC<RoomCardProps> = ({ data }) => {
     <div className="p-3 rounded-xl max-w-sm sm:max-w-[16rem] w-full">
       <Link href={`/rooms/${data?.roomId}`} onClick={saveRoomData}>
         <div className=" relative">
-          <div className="auto h-56 rounded-xl overflow-hidden">
-            <img className="h-full w-full" src={data?.images[2]} />
+          <div className="auto h-56 w-60 rounded-xl overflow-hidden">
+            <img className="h-full w-72" src={data?.images[2]} />
             {/* <img className="h-full w-full" src={"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/f9/34/83/guest-room.jpg?w=1200&h=-1&s=1"} /> */}
           </div>
           <div className="p-2 rounded-full bg-white absolute bottom-0 right-3 translate-y-1/2">
