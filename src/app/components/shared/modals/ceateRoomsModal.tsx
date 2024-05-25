@@ -1,17 +1,28 @@
 import { IoClose } from "react-icons/io5";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import InputField from "../input-fields/InputFields";
 import { FiPaperclip } from "react-icons/fi";
 import { FaRegTrashAlt } from "react-icons/fa";
 import axios from "axios";
-import { error } from "console";
 import { ToastContainer, toast } from "react-toastify";
+import Select from "react-select";
 
 interface CreateRoomModalProps {
   open: boolean;
   onClose: (value: boolean) => void;
+  reload: () => void;
+  type: string;
+  data?: any;
+  id?: any;
 }
-const CreateRoomModal: FC<CreateRoomModalProps> = ({ open, onClose }) => {
+const CreateRoomModal: FC<CreateRoomModalProps> = ({
+  open,
+  onClose,
+  reload,
+  type,
+  data,
+  id,
+}) => {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<{
     amenities: string[];
@@ -26,6 +37,33 @@ const CreateRoomModal: FC<CreateRoomModalProps> = ({ open, onClose }) => {
     price: "",
     images: [],
   });
+  const amenities = ["Wifi", "Tv", "Air Conditioning", "Chiller", "Microwave"];
+  const options = [
+    { value: "Deluxe", label: "Deluxe" },
+    { value: "Standard", label: "Standard" },
+  ];
+  const customStyles = {
+    control: (provided: any, state: any) => ({
+      ...provided,
+      borderColor: "#B89010", // Replace with your desired color
+      borderRadius: "8px",
+      borderWidth: "1px",
+      padding: "2px",
+      boxShadow: state.isFocused ? 0 : 0, // this will remove the blue border
+      "&:hover": {
+        borderColor: "#B89010", // border style on hover
+      },
+    }),
+    option: (provided: any, state: any) => ({
+      ...provided,
+      backgroundColor: state.isSelected
+        ? "#B89010"
+        : state.isFocused
+        ? "#f0f0f0"
+        : "#fff",
+    }),
+  };
+  // console.log(formData);
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -33,7 +71,6 @@ const CreateRoomModal: FC<CreateRoomModalProps> = ({ open, onClose }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const amenities = ["Wifi", "Tv", "Air Conditioning", "Chiller", "Microwave"];
   const handleCheckbox = (e: any, amenity: string) => {
     const isChecked = e.target.checked; // Check if the checkbox is checked
 
@@ -56,7 +93,18 @@ const CreateRoomModal: FC<CreateRoomModalProps> = ({ open, onClose }) => {
 
   const handleFileChange = (e: any) => {
     const files = Array.from(e.target.files) as File[];
-    setFormData((prev: any) => ({ ...prev, images: files }));
+
+    files.length > 0
+      ? files.map((item: any) =>
+          setFormData((prev: any) => ({
+            ...prev,
+            images: [...prev.images, item],
+          }))
+        )
+      : setFormData((prev: any) => ({
+          ...prev,
+          images: [...prev.images, files[0]],
+        }));
   };
 
   const handleFileDelete = (index: number) => {
@@ -68,39 +116,98 @@ const CreateRoomModal: FC<CreateRoomModalProps> = ({ open, onClose }) => {
   const handleCreateRoom = async () => {
     setLoading(true);
     const payload = new FormData();
-    payload.append("roomName", formData.roomName);
-    payload.append("roomType", formData.roomType);
-    payload.append("price", formData.price);
-    payload.append("amenities", JSON.stringify(formData.amenities));
-    formData.images.forEach((image, index) => {
-      payload.append("images", image);
-    });
-
-    try {
-      const response = await axios.post(
-        "https://sunet-be.onrender.com/api/rooms/create",
-        payload
-      );
-      if (response.status === 201) {
-        toast.success("Room has been created successfully");
-      } else {
-        console.error("Room created failed:", response.statusText);
-        toast.error("Room creation failed. Please try again later.");
-      }
-    } catch (error: any) {
-      console.error("Room creation failed:", error?.message);
-      toast.error(error?.message);
-    } finally {
-      setLoading(false);
-      setFormData({
-        amenities: [],
-        roomType: "",
-        roomName: "",
-        price: "",
-        images: [],
+    if (type === "create") {
+      payload.append("roomName", formData.roomName);
+      payload.append("roomType", formData.roomType);
+      payload.append("price", formData.price);
+      payload.append("amenities", JSON.stringify(formData.amenities));
+      formData.images.forEach((image, index) => {
+        payload.append("images", image);
       });
+
+      try {
+        const response = await axios.post(
+          "https://sunet-be.onrender.com/api/rooms/create",
+          payload
+        );
+        if (response.status === 201) {
+          toast.success("Room has been created successfully");
+          reload();
+          onClose(false);
+        } else {
+          console.error("Room created failed:", response.statusText);
+          toast.error("Room creation failed. Please try again later.");
+        }
+      } catch (error: any) {
+        console.error("Room creation failed:", error?.message);
+        toast.error(error?.message);
+      } finally {
+        setLoading(false);
+        setFormData({
+          amenities: [],
+          roomType: "",
+          roomName: "",
+          price: "",
+          images: [],
+        });
+      }
+    } else {
+      Object.values(formData).map((e: any) => {
+        if (e.length > 0) {
+          const key = Object.keys(formData).find(
+            (key: any) => formData[key as keyof typeof formData] === e
+          );
+          if (key === "images") {
+            formData.images.forEach((item) => {
+              payload.append(key, item);
+            });
+          } else if (key === "amenities") {
+            payload.append(key, JSON.stringify(formData.amenities));
+          } else if (key) {
+            const value = formData[key as keyof typeof formData];
+            payload.append(key, value as string);
+          }
+        }
+      });
+      try {
+        const response = await axios.put(
+          `https://sunet-be.onrender.com/api/rooms/${id}`,
+          payload
+        );
+        if (response.status === 200) {
+          toast.success("Room has been updated successfully");
+          reload();
+          onClose(false);
+        } else {
+          console.error(response.data?.message);
+          toast.error("Room creation failed. Please try again later.");
+        }
+      } catch (error: any) {
+        console.error("Room creation failed:", error);
+        toast.error(error?.message);
+      } finally {
+        setLoading(false);
+        setFormData((prev) => ({
+          ...prev,
+          images: [],
+        }));
+      }
     }
   };
+
+  useEffect(() => {
+    if (data?.amenities) {
+      setFormData((prev) => ({
+        ...prev,
+        amenities: JSON.parse(data?.amenities),
+        roomType: data?.roomType,
+        roomName: data?.roomName,
+        price: data?.price,
+        // images: data?.images,
+      }));
+    }
+  }, [data]);
+  console.log(formData);
 
   if (!open) return;
   return (
@@ -134,21 +241,30 @@ const CreateRoomModal: FC<CreateRoomModalProps> = ({ open, onClose }) => {
               />
             </div>
             <div>
-              <p className="font-medium">Room Type</p>
-              <InputField
-                name="roomType"
-                css="border-2 border-jsPrimary100"
-                value={formData.roomType}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div>
               <p className="font-medium">Price</p>
               <InputField
                 name="price"
                 css="border-2 border-jsPrimary100"
-                value={formData.price}
-                onChange={handleInputChange}
+                value={Number(formData.price).toLocaleString()}
+                onChange={(e) =>
+                  handleInputChange({
+                    target: {
+                      name: e.target.name,
+                      value: e.target.value.replace(/\D/g, ""), // remove non-digit characters
+                    },
+                  })
+                }
+              />
+            </div>
+            <div className="relative">
+              <p className="font-medium">Room Type</p>
+              <Select
+                options={options}
+                value={options.find((e) => e.value === formData.roomType)}
+                onChange={(e: any) =>
+                  setFormData((prev) => ({ ...prev, roomType: e.value }))
+                }
+                styles={customStyles}
               />
             </div>
             <div>
@@ -217,13 +333,24 @@ const CreateRoomModal: FC<CreateRoomModalProps> = ({ open, onClose }) => {
                 onClick={handleCreateRoom}
               >
                 Create Room
-                <div
-                  className={`${
-                    loading || Object.values(formData).some((e) => e.length < 1)
-                      ? "bg-white bg-opacity-50 h-full w-full absolute top-0 left-0 cursor-not-allowed"
-                      : "hidden"
-                  }`}
-                />
+                {type === "create" ? (
+                  <div
+                    className={`${
+                      loading ||
+                      Object.values(formData).some((e) => e.length < 1)
+                        ? "bg-white bg-opacity-50 h-full w-full absolute top-0 left-0 cursor-not-allowed"
+                        : "hidden"
+                    }`}
+                  />
+                ) : (
+                  <div
+                    className={`${
+                      loading
+                        ? "bg-white bg-opacity-50 h-full w-full absolute top-0 left-0 cursor-not-allowed"
+                        : "hidden"
+                    }`}
+                  />
+                )}
               </button>
             </div>
           </div>

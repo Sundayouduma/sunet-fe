@@ -124,7 +124,12 @@ const AdminDashboard = () => {
           </table>
         </div>
       </AdminLayout>
-      <CreateRoomModal open={openRoomModal} onClose={setOpenRoomModal} />
+      <CreateRoomModal
+        open={openRoomModal}
+        onClose={setOpenRoomModal}
+        reload={getAllRooms}
+        type={"create"}
+      />
     </>
   );
 };
