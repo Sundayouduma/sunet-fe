@@ -83,7 +83,7 @@ const Footer = () => {
           </p>
           <p className="flex gap-2 items-center">
             <MdEmail size={20} />{" "}
-            <Link href="mailto:info@juwshewaj.com">info@juwshewaj.com</Link>
+            <Link href="mailto:info@Juwsheyaj.com">info@Juwsheyaj.com</Link>
           </p>
 
           <div className="mt-3 flex gap-5">

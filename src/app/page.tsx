@@ -127,16 +127,16 @@ export default function Home() {
               The Most Preferred Hotel in Nigeria
             </h3>
             <p className="text-[#b1a36c]">
-              Juwshewaj hotels is the most preferred hotel in Nigeria, it is all
+              Juwsheyaj hotels is the most preferred hotel in Nigeria, it is all
               about the right blend, Located in Federal capital territory of
               Nigeria, Abuja. We offer our clients a perfect combination of
-              business and leiusre amenities with dining and recreational
+              business and leisure amenities with dining and recreational
               options delicately infused in one amazing space. We crown all
-              these with services that meet the highest standards.
+              these with services that meet the highest Executive Business Suites.
               <br />
               <br />
-              Overlooking Juwshewaj hotel is Asorock and its only a 10 minute
-              drive to the city center and a 20 minute drive from the airport
+              Overlooking Juwsheyaj hotel is Asorock and its only a 10 minute
+              drive to the city center and a 25 minute drive from the airport
               <br />
               <br />
               Our hotels are designed for your comfort and convenience. Your
@@ -150,7 +150,7 @@ export default function Home() {
       <div className="flex flex-col items-start max-w-7xl mx-auto py-10 px-5 my-10 lg:my-16">
         <div className="mb-8 text-center w-full">
           <h2 className="text-[2rem] mb-4 text-[#222222]">
-            Why choose Juwshewaj Hotels
+            Why choose Juwsheyaj Hotels
           </h2>
           <p className="text-gray-600">
             Here are some reasons why you should choose Tourz for your next
@@ -288,7 +288,7 @@ export default function Home() {
               Our vision
             </h3>
             <p className="text-gray-600 text-md text-start mt-4 leading-loose">
-              At Juwshewaj, we believe in creating unforgettable experiences for
+              At Juwsheyaj, we believe in creating unforgettable experiences for
               our guests. Nestled at No 1, lukulu Street wuse zone 3, Abuja, our
               hotel offers a blend of luxury, comfort, and personalized service,
               making it the perfect choice for both leisure and business

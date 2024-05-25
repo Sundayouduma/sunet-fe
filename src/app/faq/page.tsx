@@ -15,7 +15,7 @@ const Faq = () => {
             </summary>
             <div className="p-4 bg-gray-50">
               <p>
-                Standard check-in time is at 2 PM and check-out at 12 PM. Kindly
+                Executive Business Suite check-in time is at 2 PM and check-out at 12 PM. Kindly
                 note that check-in time may be shifted to 3:00 PM during high
                 occupancy periods.{" "}
               </p>
