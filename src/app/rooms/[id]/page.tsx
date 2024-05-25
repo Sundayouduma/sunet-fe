@@ -142,7 +142,7 @@ const RoomPage = () => {
           checkOutDate: format(checkOutDate, "yyyy-MM-dd"),
           occupancy: occupants,
         },
-        total_price: totalAmount,
+        total_price: totalAmount.toString(),
         email: user?.user?.email,
       };
       // console.log({ booking });
