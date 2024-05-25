@@ -125,7 +125,7 @@ const Room = () => {
                 <p>
                   Step into comfort and elegance with our luxurious hotel rooms.
                   Designed for relaxation, each room features modern amenities,
-                  plush bedding, and deluxe bathrooms. Whether traveling for
+                  plush bedding, and Executive Luxury bathrooms. Whether traveling for
                   business or leisure, our rooms provide the perfect retreat for
                   a rejuvenating stay.
                 </p>

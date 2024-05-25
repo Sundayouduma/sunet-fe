@@ -20,6 +20,7 @@ const Bookings = () => {
         const response = await axios(
           `https://sunet-be.onrender.com/api/rooms/user-bookings?email=${userData?.user?.email}`
         );
+        console.log({ response });
         setData(response?.data);
       } catch (error) {
         toast.error(error?.message);
@@ -63,28 +64,14 @@ const Bookings = () => {
                 <div className="w-40">
                   <p className="text-swGray600 text-sm">Check-in</p>
                   <p className="text-lg font-medium">
-                    {format(
-                      parse(
-                        item?.roomDetails?.checkinDate,
-                        "dd-MM-yy",
-                        new Date()
-                      ),
-                      "PPP"
-                    )}
+                    {item?.roomDetails?.checkinDate}
                   </p>
                 </div>
 
                 <div className="w-40">
                   <p className="text-swGray600 text-sm">Check-out</p>
                   <p className="text-lg font-medium">
-                    {format(
-                      parse(
-                        item?.roomDetails?.checkOutDate,
-                        "dd-MM-yy",
-                        new Date()
-                      ),
-                      "PPP"
-                    )}
+                    {item?.roomDetails?.checkOutDate}
                   </p>
                 </div>
               </div>
@@ -100,7 +87,7 @@ const Bookings = () => {
                 </div>
                 <div className="">
                   <p className="text-sm text-swGray600">Booking ID</p>
-                  <p className="text-lg font-medium">{item?._id}</p>
+                  <p className="text-lg font-medium">{item?.bookingId}</p>
                 </div>
                 <div className="flex items-center w-32">
                   <div

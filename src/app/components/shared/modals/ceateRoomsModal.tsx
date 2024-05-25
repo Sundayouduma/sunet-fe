@@ -39,8 +39,8 @@ const CreateRoomModal: FC<CreateRoomModalProps> = ({
   });
   const amenities = ["Wifi", "Tv", "Air Conditioning", "Chiller", "Microwave"];
   const options = [
-    { value: "Deluxe", label: "Deluxe" },
-    { value: "Standard", label: "Standard" },
+    { value: "Executive Luxury", label: "Executive Luxury" },
+    { value: "Executive Business Suite", label: "Executive Business Suite" },
   ];
   const customStyles = {
     control: (provided: any, state: any) => ({

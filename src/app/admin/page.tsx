@@ -69,8 +69,8 @@ const AdminLoginScreen = () => {
         console.error("Login failed:", response.statusText);
       }
     } catch (error: any) {
-      toast.error(error.response.data.message);
-      console.log("Login failed:", error.response.data.message);
+      toast.error(error?.response?.data?.message);
+
     } finally {
       setLoading(false);
     }
