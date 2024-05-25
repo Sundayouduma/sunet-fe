@@ -46,6 +46,8 @@ const NavBar = () => {
   const handleSignOut = () => {
     setUserData(false);
     localStorage.removeItem("userData");
+    localStorage.removeItem("roomBookingDetails");
+    router.push("/");
   };
 
   return (

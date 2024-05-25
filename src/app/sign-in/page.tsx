@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../components/shared/buttons/Button";
 import InputField from "../components/shared/input-fields/InputFields";
 import { useRouter } from "next/navigation";
@@ -72,11 +72,13 @@ const AdminLoginScreen = () => {
           ? JSON.parse(roomBookingDetails)
           : null;
 
+        console.log(savedData);
+
         if (!savedData) {
           router.push("/"); // Redirect to dashboard or home page after login
         } else {
           // console.log(`/rooms/${savedData?.roomDetails?.roomType?.roomId}`);
-          router.push(`/rooms/${savedData?.roomDetails?.roomType?.roomId}`); // Redirect to dashboard or home page after login
+          router.push(`/rooms/${savedData?.roomDetails?.id}`); // Redirect to dashboard or home page after login
         }
       } else {
         console.error("Login failed:", response.statusText);

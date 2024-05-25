@@ -21,12 +21,16 @@ interface RoomCardProps {
 }
 
 const RoomCard: React.FC<RoomCardProps> = ({ data }) => {
-  const saveRoomData = () => {
-    localStorage.setItem("roomData", JSON.stringify(data));
-  };
+  // const saveRoomData = () => {
+  //   localStorage.setItem("roomData", JSON.stringify(data));
+  // };
+  console.log(data);
   return (
     <div className="p-3 rounded-xl max-w-sm sm:max-w-[16rem] w-full">
-      <Link href={`/rooms/${data?.roomId}`} onClick={saveRoomData}>
+      <Link
+        href={`/rooms/${data?._id}`}
+        // onClick={saveRoomData}
+      >
         <div className=" relative">
           <div className="auto h-56 w-60 rounded-xl overflow-hidden">
             <img className="h-full w-72" src={data?.images[2]} />

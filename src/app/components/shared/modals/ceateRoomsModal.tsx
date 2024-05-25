@@ -130,10 +130,10 @@ const CreateRoomModal: FC<CreateRoomModalProps> = ({
           "https://sunet-be.onrender.com/api/rooms/create",
           payload
         );
-        if (response.status === 201) {
-          toast.success("Room has been created successfully");
+        if (response.status === 201 || response.status === 200) {
           reload();
           onClose(false);
+          toast.success("Room has been created successfully");
         } else {
           console.error("Room created failed:", response.statusText);
           toast.error("Room creation failed. Please try again later.");
