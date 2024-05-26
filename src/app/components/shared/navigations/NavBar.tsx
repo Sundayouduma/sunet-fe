@@ -14,8 +14,11 @@ import Link from "next/link";
 
 const navItems = [
   // { text: "Home", route: "/" },
-  { text: " Home", route: "/" },
-  { text: "FAQs", route: "/faq" },
+  { text: "Home", route: "/" },
+  { text: "About us", route: "/#about-us" },
+  { text: "Why choose us", route: "/#why-choose-us" },
+  { text: "Rooms", route: "/#rooms" },
+  { text: "Services", route: "/#services" },
 ];
 
 // Create a component to render the navigation items
@@ -56,13 +59,13 @@ const NavBar = () => {
         <Image src={Logo} alt="logo" className="h-14 w-auto" />
       </NavLink>
 
-      <div className="min-[820px]:flex hidden items-center">
+      <div className="lg:flex hidden items-center">
         <Navigation />
       </div>
 
       <div className="flex gap-5 items-center">
         {!userData && (
-          <div className="min-[820px]:flex hidden gap-8 items-center">
+          <div className="lg:flex hidden gap-8 items-center">
             <NavLink className="pt-2" href="/sign-in">
               Sign In
             </NavLink>
@@ -77,7 +80,7 @@ const NavBar = () => {
           </div>
         )}
 
-        <div className="block min-[820px]:hidden text-jsPrimary100">
+        <div className="block min-[820px}:hidden text-jsPrimary100">
           {!navOpen ? (
             <MdOutlineKeyboardDoubleArrowDown
               onClick={() => setNavOpen(true)}
@@ -97,11 +100,11 @@ const NavBar = () => {
             }`}
           >
             <div className="pt-8">
-              <div className="min-[820px] items-center">
+              <div className=" items-center">
                 <Navigation />
               </div>
 
-              <div className="pt-8 min-[820px] justify-center flex gap-8 items-center">
+              <div className="pt-8 justify-center flex gap-8 items-center">
                 <NavLink className="pt-2" href="/sign-in">
                   Sign In
                 </NavLink>

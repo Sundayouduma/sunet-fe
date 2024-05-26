@@ -2,11 +2,14 @@
 import Layout from "./components/layout/UserLayout";
 import { TypeAnimation } from "react-type-animation";
 import RoomCard from "./components/shared/roomCard/RoomCard";
-import Image from "next/image";
 import resturantImg from "../../public/images/resturant.jpg";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
+import { TiHeartOutline } from "react-icons/ti";
+import { FaRegSnowflake, FaWifi } from "react-icons/fa";
+import { TbPhotoPentagon } from "react-icons/tb";
+import Image from "next/image";
 
 export default function Home() {
   const [rooms, setRooms] = useState([]);
@@ -60,7 +63,10 @@ export default function Home() {
 
   return (
     <Layout>
-      <div className="w-full h-[600px] md:h-[720px] relative p-3 group">
+      <section
+        id="home"
+        className="w-full h-[600px] md:h-[720px] relative p-3 group "
+      >
         <div
           style={{
             backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${slides[slide].url})`,
@@ -105,9 +111,12 @@ export default function Home() {
         >
           <BsChevronCompactRight size={30} />
         </div>
-      </div>
+      </section>
 
-      <div className="flex flex-col items-start max-w-7xl mx-auto py-5 px-5 my-5 lg:my-12">
+      <section
+        id="about-us"
+        className="flex flex-col items-start max-w-7xl mx-auto py-5 px-5 my-5 lg:my-12 pt-32"
+      >
         <div className="grid md:grid-cols-2 items-center">
           <div className="max-w-1/2 w-full h-auto py-5 hidden md:block">
             <img
@@ -148,9 +157,12 @@ export default function Home() {
             </p>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="flex flex-col items-start max-w-7xl mx-auto py-10 px-5 my-10 lg:my-16">
+      <section
+        id="why-choose-us"
+        className="flex flex-col items-start max-w-7xl mx-auto py-10 px-5 mt-10 lg:mt-16 pt-32"
+      >
         <div className="mb-8 text-center w-full">
           <h2 className="text-[2rem] mb-4 text-[#222222]">
             Why choose Juwsheyaj Hotels
@@ -161,10 +173,10 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pt-4">
+        {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pt-4">
           <div className="flex flex-col border p-3 rounded-md">
             <div className="bg-blue-500 rounded-full w-fit p-3 text-white text-3xl mb-4">
-              {/* Icon */}
+
               <i className="fas fa-bed"></i>
             </div>
             <h3 className="text-lg text-center font-semibold mb-2">
@@ -178,7 +190,7 @@ export default function Home() {
 
           <div className="flex flex-col  border p-3 rounded-md">
             <div className="bg-yellow-500 w-fit rounded-full p-3 text-white text-3xl mb-4">
-              {/* Icon */}
+              
               <i className="fas fa-utensils"></i>
             </div>
             <h3 className="text-lg text-center font-semibold mb-2">
@@ -192,7 +204,7 @@ export default function Home() {
 
           <div className="flex flex-col border p-3 rounded-md">
             <div className="bg-green-500 w-fit rounded-full p-3 text-white text-3xl mb-4">
-              {/* Icon */}
+              
               <i className="fas fa-swimming-pool"></i>
             </div>
             <h3 className="text-lg text-center font-semibold mb-2">
@@ -206,7 +218,7 @@ export default function Home() {
 
           <div className="flex flex-col border p-3 rounded-md">
             <div className="bg-purple-500 w-fit rounded-full p-3 text-white text-3xl mb-4">
-              {/* Icon */}
+              
               <i className="fas fa-concierge-bell"></i>
             </div>
             <h3 className="text-lg font-semibold mb-2">Exceptional Service</h3>
@@ -215,9 +227,133 @@ export default function Home() {
               flawless, providing attentive service round the clock.
             </p>
           </div>
+        </div> */}
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-5">
+          <div className="w-full lg:w-1/2">
+            <div className="flex flex-col lg:flex-row lg:text-start text-center gap-5 items-center">
+              <div className="bg-yellow-50 p-3 rounded-full">
+                <TiHeartOutline size={40} color="#B89010" />
+              </div>
+              <div>
+                <p className="text-xl font-medium mb-5">24 Hour Housekeeping</p>
+                <p>
+                  Provide ultimate comfort and security to our clients with
+                  round-the-clock housekeeping and security services. Keep
+                  premises clean and well-guarded with dedicated professionals
+                  who exceed expectations. Create an exceptional experience that
+                  puts our clients at ease and feels like home.
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col lg:flex-row lg:text-start text-center gap-5 items-center mt-10">
+              <div className="bg-yellow-50 p-3 rounded-full">
+                <FaWifi size={40} color="#B89010" />
+              </div>
+              <div>
+                <p className="text-xl font-medium mb-5">
+                  High Speed Internet Access
+                </p>
+                <p>
+                  Experience endless possibilities with Juwsheyaj residence
+                  high-speed internet! Connect with people from around the
+                  world, access informative content, and enjoy the power of
+                  technology. Our fast streaming and unlimited connectivity is a
+                  game-changer for work or play. Come embrace this technology
+                  and achieve your goals and dreams. There's no limit to what
+                  you can do! Get ready for an exciting journey of discovery and
+                  growth with Juwsheyaj.
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col lg:flex-row lg:text-start text-center gap-5 items-center mt-10">
+              <div className="bg-yellow-50 p-3 rounded-full">
+                <FaRegSnowflake size={40} color="#B89010" />
+              </div>
+              <div>
+                <p className="text-xl font-medium mb-5">Air Conditioning</p>
+                <p>
+                  Our efficient and powerful air conditioning system keeps every
+                  room in your building cool and comfortable. It works
+                  flawlessly and uses minimal energy, providing maximum cooling
+                  power. Whether it's a commercial or residential property, our
+                  system will keep you cool and collected during hot summer
+                  days. You can rest easy knowing you have a reliable and
+                  effective solution to beat the heat.
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col lg:flex-row lg:text-start text-center gap-5 items-center mt-10">
+              <div className="bg-yellow-50 p-3 rounded-full">
+                <TbPhotoPentagon size={40} color="#B89010" />
+              </div>
+              <div>
+                <p className="text-xl font-medium mb-5">
+                  Rooftop Restaurants and lounge
+                </p>
+                <p>
+                  Immerse yourself in Abuja's stunning skyline! Rooftop dining
+                  offers incredible views, delicious food, and an upscale
+                  atmosphere. Explore the city and make unforgettable memories
+                  with loved ones. Reach new heights and step out of your
+                  comfort zone. Enjoy the beauty of Abuja and broaden your
+                  horizons today.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="flex justify-center items-center w-full lg:w-1/2">
+            <div className="grid grid-cols-2 w-full gap-5">
+              <div className="relative min-h-[200px] max-h-[200px] min-w-full max-w-full">
+                <Image
+                  src="/images/whyChooseUs1.png"
+                  alt="Description of the image"
+                  layout="fill"
+                />
+              </div>
+              <div className="relative min-h-[200px] max-h-[200px] min-w-full max-w-full">
+                <Image
+                  src="/images/whyChooseUs2.png"
+                  alt="Description of the image"
+                  layout="fill"
+                />
+              </div>
+              <div className="relative min-h-[200px] max-h-[200px] min-w-full max-w-full">
+                <Image
+                  src="https://res.cloudinary.com/dzv98o7ds/image/upload/v1715895933/WhatsApp_Image_2024-05-03_at_22.50.50_10_ng12hu.jpg"
+                  alt="Description of the image"
+                  layout="fill"
+                />
+              </div>
+              <div className="relative min-h-[200px] max-h-[200px] min-w-full max-w-full">
+                <Image
+                  src="/images/whyChooseUs3.png"
+                  alt="Description of the image"
+                  layout="fill"
+                />
+              </div>
+              <div className="relative min-h-[200px] max-h-[200px] min-w-full max-w-full">
+                <Image
+                  src="/images/whyChooseUs4.png"
+                  alt="Description of the image"
+                  layout="fill"
+                />
+              </div>
+              <div className="relative min-h-[200px] max-h-[200px] min-w-full max-w-full">
+                <Image
+                  src="https://res.cloudinary.com/dzv98o7ds/image/upload/v1715895932/WhatsApp_Image_2024-05-03_at_22.50.50_7_e8bw7f.jpg"
+                  alt="Description of the image"
+                  layout="fill"
+                />
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="flex flex-col items-start max-w-7xl mx-auto py-10 p-5">
+      </section>
+
+      <section
+        id="rooms"
+        className="flex flex-col items-start max-w-7xl mx-auto p-5 pt-32"
+      >
         <div className="mb-8 text-center w-full">
           <h2 className="text-[2rem] mb-4 text-[#222222]">
             Our Exclusive Rooms
@@ -234,9 +370,12 @@ export default function Home() {
             );
           })}
         </div>
-      </div>
+      </section>
 
-      <div className="flex flex-col max-w-7xl mx-auto py-10 p-5">
+      <section
+        id="services"
+        className="flex flex-col max-w-7xl mx-auto py-10 p-5 pt-32"
+      >
         <h2 className="text-[2rem] w-full text-center text-[#222222] mb-4">
           Exceptional services
         </h2>
@@ -282,9 +421,12 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="flex flex-col items-start max-w-7xl mx-auto py-5 px-5 my-5 lg:my-12">
+      <section
+        id="mission"
+        className="flex flex-col items-start max-w-7xl mx-auto py-5 px-5 my-5 lg:my-12"
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 pt-4">
           <div className="flex flex-col items-start animate-fade-in">
             <h3 className="text-2xl font-semibold mb-2 w-full text-center">
@@ -336,7 +478,7 @@ export default function Home() {
             </ol>
           </div>
         </div>
-      </div>
+      </section>
     </Layout>
   );
 }
