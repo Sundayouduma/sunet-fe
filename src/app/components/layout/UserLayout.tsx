@@ -12,8 +12,7 @@ const Layout = ({ children }: Props) => {
     <div>
       <NavBar />
       <main className="mt-24">{children}</main>
-      <Footer/>
-
+      <Footer />
     </div>
   );
 };
