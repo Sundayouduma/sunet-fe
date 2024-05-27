@@ -80,7 +80,7 @@ const NavBar = () => {
           </div>
         )}
 
-        <div className="block min-[820px}:hidden text-jsPrimary100">
+        <div className="block lg:hidden text-jsPrimary100">
           {!navOpen ? (
             <MdOutlineKeyboardDoubleArrowDown
               onClick={() => setNavOpen(true)}
