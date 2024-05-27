@@ -23,7 +23,7 @@ const navItems = [
 
 // Create a component to render the navigation items
 const Navigation = () => (
-  <nav className="flex justify-center gap-16">
+  <nav className="flex flex-col lg:flex-row items-center justify-center gap-16">
     {navItems.map(({ text, route }, index) => (
       <div key={index}>
         <div>
@@ -80,7 +80,7 @@ const NavBar = () => {
           </div>
         )}
 
-        <div className="block min-[820px}:hidden text-jsPrimary100">
+        <div className="block lg:hidden text-jsPrimary100">
           {!navOpen ? (
             <MdOutlineKeyboardDoubleArrowDown
               onClick={() => setNavOpen(true)}

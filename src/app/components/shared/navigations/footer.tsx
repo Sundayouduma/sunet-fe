@@ -79,7 +79,7 @@ const Footer = () => {
           </p>
           <p className="flex gap-2 items-center">
             <FaPhoneAlt size={20} />
-            <Link href="tel:+2340000000000">07032735889</Link>
+            <Link href="tel:+2347032735889">07032735889</Link>
           </p>
           <p className="flex gap-2 items-center">
             <MdEmail size={20} />{" "}
@@ -88,7 +88,7 @@ const Footer = () => {
 
           <div className="mt-3 flex gap-5">
             <Link
-              href="#"
+              href="https://www.facebook.com/juwsheyaj"
               className="p-2 rounded-full text-white bg-jsPrimary100 hover:bg-jsPrimary200"
             >
               <FaFacebook size={20} />
@@ -100,7 +100,8 @@ const Footer = () => {
               <FaInstagram size={20} />
             </Link>
             <Link
-              href="#"
+              href="https://x.com/jsheyajOfficial"
+              target="_blank"
               className="p-2 rounded-full text-white bg-jsPrimary100 hover:bg-jsPrimary200"
             >
               <FaTwitter size={20} />
