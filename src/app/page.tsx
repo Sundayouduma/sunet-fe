@@ -60,6 +60,14 @@ export default function Home() {
       url: "https://res.cloudinary.com/dzv98o7ds/image/upload/v1715895932/WhatsApp_Image_2024-05-03_at_22.50.50_7_e8bw7f.jpg",
     },
   ];
+  const whyChooseUsImg = [
+    "/images/whyChooseUs1.jpg",
+    "/images/whyChooseUs2.jpg",
+    "/images/whyChooseUs3.jpg",
+    "/images/whyChooseUs4.jpg",
+    "/images/whyChooseUs5.jpg",
+    "/images/whyChooseUs6.jpg",
+  ];
 
   return (
     <Layout>
@@ -173,61 +181,6 @@ export default function Home() {
           </p>
         </div>
 
-        {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pt-4">
-          <div className="flex flex-col border p-3 rounded-md">
-            <div className="bg-blue-500 rounded-full w-fit p-3 text-white text-3xl mb-4">
-
-              <i className="fas fa-bed"></i>
-            </div>
-            <h3 className="text-lg text-center font-semibold mb-2">
-              Luxurious Accommodations
-            </h3>
-            <p className="text-gray-600 text-center text-sm">
-              Experience the epitome of comfort and luxury with our elegantly
-              designed rooms and suites.
-            </p>
-          </div>
-
-          <div className="flex flex-col  border p-3 rounded-md">
-            <div className="bg-yellow-500 w-fit rounded-full p-3 text-white text-3xl mb-4">
-              
-              <i className="fas fa-utensils"></i>
-            </div>
-            <h3 className="text-lg text-center font-semibold mb-2">
-              Gourmet Dining
-            </h3>
-            <p className="text-gray-600 text-center text-sm">
-              Indulge in culinary delights crafted by our world-class chefs,
-              offering a symphony of flavors.
-            </p>
-          </div>
-
-          <div className="flex flex-col border p-3 rounded-md">
-            <div className="bg-green-500 w-fit rounded-full p-3 text-white text-3xl mb-4">
-              
-              <i className="fas fa-swimming-pool"></i>
-            </div>
-            <h3 className="text-lg text-center font-semibold mb-2">
-              Relaxation and Recreation
-            </h3>
-            <p className="text-gray-600 text-sm text-center">
-              Unwind and rejuvenate in our state-of-the-art spa facilities or
-              take a refreshing dip in our sparkling pool.
-            </p>
-          </div>
-
-          <div className="flex flex-col border p-3 rounded-md">
-            <div className="bg-purple-500 w-fit rounded-full p-3 text-white text-3xl mb-4">
-              
-              <i className="fas fa-concierge-bell"></i>
-            </div>
-            <h3 className="text-lg font-semibold mb-2">Exceptional Service</h3>
-            <p className="text-gray-600 text-sm text-start">
-              Our dedicated staff is committed to ensuring your stay is
-              flawless, providing attentive service round the clock.
-            </p>
-          </div>
-        </div> */}
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-5">
           <div className="w-full lg:w-1/2">
             <div className="flex flex-col lg:flex-row lg:text-start text-center gap-5 items-center">
@@ -302,49 +255,19 @@ export default function Home() {
             </div>
           </div>
           <div className="flex justify-center items-center w-full lg:w-1/2">
-            <div className="grid grid-cols-2 w-full gap-5">
-              <div className="relative min-h-[200px] max-h-[200px] min-w-full max-w-full">
-                <Image
-                  src="/images/whyChooseUs1.png"
-                  alt="Description of the image"
-                  layout="fill"
-                />
-              </div>
-              <div className="relative min-h-[200px] max-h-[200px] min-w-full max-w-full">
-                <Image
-                  src="/images/whyChooseUs2.png"
-                  alt="Description of the image"
-                  layout="fill"
-                />
-              </div>
-              <div className="relative min-h-[200px] max-h-[200px] min-w-full max-w-full">
-                <Image
-                  src="https://res.cloudinary.com/dzv98o7ds/image/upload/v1715895933/WhatsApp_Image_2024-05-03_at_22.50.50_10_ng12hu.jpg"
-                  alt="Description of the image"
-                  layout="fill"
-                />
-              </div>
-              <div className="relative min-h-[200px] max-h-[200px] min-w-full max-w-full">
-                <Image
-                  src="/images/whyChooseUs3.png"
-                  alt="Description of the image"
-                  layout="fill"
-                />
-              </div>
-              <div className="relative min-h-[200px] max-h-[200px] min-w-full max-w-full">
-                <Image
-                  src="/images/whyChooseUs4.png"
-                  alt="Description of the image"
-                  layout="fill"
-                />
-              </div>
-              <div className="relative min-h-[200px] max-h-[200px] min-w-full max-w-full">
-                <Image
-                  src="https://res.cloudinary.com/dzv98o7ds/image/upload/v1715895932/WhatsApp_Image_2024-05-03_at_22.50.50_7_e8bw7f.jpg"
-                  alt="Description of the image"
-                  layout="fill"
-                />
-              </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 w-full gap-5">
+              {whyChooseUsImg.map((item) => (
+                <div
+                  key={item}
+                  className="relative min-h-[200px] max-h-[200px] min-w-full max-w-full"
+                >
+                  <Image
+                    src={item}
+                    alt="Description of the image"
+                    layout="fill"
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </div>
