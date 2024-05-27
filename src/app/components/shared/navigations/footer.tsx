@@ -88,7 +88,7 @@ const Footer = () => {
 
           <div className="mt-3 flex gap-5">
             <Link
-              href="#"
+              href="https://www.facebook.com/juwsheyaj"
               className="p-2 rounded-full text-white bg-jsPrimary100 hover:bg-jsPrimary200"
             >
               <FaFacebook size={20} />
@@ -100,7 +100,7 @@ const Footer = () => {
               <FaInstagram size={20} />
             </Link>
             <Link
-              href="https://x.com/juwsheyaj29146"
+              href="https://x.com/jsheyajOfficial"
               target="_blank"
               className="p-2 rounded-full text-white bg-jsPrimary100 hover:bg-jsPrimary200"
             >
