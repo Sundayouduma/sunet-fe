@@ -263,7 +263,7 @@ export default function Home() {
                 >
                   <Image
                     src={item}
-                    alt="Description of the image"
+                    alt={item}
                     layout="fill"
                   />
                 </div>
