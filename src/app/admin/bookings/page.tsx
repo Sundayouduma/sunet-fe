@@ -42,7 +42,6 @@ const AdminBookings = () => {
 
   return (
     <AdminLayout>
-      
       <div className="p-5">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-semibold">Bookings</h2>
@@ -73,12 +72,13 @@ const AdminBookings = () => {
         <table className="mt-10 w-full">
           <thead className="bg-jsPrimary100 text-white font-medium">
             <tr>
-              <td className="p-5">No</td>
+              <td className="p-5">ID</td>
               <td className="p-5">Name</td>
               <td className="p-5">Email</td>
-              <td className="p-5">Phone</td>
+              {/* <td className="p-5">Phone</td> */}
+              <td className="p-5">Room Name</td>
               <td className="p-5">Room Type</td>
-              <td className="p-5">Occupants</td>
+              {/* <td className="p-5">Occupants</td> */}
               <td className="p-5">Checkin Date</td>
               <td className="p-5">Checkout Date</td>
               <td className="p-5">Total Price</td>
@@ -100,7 +100,7 @@ const AdminBookings = () => {
                     className={`border-t border-t-yellow-500 hover:bg-yellow-50 cursor-pointer`}
                     onClick={() => router.push(`/admin/bookings/${item?._id}`)}
                   >
-                    <td className="p-5">{index + 1}</td>
+                    <td className="p-5">{item?.bookingId}</td>
                     <td className="p-5 capitalize">
                       {item?.userDetails?.firstName}{" "}
                       {item?.userDetails?.lastName}
@@ -108,22 +108,24 @@ const AdminBookings = () => {
                     <td className="p-5 capitalize">
                       {item?.userDetails?.email}
                     </td>
-                    <td className="p-5">{item?.userDetails?.phoneNumber}</td>
-                    {/* <td className="p-5">{format(item?.createdAt, "PPP")}</td> */}
+                    <td className="p-5">
+                      {item?.roomDetails?.roomType?.roomName}
+                    </td>
+                    <td className="p-5">
+                      {item?.roomDetails?.roomType?.roomType}
+                    </td>
+                    <td className="p-5">
+                      {item?.roomDetails?.checkinDate &&
+                        format(new Date(item?.roomDetails?.checkinDate), "PPP")}
+                    </td>
+                    <td className="p-5">
+                      {item?.roomDetails?.checkOutDate &&
+                        format(
+                          new Date(item?.roomDetails?.checkOutDate),
+                          "PPP"
+                        )}
+                    </td>
 
-                    {/* <td className="p-5">{item?.roomDetails?.roomType}</td> */}
-                    <td className="p-5">roomType</td>
-                    <td className="p-5">{item?.roomDetails?.occupancy}</td>
-                    <td className="p-5">
-                      {item?.roomDetails?.checkInDate &&
-                        format(new Date(item?.roomDetails?.checkInDate), "PPP")}
-                    </td>
-                    <td className="p-5">
-                      {/* {item?.roomDetails?.checkOutDate
-                      ? format(new Date(item?.roomDetails?.checkOutDate), "PPP")
-                      : "No Date"} */}
-                      checkOutDate
-                    </td>
                     <td className="p-5">
                       {item?.total_price.toLocaleString()}
                     </td>
