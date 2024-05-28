@@ -89,12 +89,14 @@ const Footer = () => {
           <div className="mt-3 flex gap-5">
             <Link
               href="https://www.facebook.com/juwsheyaj"
+              target="_blank"
               className="p-2 rounded-full text-white bg-jsPrimary100 hover:bg-jsPrimary200"
             >
               <FaFacebook size={20} />
             </Link>
             <Link
-              href="#"
+              href="https://www.instagram.com/juwsheyajhotels/"
+              target="_blank"
               className="p-2 rounded-full text-white bg-jsPrimary100 hover:bg-jsPrimary200"
             >
               <FaInstagram size={20} />

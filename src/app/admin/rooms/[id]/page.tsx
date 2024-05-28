@@ -1,5 +1,6 @@
 "use client";
 import AdminLayout from "@/app/components/layout/AdminLayout";
+import LoadingPage from "@/app/components/loaders/Loader";
 import CreateRoomModal from "@/app/components/shared/modals/ceateRoomsModal";
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
@@ -36,10 +37,10 @@ const Room = () => {
 
   return (
     <>
-      <AdminLayout>
-        {loading ? (
-          <div className="p-5">Loading...</div>
-        ) : (
+      {loading ? (
+        <LoadingPage />
+      ) : (
+        <AdminLayout>
           <div className="max-w-7xl w-full mx-auto p-5">
             <div className="flex items-center justify-between mb-10">
               <FaArrowLeft
@@ -148,8 +149,8 @@ const Room = () => {
               </div>
             </div>
           </div>
-        )}
-      </AdminLayout>
+        </AdminLayout>
+      )}
       <Viewer
         visible={visibleImg}
         onClose={() => setVisibleImg(false)}
