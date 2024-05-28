@@ -16,9 +16,10 @@ const navItems = [
   // { text: "Home", route: "/" },
   { text: "Home", route: "/" },
   { text: "About us", route: "/#about-us" },
-  { text: "Why choose us", route: "/#why-choose-us" },
+  // { text: "Why choose us", route: "/#why-choose-us" },
   { text: "Rooms", route: "/#rooms" },
   { text: "Services", route: "/#services" },
+  { text: "Contact us", route: "/#contact-us" },
 ];
 
 // Create a component to render the navigation items
