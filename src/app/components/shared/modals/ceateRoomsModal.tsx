@@ -332,7 +332,7 @@ const CreateRoomModal: FC<CreateRoomModalProps> = ({
                 className={`relative bg-jsPrimary100 rounded-md py-2 px-4 text-white`}
                 onClick={handleCreateRoom}
               >
-                Create Room
+                {type === "create" ? "Create Room" : "Update Room"}
                 {type === "create" ? (
                   <div
                     className={`${
