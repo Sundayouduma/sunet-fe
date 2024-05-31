@@ -13,6 +13,10 @@ const AdminDashboard = () => {
   const [openRoomModal, setOpenRoomModal] = useState<any>(false);
   const [filter, setFilter] = useState("all");
   const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
   const getAllRooms = async () => {
     try {
@@ -104,24 +108,62 @@ const AdminDashboard = () => {
                       .includes(search.toLocaleLowerCase())
                   )
                 )
-                .map((item: any, index: number) => (
-                  <tr
-                    key={item?._id}
-                    className={`border-t border-t-yellow-500 hover:bg-yellow-50 cursor-pointer `}
-                    onClick={() => router.push(`/admin/rooms/${item?._id}`)}
-                  >
-                    <td className="p-5">{index + 1}</td>
-                    <td className="p-5">{item?.roomId}</td>
-                    <td className="p-5">{item?.roomName}</td>
-                    <td className="p-5">{item?.roomType}</td>
-                    <td className="p-5">{item?.price?.toLocaleString()}</td>
-                    <td className="p-5">
-                      {item?.availability ? "Available" : "Not Available"}
-                    </td>
-                  </tr>
-                ))}
+                .map((item: any, index: number) => {
+                  const startIndex = (currentPage - 1) * itemsPerPage;
+                  const endIndex = startIndex + itemsPerPage;
+                  if (index >= startIndex && index < endIndex) {
+                    return (
+                      <tr
+                        key={item?._id}
+                        className={`border-t border-t-yellow-500 hover:bg-yellow-50 cursor-pointer `}
+                        onClick={() => router.push(`/admin/rooms/${item?._id}`)}
+                      >
+                        <td className="p-5">{index + 1}</td>
+                        <td className="p-5">{item?.roomId}</td>
+                        <td className="p-5">{item?.roomName}</td>
+                        <td className="p-5">{item?.roomType}</td>
+                        <td className="p-5">{item?.price?.toLocaleString()}</td>
+                        <td className="p-5">
+                          {item?.availability ? "Available" : "Not Available"}
+                        </td>
+                      </tr>
+                    );
+                  }
+                })}
             </tbody>
           </table>
+          <div className="flex justify-center items-center w-full mt-5">
+            <button
+              disabled={currentPage === 1}
+              className="p-2 px-4 border border-jsPrimary100  rounded-tl-lg rounded-bl-lg cursor-pointer"
+              onClick={() =>
+                setCurrentPage(currentPage > 1 ? currentPage - 1 : 1)
+              }
+            >
+              Prev
+            </button>
+            {Array.from(
+              { length: Math.ceil(rooms.length / itemsPerPage) },
+              (_, i) => (
+                <button
+                  key={i}
+                  className={`p-2 px-4 border border-jsPrimary100 ${
+                    i + 1 === currentPage && "bg-jsPrimary100 text-white"
+                  }`}
+                  onClick={() => setCurrentPage(i + 1)}
+                >
+                  {i + 1}
+                </button>
+              )
+            )}
+            <button
+              disabled={currentPage === Math.ceil(rooms.length / itemsPerPage)}
+              className="p-2 px-4 border border-jsPrimary100 rounded-tr-lg rounded-br-lg cursor-pointer"
+              onClick={() => setCurrentPage(currentPage + 1)}
+            >
+              Next
+            </button>
+          </div>
         </div>
       </AdminLayout>
       <CreateRoomModal

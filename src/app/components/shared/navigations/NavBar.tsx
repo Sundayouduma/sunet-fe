@@ -144,12 +144,7 @@ const NavBar = () => {
                   >
                     Bookings
                   </Link>
-                  <Link
-                    href={"#"}
-                    className="w-full hover:bg-yellow-50 rounded-md p-3"
-                  >
-                    Settings
-                  </Link>
+
                   <div
                     className="w-full hover:bg-yellow-50 rounded-md p-3 cursor-pointer"
                     onClick={handleSignOut}
