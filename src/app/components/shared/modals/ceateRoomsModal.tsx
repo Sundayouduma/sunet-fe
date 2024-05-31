@@ -29,18 +29,24 @@ const CreateRoomModal: FC<CreateRoomModalProps> = ({
     roomType: string;
     roomName: string;
     price: string;
+    availability: boolean;
     images: File[];
   }>({
     amenities: [],
     roomType: "",
     roomName: "",
     price: "",
+    availability: true,
     images: [],
   });
   const amenities = ["Wifi", "Tv", "Air Conditioning", "Chiller", "Microwave"];
   const options = [
     { value: "Executive Luxury", label: "Executive Luxury" },
     { value: "Executive Business Suite", label: "Executive Business Suite" },
+  ];
+  const optionsAvailability = [
+    { value: true, label: "Available" },
+    { value: false, label: "Not Available" },
   ];
   const customStyles = {
     control: (provided: any, state: any) => ({
@@ -148,6 +154,7 @@ const CreateRoomModal: FC<CreateRoomModalProps> = ({
           roomType: "",
           roomName: "",
           price: "",
+          availability: true,
           images: [],
         });
       }
@@ -157,12 +164,17 @@ const CreateRoomModal: FC<CreateRoomModalProps> = ({
           const key = Object.keys(formData).find(
             (key: any) => formData[key as keyof typeof formData] === e
           );
+          console.log({key});
+          
           if (key === "images") {
             formData.images.forEach((item) => {
               payload.append(key, item);
             });
           } else if (key === "amenities") {
             payload.append(key, JSON.stringify(formData.amenities));
+            payload.append("availability", JSON.stringify(formData.availability));
+          } else if (key === "availability") {
+           
           } else if (key) {
             const value = formData[key as keyof typeof formData];
             payload.append(key, value as string);
@@ -170,6 +182,8 @@ const CreateRoomModal: FC<CreateRoomModalProps> = ({
         }
       });
       try {
+        console.log({payload});
+        
         const response = await axios.put(
           `https://sunet-be.onrender.com/api/rooms/${id}`,
           payload
@@ -203,6 +217,7 @@ const CreateRoomModal: FC<CreateRoomModalProps> = ({
         roomType: data?.roomType,
         roomName: data?.roomName,
         price: data?.price,
+        availability: data?.availability
         // images: data?.images,
       }));
     }
@@ -263,6 +278,18 @@ const CreateRoomModal: FC<CreateRoomModalProps> = ({
                 value={options.find((e) => e.value === formData.roomType)}
                 onChange={(e: any) =>
                   setFormData((prev) => ({ ...prev, roomType: e.value }))
+                }
+                styles={customStyles}
+              />
+            </div>
+            <div className="relative">
+              <p className="font-medium">Update Room Availability</p>
+              <Select
+                options={optionsAvailability}
+                value={optionsAvailability.find((e) => e.value === formData.availability)}
+                onChange={(e: any) =>
+                {  setFormData((prev) => ({ ...prev, availability: e.value })); console.log({});
+                }
                 }
                 styles={customStyles}
               />
@@ -337,7 +364,7 @@ const CreateRoomModal: FC<CreateRoomModalProps> = ({
                   <div
                     className={`${
                       loading ||
-                      Object.values(formData).some((e) => e.length < 1)
+                      Object.values(formData).some((e: any) => e.length < 1)
                         ? "bg-white bg-opacity-50 h-full w-full absolute top-0 left-0 cursor-not-allowed"
                         : "hidden"
                     }`}

@@ -156,7 +156,7 @@ const RoomPage = () => {
         );
         toast.success("Your booking was successful");
         localStorage.removeItem("roomBookingDetails");
-        router.push("/");
+        router.push("/bookings");
       } catch (error: any) {
         toast.error(error?.message);
       }
@@ -190,6 +190,8 @@ const RoomPage = () => {
     }
   }, []);
 
+  console.log({ user });
+
   const getRoomData = async () => {
     try {
       const response = await axios.get(
@@ -215,9 +217,24 @@ const RoomPage = () => {
         <Layout>
           <ToastContainer />
           <div className="max-w-7xl w-full mx-auto p-5">
-            <h1 className="font-semibold text-4xl">
-              {data?.roomName} <small>({data?.roomType})</small>
-            </h1>
+            <div className="flex justify-between items-center flex-wrap">
+              <h1 className="font-semibold text-4xl">
+                {data?.roomName} <small>({data?.roomType})</small>
+              </h1>
+              <div
+                className={`py-2 px-4 rounded-md ${
+                  data?.availability
+                    ? "bg-green-100 text-green-500"
+                    : "bg-red-100 text-red-500"
+                }`}
+              >
+                {data.availability === true ? (
+                  <p>Available</p>
+                ) : (
+                  <p>Not Available</p>
+                )}
+              </div>
+            </div>
 
             <div className="flex gap-3 items-center mt-2">
               <div className="flex items-center gap-1">
@@ -391,19 +408,17 @@ const RoomPage = () => {
 
                   {user ? (
                     <div className="w-full ">
-                      {
-                        data?.availability === true ?    <ReactPaystackButton
-                        text="Pay Now"
-                        className="payButton hover:bg-[#B89010] bg-[#C8A008] cursor-pointer mt-2 font-medium p-3 rounded-md text-center text-white block w-full"
-                        onSuccess={onSuccess} // Use onSuccess instead of callback
-                        onClose={onClose}
-                        email={user?.user?.email}
-                        amount={totalAmount * 100}
-                        publicKey={publicKey}
-                        
-                      /> : null
-                      }
-                   
+                      {data?.availability === true ? (
+                        <ReactPaystackButton
+                          text="Pay Now"
+                          className="payButton hover:bg-[#B89010] bg-[#C8A008] cursor-pointer mt-2 font-medium p-3 rounded-md text-center text-white block w-full"
+                          onSuccess={onSuccess} // Use onSuccess instead of callback
+                          onClose={onClose}
+                          email={user?.user?.email}
+                          amount={totalAmount * 100}
+                          publicKey={publicKey}
+                        />
+                      ) : null}
                     </div>
                   ) : (
                     <div

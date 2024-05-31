@@ -40,8 +40,20 @@ const AdminBookings = () => {
     </button>
   );
 
+  const filteredBookings = bookings
+    .filter((item: any) => filter === "all" || item.status === filter)
+    .filter((item: any) =>
+      ["firstName", "lastName", "email"].some((prop) =>
+        item.userDetails[prop as keyof typeof item.userDetails]
+          .toLowerCase()
+          .includes(search.toLowerCase())
+      )
+    );
+
+
   return (
     <AdminLayout>
+      
       <div className="p-5">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-semibold">Bookings</h2>
@@ -52,14 +64,15 @@ const AdminBookings = () => {
 
         <div className="mt-3">
           <p className="text-lg font-semibold">
-            Total Rooms: {bookings.length}
+            Total Bookings: {bookings.length}
           </p>
         </div>
         <div className="flex justify-between items-center mt-10">
           <div className="flex gap-5 items-center">
             {renderFilterButton("all")}
-            {renderFilterButton("Active")}
-            {renderFilterButton("Not Active")}
+            {renderFilterButton("pending")}
+            {renderFilterButton("confirmed")}
+            {renderFilterButton("cancelled")}
           </div>
           <div className="max-w-md w-full">
             <SearchBar
@@ -72,35 +85,26 @@ const AdminBookings = () => {
         <table className="mt-10 w-full">
           <thead className="bg-jsPrimary100 text-white font-medium">
             <tr>
-              <td className="p-5">ID</td>
+              <td className="p-5">No</td>
               <td className="p-5">Name</td>
               <td className="p-5">Email</td>
-              {/* <td className="p-5">Phone</td> */}
-              <td className="p-5">Room Name</td>
               <td className="p-5">Room Type</td>
-              {/* <td className="p-5">Occupants</td> */}
+              <td className="p-5">Occupants</td>
               <td className="p-5">Checkin Date</td>
               <td className="p-5">Checkout Date</td>
               <td className="p-5">Total Price</td>
             </tr>
           </thead>
           <tbody>
-            {bookings.length > 0 &&
-              bookings
-                .filter((item: any) =>
-                  ["firstName", "lastName", "email"].some((prop) =>
-                    item?.[prop]
-                      ?.toLowerCase()
-                      .includes(search.toLocaleLowerCase())
-                  )
-                )
-                .map((item: any, index: number) => (
+          {filteredBookings.length > 0 &&
+              filteredBookings.map((item: any, index: any) => (
+             
                   <tr
                     key={item?._id}
                     className={`border-t border-t-yellow-500 hover:bg-yellow-50 cursor-pointer`}
                     onClick={() => router.push(`/admin/bookings/${item?._id}`)}
                   >
-                    <td className="p-5">{item?.bookingId}</td>
+                    <td className="p-5">{index + 1}</td>
                     <td className="p-5 capitalize">
                       {item?.userDetails?.firstName}{" "}
                       {item?.userDetails?.lastName}
@@ -108,24 +112,19 @@ const AdminBookings = () => {
                     <td className="p-5 capitalize">
                       {item?.userDetails?.email}
                     </td>
+                    <td className="p-5">{item?.roomDetails?.roomType?.roomType}</td>
+                    <td className="p-5">{item?.roomDetails?.occupancy}</td>
                     <td className="p-5">
-                      {item?.roomDetails?.roomType?.roomName}
+                    {item?.roomDetails?.checkinDate
+                      ? format(new Date(item?.roomDetails?.checkinDate), "PPP")
+                      : "No Date"}
                     </td>
                     <td className="p-5">
-                      {item?.roomDetails?.roomType?.roomType}
+                      {item?.roomDetails?.checkOutDate
+                      ? format(new Date(item?.roomDetails?.checkOutDate), "PPP")
+                      : "No Date"}
+                    
                     </td>
-                    <td className="p-5">
-                      {item?.roomDetails?.checkinDate &&
-                        format(new Date(item?.roomDetails?.checkinDate), "PPP")}
-                    </td>
-                    <td className="p-5">
-                      {item?.roomDetails?.checkOutDate &&
-                        format(
-                          new Date(item?.roomDetails?.checkOutDate),
-                          "PPP"
-                        )}
-                    </td>
-
                     <td className="p-5">
                       {item?.total_price.toLocaleString()}
                     </td>
