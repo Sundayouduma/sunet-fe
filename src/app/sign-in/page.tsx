@@ -9,6 +9,7 @@ import { toast, ToastContainer } from "react-toastify"; // Import toast
 import "react-toastify/dist/ReactToastify.css";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; // Import icons for show/hide password
 import Link from "next/link";
+import Layout from "../components/layout/UserLayout";
 
 const AdminLoginScreen = () => {
   const router = useRouter();
@@ -64,6 +65,7 @@ const AdminLoginScreen = () => {
       if (response.status === 200) {
         // Login successful
         toast.success("Login successful");
+        console.log("Login successful:", response.data);
         const userData = response.data; // Assuming response.data contains user data
         localStorage.setItem("userData", JSON.stringify(userData));
 
@@ -82,16 +84,14 @@ const AdminLoginScreen = () => {
         }
       } else {
         console.error("Login failed:", response.statusText);
-        console.log("hello", response);
-        // Handle login failure
-        // Show error message, enable the button again, etc.
       }
     } catch (error: any) {
       toast.error(
-        `Login failed: ${error?.message || error?.response?.data?.message}`
+        `Login failed: ${error?.response?.data?.message || error?.message}`
       );
+      console.log(error);
       // Handle login failure
-      // Show error message, enable the button again, etc.
+      // Show error message, enable the button again, etc.  
     } finally {
       setLoading(false); // Set loading state back to false
     }
@@ -102,69 +102,70 @@ const AdminLoginScreen = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <Layout>
       <ToastContainer />
-      <div className="w-full max-w-md p-5 justify-center">
-        <div className="">
-          <div className="text-3xl text-nrvGreyBlack font-semibold">
-            Welcome Back 🤗
-          </div>
-          <div className="pt-2 text-nrvLightGrey text-md">
-            Please enter your login to access your account.
-          </div>
-
-          <div className="w-full mt-6">
-            <div className="mt-2">
-              <InputField
-                label="Email Address"
-                placeholder="Enter your email address"
-                inputType="email"
-                onChange={handleInputChange}
-                name="email"
-                error={errors.email}
-              />
+      <div className="flex justify-center items-center h-[85vh]">
+        <div className="w-full max-w-md p-5 justify-center">
+          <div className="">
+            <div className="text-3xl text-nrvGreyBlack font-semibold">
+              Welcome Back 🤗
+            </div>
+            <div className="pt-2 text-nrvLightGrey text-md">
+              Please enter your login to access your account.
             </div>
 
-            <div className="mt-4">
-              <InputField
-                label="Password"
-                placeholder="Enter your password"
-                onChange={handleInputChange}
-                name="password"
-                inputType={showPassword ? "text" : "password"}
-                endIcon={
-                  <button
-                    type="button"
-                    className="mr-2"
-                    onClick={togglePasswordVisibility}
-                  >
-                    {showPassword ? (
-                      <AiOutlineEyeInvisible size={20} />
-                    ) : (
-                      <AiOutlineEye size={20} />
-                    )}
-                  </button>
-                }
-                error={errors.password}
-              />
+            <div className="w-full mt-6">
+              <div className="mt-2">
+                <InputField
+                  label="Email Address"
+                  placeholder="Enter your email address"
+                  inputType="email"
+                  onChange={handleInputChange}
+                  name="email"
+                  error={errors.email}
+                />
+              </div>
+
+              <div className="mt-4">
+                <InputField
+                  label="Password"
+                  placeholder="Enter your password"
+                  onChange={handleInputChange}
+                  name="password"
+                  inputType={showPassword ? "text" : "password"}
+                  endIcon={
+                    <button
+                      type="button"
+                      className="mr-2"
+                      onClick={togglePasswordVisibility}
+                    >
+                      {showPassword ? (
+                        <AiOutlineEyeInvisible size={20} />
+                      ) : (
+                        <AiOutlineEye size={20} />
+                      )}
+                    </button>
+                  }
+                  error={errors.password}
+                />
+              </div>
             </div>
-          </div>
-          <p className="text-sm mt-2 pt-2 hover:underline w-fit">
-            <Link href="/forgot-password">Forgot Password? </Link>
-          </p>
-          <div className="w-full mt-16">
-            <Button
-              size="large"
-              className="block w-full"
-              variant="bluebg"
-              showIcon={false}
-              onClick={handleLogin}
-              disabled={loading}
-            >
-              {loading ? "Logging in..." : "Continue"}
-            </Button>
-          </div>
-          {/* <div className="w-full justify-center flex gap-3 mt-4">
+            <p className="text-sm mt-2 pt-2 hover:underline w-fit">
+              <Link href="/forgot-password">Forgot Password? </Link>
+            </p>
+            <div className="w-full mt-16">
+              <Button
+                size="large"
+                className="block w-full"
+                variant="bluebg"
+                showIcon={false}
+                onClick={handleLogin}
+                disabled={loading}
+              >
+                {loading ? "Logging in..." : "Continue"}
+              </Button>
+            </div>
+            {/* <div className="w-full justify-center flex gap-3 mt-4">
             <div className="text-sm text-nrvLightGrey">
               Do not have an account?
             </div>
@@ -175,9 +176,10 @@ const AdminLoginScreen = () => {
               Sign Up
             </Link>
           </div> */}
+          </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 

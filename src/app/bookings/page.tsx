@@ -15,6 +15,11 @@ const Bookings = () => {
   const [filter, setFilter] = useState("all");
   const [search, setSearch] = useState("");
   const [data, setData] = useState<any>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
   useEffect(() => {
     const userDataString = localStorage.getItem("userData");
@@ -69,6 +74,7 @@ const Bookings = () => {
             <thead className="bg-jsPrimary100 text-white font-medium">
               <tr>
                 <td className="p-5">Booking ID</td>
+                <td className="p-5">Date Booked</td>
                 <td className="p-5">Room Name</td>
                 <td className="p-5">Room Type</td>
                 <td className="p-5">Check-in Date</td>
@@ -95,48 +101,70 @@ const Bookings = () => {
                           .includes(search.toLocaleLowerCase())
                     )
                   )
-                  .map((item: any, index: number) => (
-                    <tr
-                      key={item?._id}
-                      className={`border-t border-t-yellow-500 hover:bg-yellow-50 cursor-pointer`}
-                      onClick={() => router.push(`bookings/${item?._id}`)}
-                    >
-                      <td className="p-5">{item?.bookingId}</td>
-                      <td className="p-5 capitalize">
-                        {item?.roomDetails?.roomType?.roomName}
-                      </td>
-                      <td className="p-5 capitalize">
-                        {item?.roomDetails?.roomType?.roomType}
-                      </td>
-                      <td className="p-5">
-                        {item?.roomDetails?.checkinDate &&
-                          format(
-                            new Date(item?.roomDetails?.checkinDate),
-                            "PPP"
-                          )}
-                      </td>
-                      <td className="p-5">
-                        {item?.roomDetails?.checkOutDate &&
-                          format(
-                            new Date(item?.roomDetails?.checkOutDate),
-                            "PPP"
-                          )}
-                      </td>
-                      <td className="p-5">
-                        <div
-                          className={`text-white rounded-full py-2 px-4 w-fit mx-auto ${
-                            item?.status === "New"
-                              ? "bg-[#CBC419]"
-                              : item.status === "Completed"
-                              ? "bg-[#33CB19]"
-                              : "bg-[#CB2419]"
-                          }`}
+                  .sort((a: any, b: any) => {
+                    const dateA =
+                      typeof a?.createdAt === "string"
+                        ? new Date(a?.createdAt)
+                        : new Date();
+                    const dateB =
+                      typeof b?.createdAt === "string"
+                        ? new Date(b?.createdAt)
+                        : new Date();
+                    return dateB.getTime() - dateA.getTime();
+                  })
+                  .map((item: any, index: number) => {
+                    const startIndex = (currentPage - 1) * itemsPerPage;
+                    const endIndex = startIndex + itemsPerPage;
+                    if (index >= startIndex && index < endIndex) {
+                      return (
+                        <tr
+                          key={item?._id}
+                          className={`border-t border-t-yellow-500 hover:bg-yellow-50 cursor-pointer`}
+                          onClick={() => router.push(`bookings/${item?._id}`)}
                         >
-                          {item?.status || "booked"}
-                        </div>
-                      </td>
-                    </tr>
-                  ))
+                          <td className="p-5">{item?.bookingId}</td>
+                          <td className="p-5">
+                            {format(new Date(item?.createdAt), "PPP")}
+                          </td>
+                          <td className="p-5 capitalize">
+                            {item?.roomDetails?.roomType?.roomName}
+                          </td>
+                          <td className="p-5 capitalize">
+                            {item?.roomDetails?.roomType?.roomType}
+                          </td>
+                          <td className="p-5">
+                            {item?.roomDetails?.checkinDate &&
+                              format(
+                                new Date(item?.roomDetails?.checkinDate),
+                                "PPP"
+                              )}
+                          </td>
+                          <td className="p-5">
+                            {item?.roomDetails?.checkOutDate &&
+                              format(
+                                new Date(item?.roomDetails?.checkOutDate),
+                                "PPP"
+                              )}
+                          </td>
+                          <td className="p-5">
+                            <div
+                              className={`text-white rounded-full py-2 px-4 w-fit mx-auto ${
+                                item?.status?.toLowerCase() === "new"
+                                  ? "bg-[#CBC419]"
+                                  : item.status?.toLowerCase() === "completed"
+                                  ? "bg-[#33CB19]"
+                                  : item.status?.toLowerCase() === "confirmed"
+                                  ? "bg-[#33CB19]"
+                                  : "bg-[#CB2419]"
+                              }`}
+                            >
+                              {item?.status || "booked"}
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    }
+                  })
               ) : (
                 <tr className="text-2xl font-semibold">
                   <td colSpan={6} className="p-10 text-center">
@@ -146,6 +174,38 @@ const Bookings = () => {
               )}
             </tbody>
           </table>
+          <div className="flex justify-center items-center w-full mt-5">
+            <button
+              disabled={currentPage === 1}
+              className="p-2 px-4 border border-jsPrimary100  rounded-tl-lg rounded-bl-lg cursor-pointer"
+              onClick={() =>
+                setCurrentPage(currentPage > 1 ? currentPage - 1 : 1)
+              }
+            >
+              Prev
+            </button>
+            {Array.from(
+              { length: Math.ceil(data.length / itemsPerPage) },
+              (_, i) => (
+                <button
+                  key={i}
+                  className={`p-2 px-4 border border-jsPrimary100 ${
+                    i + 1 === currentPage && "bg-jsPrimary100 text-white"
+                  }`}
+                  onClick={() => setCurrentPage(i + 1)}
+                >
+                  {i + 1}
+                </button>
+              )
+            )}
+            <button
+              disabled={currentPage === Math.ceil(data.length / itemsPerPage)}
+              className="p-2 px-4 border border-jsPrimary100 rounded-tr-lg rounded-br-lg cursor-pointer"
+              onClick={() => setCurrentPage(currentPage + 1)}
+            >
+              Next
+            </button>
+          </div>
         </div>
       </main>
     </Layout>
