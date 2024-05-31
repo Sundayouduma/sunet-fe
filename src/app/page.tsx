@@ -80,14 +80,20 @@ export default function Home() {
         <Layout>
           <section
             id="home"
-            className="w-full h-[600px] md:h-[720px] relative p-3 group "
+            className="w-full h-fit relative group p-3 overflow-hidden"
           >
-            <div
+            {/* <div
               style={{
                 backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${slides[slide].url})`,
               }}
               className="h-full w-full rounded-xl bg-cover bg-center bg-no-repeat transition-all duration-500 ease-in-out"
-            ></div>
+            ></div> */}
+            <div className="w-full h-fit relative rounded-2xl overflow-hidden">
+
+            <video src="/video/bgvid.mp4" className="w-full h-[80vh] object-cover" autoPlay loop muted />
+            <div className="bg-black bg-opacity-30 absolute top-0 left-0 h-full w-full"/>
+            </div>
+
             <div className="absolute inset-0 flex justify-center items-center p-10">
               <div className="text-white text-center">
                 <h1 className="text-2xl font-bold">
@@ -110,7 +116,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <div
+            {/* <div
               className="md:hidden md:group-hover:block absolute top-1/2 z-20 bg-black bg-opacity-50 text-white cursor-pointer rounded-full p-2 -translate-y-1/2 left-5"
               onClick={() =>
                 slide === 0 ? setSlide(slides.length - 1) : setSlide(slide - 1)
@@ -125,7 +131,7 @@ export default function Home() {
               }
             >
               <BsChevronCompactRight size={30} />
-            </div>
+            </div> */}
           </section>
 
           <section
