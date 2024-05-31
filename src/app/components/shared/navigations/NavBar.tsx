@@ -16,14 +16,15 @@ const navItems = [
   // { text: "Home", route: "/" },
   { text: "Home", route: "/" },
   { text: "About us", route: "/#about-us" },
-  { text: "Why choose us", route: "/#why-choose-us" },
+  // { text: "Why choose us", route: "/#why-choose-us" },
   { text: "Rooms", route: "/#rooms" },
   { text: "Services", route: "/#services" },
+  { text: "Contact us", route: "/#contact-us" },
 ];
 
 // Create a component to render the navigation items
 const Navigation = () => (
-  <nav className="flex justify-center gap-16">
+  <nav className="flex flex-col lg:flex-row items-center justify-center gap-16">
     {navItems.map(({ text, route }, index) => (
       <div key={index}>
         <div>
@@ -80,7 +81,7 @@ const NavBar = () => {
           </div>
         )}
 
-        <div className="block min-[820px}:hidden text-jsPrimary100">
+        <div className="block lg:hidden text-jsPrimary100">
           {!navOpen ? (
             <MdOutlineKeyboardDoubleArrowDown
               onClick={() => setNavOpen(true)}
@@ -143,12 +144,7 @@ const NavBar = () => {
                   >
                     Bookings
                   </Link>
-                  <Link
-                    href={"#"}
-                    className="w-full hover:bg-yellow-50 rounded-md p-3"
-                  >
-                    Settings
-                  </Link>
+
                   <div
                     className="w-full hover:bg-yellow-50 rounded-md p-3 cursor-pointer"
                     onClick={handleSignOut}
