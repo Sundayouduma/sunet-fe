@@ -40,6 +40,17 @@ const AdminBookings = () => {
     </button>
   );
 
+  const filteredBookings = bookings
+    .filter((item: any) => filter === "all" || item.status === filter)
+    .filter((item: any) =>
+      ["firstName", "lastName", "email"].some((prop) =>
+        item.userDetails[prop as keyof typeof item.userDetails]
+          .toLowerCase()
+          .includes(search.toLowerCase())
+      )
+    );
+
+
   return (
     <AdminLayout>
       
@@ -53,14 +64,15 @@ const AdminBookings = () => {
 
         <div className="mt-3">
           <p className="text-lg font-semibold">
-            Total Rooms: {bookings.length}
+            Total Bookings: {bookings.length}
           </p>
         </div>
         <div className="flex justify-between items-center mt-10">
           <div className="flex gap-5 items-center">
             {renderFilterButton("all")}
-            {renderFilterButton("Active")}
-            {renderFilterButton("Not Active")}
+            {renderFilterButton("pending")}
+            {renderFilterButton("confirmed")}
+            {renderFilterButton("cancelled")}
           </div>
           <div className="max-w-md w-full">
             <SearchBar
@@ -76,7 +88,6 @@ const AdminBookings = () => {
               <td className="p-5">No</td>
               <td className="p-5">Name</td>
               <td className="p-5">Email</td>
-              <td className="p-5">Phone</td>
               <td className="p-5">Room Type</td>
               <td className="p-5">Occupants</td>
               <td className="p-5">Checkin Date</td>
@@ -85,16 +96,9 @@ const AdminBookings = () => {
             </tr>
           </thead>
           <tbody>
-            {bookings.length > 0 &&
-              bookings
-                .filter((item: any) =>
-                  ["firstName", "lastName", "email"].some((prop) =>
-                    item?.[prop]
-                      ?.toLowerCase()
-                      .includes(search.toLocaleLowerCase())
-                  )
-                )
-                .map((item: any, index: number) => (
+          {filteredBookings.length > 0 &&
+              filteredBookings.map((item: any, index: any) => (
+             
                   <tr
                     key={item?._id}
                     className={`border-t border-t-yellow-500 hover:bg-yellow-50 cursor-pointer`}
@@ -108,21 +112,18 @@ const AdminBookings = () => {
                     <td className="p-5 capitalize">
                       {item?.userDetails?.email}
                     </td>
-                    <td className="p-5">{item?.userDetails?.phoneNumber}</td>
-                    {/* <td className="p-5">{format(item?.createdAt, "PPP")}</td> */}
-
-                    {/* <td className="p-5">{item?.roomDetails?.roomType}</td> */}
-                    <td className="p-5">roomType</td>
+                    <td className="p-5">{item?.roomDetails?.roomType?.roomType}</td>
                     <td className="p-5">{item?.roomDetails?.occupancy}</td>
                     <td className="p-5">
-                      {item?.roomDetails?.checkInDate &&
-                        format(new Date(item?.roomDetails?.checkInDate), "PPP")}
+                    {item?.roomDetails?.checkinDate
+                      ? format(new Date(item?.roomDetails?.checkinDate), "PPP")
+                      : "No Date"}
                     </td>
                     <td className="p-5">
-                      {/* {item?.roomDetails?.checkOutDate
+                      {item?.roomDetails?.checkOutDate
                       ? format(new Date(item?.roomDetails?.checkOutDate), "PPP")
-                      : "No Date"} */}
-                      checkOutDate
+                      : "No Date"}
+                    
                     </td>
                     <td className="p-5">
                       {item?.total_price.toLocaleString()}
