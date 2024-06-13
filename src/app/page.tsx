@@ -65,11 +65,11 @@ export default function Home() {
   ];
   const whyChooseUsImg = [
     "/images/whyChooseUs1.jpg",
-    "/images/whyChooseUs2.jpg",
-    "/images/whyChooseUs3.jpg",
+    "/images/whyChooseUs2.jpeg",
+    "/images/whyChooseUs3.jpeg",
     "/images/whyChooseUs4.jpg",
     "/images/whyChooseUs5.jpg",
-    "/images/whyChooseUs6.jpg",
+    "/images/whyChooseUs6.jpeg",
   ];
 
   return (
@@ -89,9 +89,14 @@ export default function Home() {
               className="h-full w-full rounded-xl bg-cover bg-center bg-no-repeat transition-all duration-500 ease-in-out"
             ></div> */}
             <div className="w-full h-fit relative rounded-2xl overflow-hidden">
-
-            <video src="/video/bgvid.mp4" className="w-full h-[80vh] object-cover" autoPlay loop muted />
-            <div className="bg-black bg-opacity-30 absolute top-0 left-0 h-full w-full"/>
+              <video
+                src="/video/bgvid.mp4"
+                className="w-full h-[80vh] object-cover"
+                autoPlay
+                loop
+                muted
+              />
+              <div className="bg-black bg-opacity-30 absolute top-0 left-0 h-full w-full" />
             </div>
 
             <div className="absolute inset-0 flex justify-center items-center p-10">
