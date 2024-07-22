@@ -32,8 +32,8 @@ interface RoomData {
 
 const RoomPage = () => {
   const param = useParams();
-  const publicKey = "pk_test_2c1e582d761c7350f80ab5c922419a5fd1a06773";
-
+ // const publicKey = "pk_test_2c1e582d761c7350f80ab5c922419a5fd1a06773";
+const publicKey = "pk_live_ba29fcfd36d29217ca71ef57c96c2bb89614035f";
   const [data, setData] = useState<any>({});
   const onSuccess = (reference: string) => {
     console.log("Payment successful", reference);
