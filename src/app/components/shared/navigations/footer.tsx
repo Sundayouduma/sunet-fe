@@ -79,7 +79,7 @@ const Footer = () => {
           </p>
           <p className="flex gap-2 items-center">
             <FaPhoneAlt size={20} />
-            <Link href="tel:+2347032735889">07032735889</Link>
+            <Link href="tel:+2348033639470">08033639470</Link>
           </p>
           <p className="flex gap-2 items-center">
             <MdEmail size={20} />{" "}
