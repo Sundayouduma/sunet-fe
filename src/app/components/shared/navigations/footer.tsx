@@ -119,6 +119,13 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      <Link
+        href=" https://wa.me/2348033639470"
+        target="_blank"
+        className="fixed right-5 bottom-5 h-10 w-10 sm:right-10 sm:bottom-10 md:h-16 md:w-16 lg:h-20 lg:w-20"
+      >
+        <Image src="/images/whatsapp.svg" alt="whatsapp" fill />
+      </Link>
     </footer>
   );
 };
