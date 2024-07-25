@@ -9,6 +9,7 @@ import {
   FaMapMarkerAlt,
   FaPhoneAlt,
   FaTwitter,
+  FaWhatsapp,
 } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
@@ -107,6 +108,13 @@ const Footer = () => {
               className="p-2 rounded-full text-white bg-jsPrimary100 hover:bg-jsPrimary200"
             >
               <FaTwitter size={20} />
+            </Link>
+            <Link
+              href=" https://wa.me/2348033639470"
+              target="_blank"
+              className="p-2 rounded-full text-white bg-jsPrimary100 hover:bg-jsPrimary200"
+            >
+              <FaWhatsapp size={20} />
             </Link>
           </div>
         </div>
