@@ -27,7 +27,7 @@ const Bookings = () => {
     const fetchBookings = async () => {
       try {
         const response = await axios(
-          `https://sunet-be.onrender.com/api/rooms/user-bookings?email=${userData?.user?.email}`
+          `https://sunet-be-6812.onrender.com/api/rooms/user-bookings?email=${userData?.user?.email}`
         );
         setData(response?.data);
       } catch (error: any) {

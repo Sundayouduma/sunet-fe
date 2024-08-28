@@ -133,7 +133,7 @@ const CreateRoomModal: FC<CreateRoomModalProps> = ({
 
       try {
         const response = await axios.post(
-          "https://sunet-be.onrender.com/api/rooms/create",
+          "https://sunet-be-6812.onrender.com/api/rooms/create",
           payload
         );
         if (response.status === 201 || response.status === 200) {
@@ -185,7 +185,7 @@ const CreateRoomModal: FC<CreateRoomModalProps> = ({
         console.log({payload});
         
         const response = await axios.put(
-          `https://sunet-be.onrender.com/api/rooms/${id}`,
+          `https://sunet-be-6812.onrender.com/api/rooms/${id}`,
           payload
         );
         if (response.status === 200) {

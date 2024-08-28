@@ -76,7 +76,7 @@ const Booking: React.FC = () => {
   const getSingleBooking = async () => {
     try {
       const response = await axios.get(
-        `https://sunet-be.onrender.com/api/rooms/booking/${param.id}`
+        `https://sunet-be-6812.onrender.com/api/rooms/booking/${param.id}`
       );
       setBooking(response.data);
     } catch (error) {
@@ -91,7 +91,7 @@ const Booking: React.FC = () => {
   const handleCancelBooking = async () => {
     try {
       await axios.put(
-        `https://sunet-be.onrender.com/api/rooms/booking/${param.id}`, {
+        `https://sunet-be-6812.onrender.com/api/rooms/booking/${param.id}`, {
           status : "cancelled"
         }
       );
@@ -105,7 +105,7 @@ const Booking: React.FC = () => {
   const handleConfirmBooking = async () => {
     try {
       await axios.put(
-        `https://sunet-be.onrender.com/api/rooms/booking/${param.id}`, {
+        `https://sunet-be-6812.onrender.com/api/rooms/booking/${param.id}`, {
           status : "confirmed"
         }
       );

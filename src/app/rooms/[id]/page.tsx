@@ -150,7 +150,7 @@ const publicKey = "pk_live_ba29fcfd36d29217ca71ef57c96c2bb89614035f";
       setUser(user?.user?.email);
       try {
         await axios.post(
-          `https://sunet-be.onrender.com/api/rooms/create-booking`,
+          `https://sunet-be-6812.onrender.com/api/rooms/create-booking`,
           booking,
           { headers: { Authorization: `Bearer ${user?.token}` } }
         );
@@ -195,7 +195,7 @@ const publicKey = "pk_live_ba29fcfd36d29217ca71ef57c96c2bb89614035f";
   const getRoomData = async () => {
     try {
       const response = await axios.get(
-        `https://sunet-be.onrender.com/api/rooms/${param.id}`
+        `https://sunet-be-6812.onrender.com/api/rooms/${param.id}`
       );
       setData(response.data);
       // setLoading(false);

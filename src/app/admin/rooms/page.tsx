@@ -21,7 +21,7 @@ const AdminDashboard = () => {
   const getAllRooms = async () => {
     try {
       const response = await axios.get(
-        "https://sunet-be.onrender.com/api/rooms/all"
+        "https://sunet-be-6812.onrender.com/api/rooms/all"
       );
 
       setRooms(response?.data);

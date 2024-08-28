@@ -85,7 +85,7 @@ const NotLoggedInModal: FC<Props> = ({
 
     try {
       await axios.post(
-        `https://sunet-be.onrender.com/api/rooms/create-booking`,
+        `https://sunet-be-6812.onrender.com/api/rooms/create-booking`,
         booking
       );
       setIsLoading(false);

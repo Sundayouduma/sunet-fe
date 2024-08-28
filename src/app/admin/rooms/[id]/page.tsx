@@ -22,7 +22,7 @@ const Room = () => {
   const getRoomData = async () => {
     try {
       const response = await axios.get(
-        `https://sunet-be.onrender.com/api/rooms/${param.id}`
+        `https://sunet-be-6812.onrender.com/api/rooms/${param.id}`
       );
       setRoom(response.data);
       setLoading(false);

@@ -21,7 +21,7 @@ export default function Home() {
     const getRooms = async () => {
       try {
         const response = await axios.get(
-          `https://sunet-be.onrender.com/api/rooms/all`
+          `https://sunet-be-6812.onrender.com/api/rooms/all`
         );
         setRooms(response?.data);
         setLoading(false);

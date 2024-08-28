@@ -19,7 +19,7 @@ const AdminRooms = () => {
   const getAllUsers = async () => {
     try {
       const response = await axios.get(
-        "https://sunet-be.onrender.com/api/users/all"
+        "https://sunet-be-6812.onrender.com/api/users/all"
       );
 
       setUsers(response?.data);

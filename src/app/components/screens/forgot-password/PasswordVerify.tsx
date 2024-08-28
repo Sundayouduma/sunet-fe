@@ -82,7 +82,7 @@ const VerifyPage: FC<VerifyProps> = ({ email }) => {
       const verificationCode = verifyCode.join("");
       try {
         const response = await axios.post(
-          "https://sunet-be.onrender.com/api/users/password",
+          "https://sunet-be-6812.onrender.com/api/users/password",
           { token: verificationCode, newPassword: password }
         );
         console.log(response);
@@ -109,7 +109,7 @@ const VerifyPage: FC<VerifyProps> = ({ email }) => {
   const handleResendEmail = async () => {
     try {
       const response = await axios.post(
-        "https://sunet-be.onrender.com/api/users/reset",
+        "https://sunet-be-6812.onrender.com/api/users/reset",
         { email }
       );
 

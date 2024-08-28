@@ -66,7 +66,7 @@ const SignUpScreen = () => {
     setIsLoading(true); // Set loading state to true
 
     try {
-      const response = await axios.post("https://sunet-be.onrender.com/api/users", formData);
+      const response = await axios.post("https://sunet-be-6812.onrender.com/api/users", formData);
 
       if (response.status === 201) {
         toast.success("Sign-up successful! Redirecting to login page...");
