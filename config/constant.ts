@@ -1,1 +1,1 @@
-export const API_URL = `https://sunet-be-6812.onrender.com/api/`
+export const API_URL = `https://sunet-be-wnzi.onrender.com/api/`
