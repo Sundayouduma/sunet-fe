@@ -11,7 +11,7 @@ const Header = () => {
         >
           <div className="flex lg:block">
             <Link href="/" className="text-black">
-              {/* see2ruHOTEL */}
+              {/* See2ru Burj HOTEL */}
               {/* <img
                 className="h-8 w-auto"
                 src="./images/juwsheyaj-logo.jpeg"

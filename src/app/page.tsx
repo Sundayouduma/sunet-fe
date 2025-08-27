@@ -105,7 +105,7 @@ export default function Home() {
                   <TypeAnimation
                     sequence={[
                       // Same substring at the start will only be typed out once, initially
-                      "Welcome to see2ruHotel",
+                      "Welcome to See2ru Burj Hotel",
                       1000,
                       "Experience luxury with us",
                       1000,
@@ -164,7 +164,7 @@ export default function Home() {
                   The Most Preferred Hotel in Nigeria
                 </h3>
                 <p className="text-[#b1a36c]">
-                  see2ruhotels is the most preferred hotel in Nigeria, it is
+                  See2ru Burj hotels is the most preferred hotel in Nigeria, it is
                   all about the right blend, Located in Federal capital
                   territory of Nigeria, Abuja. We offer our clients a perfect
                   combination of business and leisure amenities with dining and
@@ -173,7 +173,7 @@ export default function Home() {
                   Executive Business Suites.
                   <br />
                   <br />
-                  Overlooking see2ruhotel is Asorock and its only a 10
+                  Overlooking See2ru Burj hotel is Asorock and its only a 10
                   minute drive to the city center and a 25 minute drive from the
                   airport
                   <br />
@@ -192,7 +192,7 @@ export default function Home() {
           >
             <div className="mb-8 text-center w-full">
               <h2 className="text-[2rem] mb-4 text-[#222222]">
-                Why choose see2ruHotels
+                Why choose See2ru Burj Hotels
               </h2>
               <p className="text-gray-600">
                 Here are some reasons why you should choose Tourz for your next
@@ -229,7 +229,7 @@ export default function Home() {
                       High Speed Internet Access
                     </p>
                     <p>
-                      Experience endless possibilities with see2ruresidence
+                      Experience endless possibilities with See2ru Burj residence
                       high-speed internet! Connect with people from around the
                       world, access informative content, and enjoy the power of
                       technology. Our fast streaming and unlimited connectivity
