@@ -15,7 +15,7 @@ const AdminBookings = () => {
   const getAllBookings = async () => {
     try {
       const response = await axios.get(
-        "https://sunet-be-6812.onrender.com/api/rooms/bookings"
+        "https://sunet-be-xb4c.onrender.com/api/rooms/bookings"
       );
 
       setBookings(response?.data);

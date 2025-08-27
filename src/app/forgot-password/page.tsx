@@ -32,7 +32,7 @@ const ForgotPassword = () => {
   const sendVerificationCode = async (email: string) => {
     try {
       const response = await axios.post(
-        "https://sunet-be-6812.onrender.com/api/users/reset",
+        "https://sunet-be-xb4c.onrender.com/api/users/reset",
         { email }
       );
 
